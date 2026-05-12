@@ -1,406 +1,344 @@
+import { useEffect, useMemo, useState } from "react";
 import {
   Activity,
-  AlertTriangle,
   BadgeCheck,
+  Banknote,
   Bell,
-  BookOpen,
-  CheckCircle2,
+  ChefHat,
   Cloud,
-  Code2,
   Database,
+  DollarSign,
   ExternalLink,
-  FileCode2,
   Github,
-  GitPullRequest,
-  Globe2,
   KeyRound,
-  LayoutDashboard,
   Lock,
-  Rocket,
-  ServerCog,
+  LogOut,
+  Megaphone,
   ShieldCheck,
-  TerminalSquare,
+  ShoppingBag,
+  Truck,
+  UserCog,
   Users,
-  Workflow,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card } from "../../components/cards/Card";
 import { Badge } from "../../components/common/Badge";
 import { Button } from "../../components/common/Button";
+import { Input } from "../../components/forms/Input";
+import { Select } from "../../components/forms/Select";
+import { Textarea } from "../../components/forms/Textarea";
 
-const kpis = [
-  { label: "Public routes", value: "10+", helper: "Concept, help, founder, developer", icon: <Globe2 /> },
-  { label: "Role areas", value: "4", helper: "Customer, cooker, delivery, admin", icon: <Users /> },
-  { label: "Backend", value: "Firebase", helper: "Auth, Firestore, Storage", icon: <Database /> },
-  { label: "Hosting", value: "Cloudflare", helper: "Pages from GitHub main", icon: <Cloud /> },
+const PORTAL_SESSION_KEY = "freshtively_developer_portal";
+const DEVELOPER_EMAIL = "engr.aanis@gmail.com";
+const DEVELOPER_PASSWORD_HASH = "5b484d8b2799daf74779ce686501847d4a08b5e917c1e8395e1da7f7e73bce0d";
+
+const users = [
+  { name: "Ayesha Rahman", email: "consumer.demo@freshtively.local", role: "Customer", status: "approved" },
+  { name: "Nadia Kitchen", email: "cooker.demo@freshtively.local", role: "Cooker", status: "pending" },
+  { name: "Samir Delivery", email: "delivery.demo@freshtively.local", role: "Delivery", status: "approved" },
+  { name: "Suspended Demo", email: "blocked.demo@freshtively.local", role: "Customer", status: "suspended" },
 ];
 
-const systemModules = [
-  {
-    title: "Customer marketplace",
-    status: "Implemented UI",
-    text: "Discovery, dish details, cart, checkout, orders, order tracking, profile, support, notifications, favorites.",
-  },
-  {
-    title: "Cooker operations",
-    status: "Implemented UI",
-    text: "Kitchen profile, verification, dish creation, menu management, orders, reviews, earnings, documents, support.",
-  },
-  {
-    title: "Delivery operations",
-    status: "Implemented UI",
-    text: "Delivery requests, active pickup/drop-off, documents, vehicle profile, ratings, earnings, support.",
-  },
-  {
-    title: "Admin control center",
-    status: "Role protected",
-    text: "Users, cookers, delivery persons, verification, orders, dishes, payments, support, analytics, settings, seed data.",
-  },
-  {
-    title: "Firebase security",
-    status: "Rules included",
-    text: "Firestore and Storage rules are included for role-based reads, writes, admin access, and user ownership.",
-  },
-  {
-    title: "Deployment pipeline",
-    status: "Cloudflare ready",
-    text: "GitHub main branch builds with Vite and publishes the dist directory through Cloudflare Pages.",
-  },
+const moneyRows = [
+  { label: "Gross order volume", value: "$12,480.50", helper: "Total marketplace order value" },
+  { label: "Platform commission", value: "$1,872.08", helper: "System owner revenue" },
+  { label: "Cooker payouts", value: "$8,340.22", helper: "Pending and completed cooker earnings" },
+  { label: "Delivery payouts", value: "$1,228.40", helper: "Delivery partner earnings" },
 ];
 
-const roleFlows = [
-  {
-    role: "Customer",
-    route: "/consumer",
-    steps: ["Create account", "Discover dishes", "Add to cart", "Review checkout", "Track order"],
-  },
-  {
-    role: "Cooker",
-    route: "/cooker",
-    steps: ["Create profile", "Verify kitchen", "Publish dishes", "Accept order", "Prepare handoff"],
-  },
-  {
-    role: "Delivery",
-    route: "/delivery",
-    steps: ["Verify documents", "Review requests", "Accept delivery", "Confirm pickup", "Complete drop-off"],
-  },
-  {
-    role: "Admin",
-    route: "/admin",
-    steps: ["Login", "Pass admin role", "Review users", "Monitor orders", "Manage platform"],
-  },
-];
-
-const deploymentChecklist = [
-  ["GitHub source", "ANIS151993/Freshtively"],
-  ["Production branch", "main"],
-  ["Framework preset", "Vite"],
-  ["Build command", "npm run build"],
-  ["Output directory", "dist"],
-  ["SPA redirect", "public/_redirects"],
-  ["Custom domain", "freshtively.marcbd.site"],
-];
-
-const environmentVariables = [
-  "VITE_FIREBASE_API_KEY",
-  "VITE_FIREBASE_AUTH_DOMAIN",
-  "VITE_FIREBASE_PROJECT_ID",
-  "VITE_FIREBASE_STORAGE_BUCKET",
-  "VITE_FIREBASE_MESSAGING_SENDER_ID",
-  "VITE_FIREBASE_APP_ID",
-  "VITE_FIREBASE_MEASUREMENT_ID",
-];
-
-const routeGroups = [
-  ["/", "Public homepage"],
-  ["/developer", "Public developer console"],
-  ["/developer-panel", "Alias for developer console"],
-  ["/founder", "Creator profile"],
-  ["/login", "Authentication"],
-  ["/consumer", "Customer dashboard"],
-  ["/cooker", "Cooker dashboard"],
-  ["/delivery", "Delivery dashboard"],
-  ["/admin", "Protected admin control center"],
+const workflow = [
+  ["Customer", "Browse food", "Order", "Track delivery", <ShoppingBag />],
+  ["Cooker", "Verify kitchen", "Publish menu", "Prepare food", <ChefHat />],
+  ["Delivery", "Accept request", "Pickup", "Drop off", <Truck />],
+  ["Developer", "Control users", "Set commission", "Monitor money", <UserCog />],
 ];
 
 export default function DeveloperPortalPage() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
+
+  useEffect(() => {
+    setIsUnlocked(sessionStorage.getItem(PORTAL_SESSION_KEY) === "unlocked");
+  }, []);
+
+  function unlock() {
+    sessionStorage.setItem(PORTAL_SESSION_KEY, "unlocked");
+    setIsUnlocked(true);
+  }
+
+  function logout() {
+    sessionStorage.removeItem(PORTAL_SESSION_KEY);
+    setIsUnlocked(false);
+  }
+
+  return isUnlocked ? <DeveloperConsole onLogout={logout} /> : <DeveloperLogin onUnlock={unlock} />;
+}
+
+function DeveloperLogin({ onUnlock }: { onUnlock: () => void }) {
+  const [email, setEmail] = useState(DEVELOPER_EMAIL);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    const passwordHash = await sha256(password);
+    if (email.trim().toLowerCase() === DEVELOPER_EMAIL && passwordHash === DEVELOPER_PASSWORD_HASH) {
+      onUnlock();
+      return;
+    }
+    setError("Developer email or password is incorrect.");
+  }
+
   return (
-    <div className="bg-cream">
-      <section className="relative overflow-hidden border-b border-[#bbcabf]/70 bg-[#101815] text-white">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute left-8 top-8 h-64 w-64 rounded-full bg-emerald blur-3xl" />
-          <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-saffron blur-3xl" />
-        </div>
-
-        <div className="relative mx-auto grid min-h-[680px] max-w-7xl items-center gap-10 px-4 py-14 md:px-10 lg:grid-cols-[1fr_460px]">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-emerald-soft">
-              <ServerCog size={18} />
-              Freshtively professional developer console
-            </div>
-            <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-tight md:text-7xl">
-              System overview, deployment health, and product workflow in one place.
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#d8e6dc]">
-              This page is a public developer portal for explaining the Freshtively system professionally. The protected
-              admin dashboard remains separate and requires Firebase admin role access.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/admin">
-                <Button leftIcon={<ShieldCheck size={18} />}>Protected Admin Dashboard</Button>
-              </Link>
-              <a href="https://github.com/ANIS151993/Freshtively" rel="noreferrer" target="_blank">
-                <Button variant="secondary" leftIcon={<Github size={18} />}>
-                  GitHub Repo
-                </Button>
-              </a>
-              <a href="https://anis151993.github.io/Freshtively/" rel="noreferrer" target="_blank">
-                <Button variant="ghost" className="bg-white/10 text-white hover:bg-white/20" leftIcon={<BookOpen size={18} />}>
-                  GitHub Website
-                </Button>
-              </a>
-            </div>
+    <section className="min-h-[calc(100vh-220px)] bg-[#101815] px-4 py-12 text-white md:px-10">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1fr_440px]">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-emerald-soft">
+            <Lock size={18} />
+            Private developer portal
           </div>
-
-          <Card className="border-white/10 bg-white/95 text-ink">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-wide text-saffron-dark">Production snapshot</p>
-                <h2 className="mt-2 text-2xl font-extrabold text-ink">Freshtively Console</h2>
-              </div>
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-soft text-emerald">
-                <Activity size={24} />
-              </span>
-            </div>
-            <div className="mt-6 space-y-3">
-              {[
-                ["Developer portal", "Public", "/developer"],
-                ["Admin dashboard", "Protected", "/admin"],
-                ["Deployment", "Cloudflare Pages", "main -> dist"],
-                ["Data platform", "Firebase", "Auth + Firestore + Storage"],
-              ].map(([label, value, helper]) => (
-                <div key={label} className="rounded-2xl border border-[#bbcabf]/70 bg-cream p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-sm font-bold text-ink">{label}</span>
-                    <span className="rounded-full bg-emerald-soft px-3 py-1 text-xs font-bold text-emerald">{value}</span>
-                  </div>
-                  <p className="mt-2 font-mono text-xs font-semibold text-muted">{helper}</p>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <div className="grid gap-5 md:grid-cols-4">
-          {kpis.map((item) => (
-            <Card key={item.label} className="transition duration-200 hover:-translate-y-1 hover:shadow-lift">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-soft text-emerald">
-                {item.icon}
-              </span>
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-muted">{item.label}</p>
-              <p className="mt-2 text-3xl font-extrabold text-ink">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-muted">{item.helper}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <div className="mb-8 max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-wide text-saffron-dark">System modules</p>
-          <h2 className="mt-3 text-3xl font-extrabold text-ink md:text-5xl">Industry-style product areas</h2>
-          <p className="mt-4 text-base leading-7 text-muted">
-            Freshtively is organized as a marketplace product with separate operational surfaces for each role.
+          <h1 className="mt-6 max-w-4xl text-5xl font-extrabold leading-tight md:text-7xl">
+            Freshtively owner console
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-[#d8e6dc]">
+            Log in to view the developer portal for monitoring customers, cookers, delivery partners, commissions,
+            promotions, account controls, money controls, and deployment health.
           </p>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {systemModules.map((module) => (
-            <Card key={module.title} className="transition duration-200 hover:-translate-y-1 hover:shadow-lift">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-xl font-bold text-ink">{module.title}</h3>
-                <Badge tone="emerald">{module.status}</Badge>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {["User control", "Money control", "Promotion control"].map((item) => (
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <BadgeCheck className="text-emerald-soft" />
+                <p className="mt-3 font-bold">{item}</p>
               </div>
-              <p className="mt-4 text-sm leading-6 text-muted">{module.text}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-saffron-dark">Workflow map</p>
-            <h2 className="mt-3 text-3xl font-extrabold text-ink md:text-5xl">How the business logic is separated</h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              Each role has a clear dashboard and task path. This makes the system easier to explain, test, and expand.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {roleFlows.map((flow) => (
-              <Card key={flow.role} className="p-5">
-                <div className="grid gap-4 lg:grid-cols-[140px_1fr_92px] lg:items-center">
-                  <div>
-                    <p className="text-lg font-extrabold text-ink">{flow.role}</p>
-                    <p className="mt-1 font-mono text-xs font-semibold text-muted">{flow.route}</p>
-                  </div>
-                  <div className="grid gap-2 sm:grid-cols-5">
-                    {flow.steps.map((step) => (
-                      <span key={step} className="rounded-2xl bg-cream px-3 py-2 text-center text-xs font-bold text-muted">
-                        {step}
-                      </span>
-                    ))}
-                  </div>
-                  <Link to={flow.route}>
-                    <Button variant="ghost" className="w-full px-3">
-                      Open
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
             ))}
           </div>
         </div>
-      </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Card>
-            <Cloud className="text-emerald" size={34} />
-            <h2 className="mt-4 text-2xl font-extrabold text-ink">Cloudflare deployment checklist</h2>
-            <div className="mt-5 space-y-3">
-              {deploymentChecklist.map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between gap-4 rounded-2xl bg-cream px-4 py-3">
-                  <span className="text-sm font-bold text-muted">{label}</span>
-                  <span className="text-right font-mono text-sm font-bold text-ink">{value}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card>
-            <KeyRound className="text-emerald" size={34} />
-            <h2 className="mt-4 text-2xl font-extrabold text-ink">Firebase environment variables</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              These must exist in Cloudflare Pages settings for production Firebase access.
-            </p>
-            <div className="mt-5 grid gap-2">
-              {environmentVariables.map((item) => (
-                <div key={item} className="flex items-center gap-3 rounded-2xl bg-cream px-4 py-3">
-                  <CheckCircle2 className="shrink-0 text-emerald" size={18} />
-                  <span className="font-mono text-xs font-bold text-ink">{item}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.92fr]">
-          <Card>
-            <Workflow className="text-emerald" size={34} />
-            <h2 className="mt-4 text-2xl font-extrabold text-ink">Route registry</h2>
-            <div className="mt-5 grid gap-3">
-              {routeGroups.map(([route, label]) => (
-                <div key={route} className="grid gap-2 rounded-2xl bg-cream px-4 py-3 sm:grid-cols-[150px_1fr]">
-                  <span className="font-mono text-sm font-bold text-ink">{route}</span>
-                  <span className="text-sm font-semibold text-muted">{label}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card>
-            <Lock className="text-emerald" size={34} />
-            <h2 className="mt-4 text-2xl font-extrabold text-ink">Protected admin rule</h2>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              The developer portal is public. The operational admin dashboard is private. To open `/admin`, Firebase
-              must have an approved admin profile for the signed-in user.
-            </p>
-            <pre className="mt-5 overflow-x-auto rounded-2xl bg-[#101815] p-4 text-sm font-semibold text-emerald-soft">
-{`users/{uid}
-  role: "admin"
-  status: "approved"`}
-            </pre>
-            <div className="mt-5 rounded-2xl border border-saffron/40 bg-saffron-soft p-4">
-              <div className="flex gap-3">
-                <AlertTriangle className="mt-0.5 shrink-0 text-saffron-dark" size={20} />
-                <p className="text-sm font-semibold leading-6 text-[#5a3700]">
-                  If `/admin` redirects to `/login`, the user is not authenticated. If it redirects after login, the
-                  Firestore user role is missing or not admin.
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
-        <Card className="bg-[#101815] text-white">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-emerald-soft">Developer actions</p>
-              <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">Use this console as your public technical portal.</h2>
-              <p className="mt-4 text-base leading-7 text-[#d8e6dc]">
-                Visitors can understand the system without logging in. You can keep the real admin dashboard secured
-                while still showing a professional developer-facing system overview.
-              </p>
-            </div>
-            <div className="grid gap-3">
-              {[
-                ["/developer", "Public professional console", <TerminalSquare />],
-                ["/admin", "Protected operational dashboard", <LayoutDashboard />],
-                ["GitHub", "Repository and source history", <GitPullRequest />],
-                ["Docs", "Animated concept page", <FileCode2 />],
-              ].map(([title, text, icon]) => (
-                <div key={title as string} className="flex items-center gap-4 rounded-2xl bg-white/10 p-4">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/10 text-emerald-soft">
-                    {icon}
-                  </span>
-                  <div>
-                    <p className="font-bold">{title as string}</p>
-                    <p className="text-sm text-[#d8e6dc]">{text as string}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <Card className="bg-white text-ink">
+          <KeyRound className="text-emerald" size={34} />
+          <h2 className="mt-4 text-2xl font-extrabold text-ink">Developer login</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">Use your private developer credential to open the portal.</p>
+          <form className="mt-6 space-y-4" onSubmit={(event) => void submit(event)}>
+            <Input label="Developer email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+            <Input label="Password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            {error ? <p className="rounded-2xl bg-clay-soft px-4 py-3 text-sm font-bold text-clay">{error}</p> : null}
+            <Button className="w-full" type="submit" leftIcon={<Lock size={18} />}>
+              Enter developer portal
+            </Button>
+          </form>
         </Card>
+      </div>
+    </section>
+  );
+}
+
+function DeveloperConsole({ onLogout }: { onLogout: () => void }) {
+  const [commission, setCommission] = useState({
+    serviceFee: 8,
+    cookerCommission: 15,
+    deliveryBase: 5,
+    taxRate: 8.875,
+  });
+  const [promotion, setPromotion] = useState({
+    title: "Launch discount",
+    code: "FRESH10",
+    audience: "all",
+    value: 10,
+    message: "Welcome promotion for Freshtively users.",
+  });
+  const [selectedUser, setSelectedUser] = useState(users[0].email);
+  const [accountNote, setAccountNote] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const selectedUserRecord = useMemo(() => users.find((user) => user.email === selectedUser), [selectedUser]);
+
+  function saveAction(action: string) {
+    setStatusMessage(`${action} prepared for ${selectedUserRecord?.email}. Connect Firebase Admin backend to execute this on production records.`);
+  }
+
+  return (
+    <div className="bg-cream">
+      <section className="border-b border-[#bbcabf]/70 bg-[#101815] px-4 py-10 text-white md:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-wide text-emerald-soft">Developer portal active</p>
+            <h1 className="mt-3 text-4xl font-extrabold md:text-6xl">Freshtively system control center</h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-[#d8e6dc]">
+              Monitor and control the customer, cooker, delivery, money, promotion, and deployment areas from one owner
+              console. Production write actions require Firebase rules/backend deployment.
+            </p>
+          </div>
+          <Button variant="ghost" className="bg-white/10 text-white hover:bg-white/20" leftIcon={<LogOut size={18} />} onClick={onLogout}>
+            Logout
+          </Button>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16 md:px-10 md:pb-20">
+      <section className="mx-auto max-w-7xl px-4 py-8 md:px-10">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {moneyRows.map((row) => (
+            <Card key={row.label}>
+              <DollarSign className="text-emerald" />
+              <p className="mt-4 text-sm font-bold uppercase tracking-wide text-muted">{row.label}</p>
+              <p className="mt-2 text-3xl font-extrabold text-ink">{row.value}</p>
+              <p className="mt-2 text-sm text-muted">{row.helper}</p>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 md:px-10 xl:grid-cols-[1.1fr_0.9fr]">
         <Card>
-          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="flex items-center gap-3">
+            <Users className="text-emerald" size={32} />
             <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-saffron-dark">Copyright and ownership</p>
-              <h2 className="mt-2 text-3xl font-extrabold text-ink">Md Anisur Rahman Chowdhury</h2>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-                Freshtively, its concept, source code, documentation, and system materials are owned by Md Anisur
-                Rahman Chowdhury unless a separate written license says otherwise.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a href="https://github.com/ANIS151993" rel="noreferrer" target="_blank">
-                <Button variant="secondary" leftIcon={<Github size={18} />}>
-                  GitHub
-                </Button>
-              </a>
-              <a href="https://marcbd.site" rel="noreferrer" target="_blank">
-                <Button variant="ghost" leftIcon={<ExternalLink size={18} />}>
-                  Portfolio
-                </Button>
-              </a>
-              <a href="https://linkedin.com/in/md-anisur-rahman-chowdhury-15862420a" rel="noreferrer" target="_blank">
-                <Button variant="ghost" leftIcon={<Code2 size={18} />}>
-                  LinkedIn
-                </Button>
-              </a>
+              <h2 className="text-2xl font-extrabold text-ink">All user control</h2>
+              <p className="text-sm text-muted">Customers, cookers, and delivery partners in one control table.</p>
             </div>
           </div>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-[#bbcabf]/70">
+            {users.map((user) => (
+              <div key={user.email} className="grid gap-3 border-b border-[#bbcabf]/70 p-4 md:grid-cols-[1fr_120px_120px_220px] md:items-center">
+                <div>
+                  <p className="font-bold text-ink">{user.name}</p>
+                  <p className="text-sm text-muted">{user.email}</p>
+                </div>
+                <Badge tone="emerald">{user.role}</Badge>
+                <Badge tone={user.status === "approved" ? "emerald" : user.status === "pending" ? "saffron" : "clay"}>{user.status}</Badge>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="secondary" onClick={() => saveAction("Approve")}>Approve</Button>
+                  <Button variant="ghost" onClick={() => saveAction("Suspend")}>Suspend</Button>
+                  <Button variant="danger" onClick={() => saveAction("Block")}>Block</Button>
+                </div>
+              </div>
+            ))}
+          </div>
         </Card>
+
+        <Card className="space-y-4">
+          <ShieldCheck className="text-emerald" size={32} />
+          <h2 className="text-2xl font-extrabold text-ink">Account action panel</h2>
+          <Select
+            label="Target account"
+            value={selectedUser}
+            onChange={(event) => setSelectedUser(event.target.value)}
+            options={users.map((user) => ({ label: `${user.name} - ${user.role}`, value: user.email }))}
+          />
+          <Textarea label="Developer note" value={accountNote} onChange={(event) => setAccountNote(event.target.value)} placeholder="Reason for control action" />
+          <div className="grid gap-2 sm:grid-cols-2">
+            <Button variant="secondary" onClick={() => saveAction("Restore account")}>Restore</Button>
+            <Button variant="ghost" onClick={() => saveAction("Freeze payouts")}>Freeze payouts</Button>
+            <Button variant="ghost" onClick={() => saveAction("Require verification")}>Require verify</Button>
+            <Button variant="danger" onClick={() => saveAction("Permanent block")}>Permanent block</Button>
+          </div>
+        </Card>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 md:px-10 xl:grid-cols-2">
+        <Card className="space-y-4">
+          <Banknote className="text-emerald" size={32} />
+          <h2 className="text-2xl font-extrabold text-ink">Commission and money controls</h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Input label="Service fee percent" type="number" value={commission.serviceFee} onChange={(event) => setCommission({ ...commission, serviceFee: Number(event.target.value) })} />
+            <Input label="Cooker commission percent" type="number" value={commission.cookerCommission} onChange={(event) => setCommission({ ...commission, cookerCommission: Number(event.target.value) })} />
+            <Input label="Delivery base fee" type="number" value={commission.deliveryBase} onChange={(event) => setCommission({ ...commission, deliveryBase: Number(event.target.value) })} />
+            <Input label="Tax rate percent" type="number" value={commission.taxRate} onChange={(event) => setCommission({ ...commission, taxRate: Number(event.target.value) })} />
+          </div>
+          <Button onClick={() => setStatusMessage("Commission settings prepared. Connect Firebase platformSettings/fees to persist production values.")}>
+            Save commission
+          </Button>
+        </Card>
+
+        <Card className="space-y-4">
+          <Megaphone className="text-emerald" size={32} />
+          <h2 className="text-2xl font-extrabold text-ink">Promotion control</h2>
+          <Input label="Promotion title" value={promotion.title} onChange={(event) => setPromotion({ ...promotion, title: event.target.value })} />
+          <Input label="Promotion code" value={promotion.code} onChange={(event) => setPromotion({ ...promotion, code: event.target.value.toUpperCase() })} />
+          <Select
+            label="Audience"
+            value={promotion.audience}
+            onChange={(event) => setPromotion({ ...promotion, audience: event.target.value })}
+            options={[
+              { label: "All users", value: "all" },
+              { label: "Customers", value: "consumer" },
+              { label: "Cookers", value: "cooker" },
+              { label: "Delivery partners", value: "delivery" },
+            ]}
+          />
+          <Input label="Discount value" type="number" value={promotion.value} onChange={(event) => setPromotion({ ...promotion, value: Number(event.target.value) })} />
+          <Textarea label="Promotion message" value={promotion.message} onChange={(event) => setPromotion({ ...promotion, message: event.target.value })} />
+          <Button variant="secondary" onClick={() => setStatusMessage(`Promotion ${promotion.code} prepared for ${promotion.audience}.`)}>
+            Publish promotion
+          </Button>
+        </Card>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 md:px-10 xl:grid-cols-[0.9fr_1.1fr]">
+        <Card>
+          <Cloud className="text-emerald" size={32} />
+          <h2 className="mt-4 text-2xl font-extrabold text-ink">Deployment and data status</h2>
+          <div className="mt-5 space-y-3">
+            {[
+              ["Cloudflare Pages", "main branch -> npm run build -> dist"],
+              ["Firebase Auth", "Developer email override: engr.aanis@gmail.com"],
+              ["Firestore rules", "Deploy required for real admin writes"],
+              ["Storage rules", "Deploy required for admin document reads"],
+            ].map(([label, text]) => (
+              <div key={label} className="rounded-2xl bg-cream p-4">
+                <p className="font-bold text-ink">{label}</p>
+                <p className="mt-1 text-sm text-muted">{text}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card>
+          <Database className="text-emerald" size={32} />
+          <h2 className="mt-4 text-2xl font-extrabold text-ink">System workflow</h2>
+          <div className="mt-5 grid gap-3">
+            {workflow.map(([role, first, second, third, icon]) => (
+              <div key={role as string} className="grid gap-3 rounded-2xl bg-cream p-4 md:grid-cols-[140px_1fr] md:items-center">
+                <div className="flex items-center gap-2 font-bold text-ink">
+                  <span className="text-emerald">{icon}</span>
+                  {role as string}
+                </div>
+                <div className="grid gap-2 text-sm font-semibold text-muted md:grid-cols-3">
+                  <span>{first as string}</span>
+                  <span>{second as string}</span>
+                  <span>{third as string}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-8 md:px-10">
+        {statusMessage ? (
+          <div className="rounded-2xl border border-emerald/20 bg-emerald-soft px-5 py-4 text-sm font-bold text-emerald">
+            {statusMessage}
+          </div>
+        ) : null}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link to="/admin">
+            <Button leftIcon={<Lock size={18} />}>Open protected admin</Button>
+          </Link>
+          <a href="https://github.com/ANIS151993/Freshtively" rel="noreferrer" target="_blank">
+            <Button variant="secondary" leftIcon={<Github size={18} />}>GitHub</Button>
+          </a>
+          <a href="https://freshtively.marcbd.site" rel="noreferrer" target="_blank">
+            <Button variant="ghost" leftIcon={<ExternalLink size={18} />}>Live site</Button>
+          </a>
+        </div>
       </section>
     </div>
   );
+}
+
+async function sha256(value: string) {
+  const data = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 }

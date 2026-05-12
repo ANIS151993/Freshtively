@@ -13,6 +13,7 @@ import RoleSelectionPage from "../pages/auth/RoleSelectionPage";
 import SignupPage from "../pages/auth/SignupPage";
 import HomePage from "../pages/public/HomePage";
 import CreatorProfilePage from "../pages/public/CreatorProfilePage";
+import DeveloperPortalPage from "../pages/public/DeveloperPortalPage";
 import PublicInfoPage from "../pages/public/PublicInfoPage";
 import { PlaceholderPage } from "../pages/PlaceholderPage";
 import { ProtectedRoute } from "../components/auth/ProtectedRoute";
@@ -86,6 +87,8 @@ export const router = createBrowserRouter([
       { path: "discover", element: <PublicInfoPage kind="discover" /> },
       { path: "about", element: <PublicInfoPage kind="about" /> },
       { path: "founder", element: <CreatorProfilePage /> },
+      { path: "developer", element: <DeveloperPortalPage /> },
+      { path: "developer-panel", element: <DeveloperPortalPage /> },
       { path: "how-it-works", element: <PublicInfoPage kind="how" /> },
       { path: "safety", element: <PublicInfoPage kind="safety" /> },
       { path: "become-a-cooker", element: <PublicInfoPage kind="cooker" /> },

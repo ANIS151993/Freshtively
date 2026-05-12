@@ -6,6 +6,7 @@ const footerLinks = [
   { label: "How it works", to: "/how-it-works" },
   { label: "Safety", to: "/safety" },
   { label: "Founder", to: "/founder" },
+  { label: "Developer portal", to: "/developer" },
   { label: "Become a cooker", to: "/become-a-cooker" },
   { label: "Become a delivery partner", to: "/become-a-delivery-person" },
   { label: "Help", to: "/help" },

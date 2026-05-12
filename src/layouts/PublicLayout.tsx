@@ -8,6 +8,7 @@ const navItems = [
   { label: "How it works", to: "/how-it-works" },
   { label: "Safety", to: "/safety" },
   { label: "Founder", to: "/founder" },
+  { label: "Developer", to: "/developer" },
   { label: "Cook", to: "/become-a-cooker" },
   { label: "Help", to: "/help" },
   { label: "Contact", to: "/contact" },

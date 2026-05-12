@@ -4,9 +4,12 @@ import {
   ChefHat,
   Clock,
   Download,
+  ExternalLink,
+  Github,
   Heart,
   Home,
   Leaf,
+  Linkedin,
   MapPin,
   Search,
   ShieldCheck,
@@ -221,6 +224,47 @@ export default function HomePage() {
           <FeatureCard icon={<Clock />} title="Live order states" text="Every handoff is designed around visible status updates." />
           <FeatureCard icon={<Heart />} title="Reviews and support" text="Ratings, support tickets, and admin monitoring are core workflows." />
         </div>
+      </PublicSection>
+
+      <PublicSection
+        eyebrow="Creator"
+        title="Built by Md Anisur Rahman Chowdhury"
+        description="Freshtively is owned, designed, and developed by Md Anisur Rahman Chowdhury, with public profiles connected for professional, academic, and research context."
+      >
+        <Card>
+          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <h3 className="text-2xl font-extrabold text-ink">Md Anisur Rahman Chowdhury</h3>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Creator and copyright holder of Freshtively, a role-based Firebase marketplace system for homemade
+                cultural food discovery, ordering, cooking operations, delivery handoffs, and admin oversight.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/founder">
+                <Button leftIcon={<ExternalLink size={18} />}>Founder Profile</Button>
+              </Link>
+              <a
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-saffron px-5 py-2.5 text-sm font-semibold text-ink shadow-ambient transition duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+                href="https://github.com/ANIS151993"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Github size={18} />
+                GitHub
+              </a>
+              <a
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-transparent px-5 py-2.5 text-sm font-semibold text-muted transition duration-200 hover:bg-emerald-soft"
+                href="https://linkedin.com/in/md-anisur-rahman-chowdhury-15862420a"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <Linkedin size={18} />
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </Card>
       </PublicSection>
 
       <PublicSection eyebrow="Community voices" title="What Freshtively is built to make possible">

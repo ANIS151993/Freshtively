@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Logo } from "../components/common/Logo";
+import { AppCopyrightFooter } from "../components/layout/AppCopyrightFooter";
 
 export default function AuthLayout() {
   return (
@@ -10,6 +11,7 @@ export default function AuthLayout() {
           <Outlet />
         </div>
       </div>
+      <AppCopyrightFooter />
     </div>
   );
 }

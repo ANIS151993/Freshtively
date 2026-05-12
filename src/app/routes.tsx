@@ -12,6 +12,7 @@ import LoginPage from "../pages/auth/LoginPage";
 import RoleSelectionPage from "../pages/auth/RoleSelectionPage";
 import SignupPage from "../pages/auth/SignupPage";
 import HomePage from "../pages/public/HomePage";
+import CreatorProfilePage from "../pages/public/CreatorProfilePage";
 import PublicInfoPage from "../pages/public/PublicInfoPage";
 import { PlaceholderPage } from "../pages/PlaceholderPage";
 import { ProtectedRoute } from "../components/auth/ProtectedRoute";
@@ -84,6 +85,7 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "discover", element: <PublicInfoPage kind="discover" /> },
       { path: "about", element: <PublicInfoPage kind="about" /> },
+      { path: "founder", element: <CreatorProfilePage /> },
       { path: "how-it-works", element: <PublicInfoPage kind="how" /> },
       { path: "safety", element: <PublicInfoPage kind="safety" /> },
       { path: "become-a-cooker", element: <PublicInfoPage kind="cooker" /> },

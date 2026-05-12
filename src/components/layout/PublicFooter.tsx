@@ -5,6 +5,7 @@ const footerLinks = [
   { label: "About", to: "/about" },
   { label: "How it works", to: "/how-it-works" },
   { label: "Safety", to: "/safety" },
+  { label: "Founder", to: "/founder" },
   { label: "Become a cooker", to: "/become-a-cooker" },
   { label: "Become a delivery partner", to: "/become-a-delivery-person" },
   { label: "Help", to: "/help" },
@@ -29,6 +30,27 @@ export function PublicFooter() {
             </Link>
           ))}
         </nav>
+      </div>
+      <div className="border-t border-white/10 px-4 py-5 text-center text-xs font-semibold text-[#dde4dd] md:px-10">
+        <p>Copyright (c) 2026 Md Anisur Rahman Chowdhury. All rights reserved.</p>
+        <p className="mt-2">
+          <a className="hover:text-white" href="https://github.com/ANIS151993" rel="noreferrer" target="_blank">
+            GitHub
+          </a>{" "}
+          |{" "}
+          <a className="hover:text-white" href="https://marcbd.site" rel="noreferrer" target="_blank">
+            Portfolio
+          </a>{" "}
+          |{" "}
+          <a
+            className="hover:text-white"
+            href="https://linkedin.com/in/md-anisur-rahman-chowdhury-15862420a"
+            rel="noreferrer"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+        </p>
       </div>
     </footer>
   );

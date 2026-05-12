@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { AppCopyrightFooter } from "../components/layout/AppCopyrightFooter";
 import { ShellNav } from "../components/layout/ShellNav";
 
 const navItems = [
@@ -20,6 +21,7 @@ export default function AdminLayout() {
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-10">
         <Outlet />
       </main>
+      <AppCopyrightFooter />
     </div>
   );
 }

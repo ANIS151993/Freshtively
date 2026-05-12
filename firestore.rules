@@ -130,6 +130,15 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    match /promotions/{promotionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /accountActions/{actionId} {
+      allow read, write: if isAdmin();
+    }
+
     match /platformSettings/{settingId} {
       allow read: if isSignedIn();
       allow write: if isAdmin();

@@ -4,10 +4,14 @@ import { ShellNav } from "../components/layout/ShellNav";
 
 const navItems = [
   { label: "Overview", to: "/admin" },
+  { label: "Developer", to: "/admin/developer" },
   { label: "Users", to: "/admin/users" },
+  { label: "Accounts", to: "/admin/account-control" },
   { label: "Orders", to: "/admin/orders" },
   { label: "Dishes", to: "/admin/dishes" },
   { label: "Payments", to: "/admin/payments" },
+  { label: "Money", to: "/admin/money-control" },
+  { label: "Promotions", to: "/admin/promotions" },
   { label: "Support", to: "/admin/support" },
   { label: "Analytics", to: "/admin/analytics" },
   { label: "Settings", to: "/admin/settings" },

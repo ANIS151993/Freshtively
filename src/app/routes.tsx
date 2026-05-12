@@ -21,9 +21,13 @@ import { RoleProtectedRoute } from "../components/auth/RoleProtectedRoute";
 import SeedDataPage from "../pages/admin/SeedDataPage";
 import {
   AdminDashboardPage,
+  AdminAccountControlPage,
+  AdminDeveloperControlPage,
   AdminDishesPage,
+  AdminMoneyControlPage,
   AdminOrdersPage,
   AdminPaymentsPage,
+  AdminPromotionsPage,
   AdminReviewsPage,
   AdminSettingsPage,
   AdminStaticPage,
@@ -251,8 +255,10 @@ export const router = createBrowserRouter([
         element: <AdminLayout />,
         children: [
           { index: true, element: <AdminDashboardPage /> },
+          { path: "developer", element: <AdminDeveloperControlPage /> },
           { path: "live-monitoring", element: <AdminStaticPage title="Live monitoring" description="Operational monitoring for current orders, availability, and support load." icon={<Activity />} /> },
           { path: "users", element: <AdminUsersPage /> },
+          { path: "account-control", element: <AdminAccountControlPage /> },
           { path: "consumers", element: <AdminUsersPage role="consumer" /> },
           { path: "cookers", element: <AdminUsersPage role="cooker" /> },
           { path: "delivery-persons", element: <AdminUsersPage role="delivery" /> },
@@ -262,6 +268,8 @@ export const router = createBrowserRouter([
           { path: "orders/:orderId", element: <AdminOrdersPage /> },
           { path: "dishes", element: <AdminDishesPage /> },
           { path: "payments", element: <AdminPaymentsPage /> },
+          { path: "money-control", element: <AdminMoneyControlPage /> },
+          { path: "promotions", element: <AdminPromotionsPage /> },
           { path: "refunds", element: <AdminStaticPage title="Refund management" description="Refund review workflow placeholder connected to payment records later." icon={<DollarSign />} /> },
           { path: "disputes", element: <AdminStaticPage title="Dispute management" description="Dispute queue and resolution workflow placeholder." icon={<AlertTriangle />} /> },
           { path: "safety", element: <AdminStaticPage title="Safety and compliance" description="Safety reports, verification alerts, and compliance workflow placeholder." icon={<ShieldCheck />} /> },

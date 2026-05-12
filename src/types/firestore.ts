@@ -139,6 +139,7 @@ export interface PaymentRecord {
   platformFee: number;
   status: PaymentStatus;
   createdAt?: unknown;
+  updatedAt?: unknown;
 }
 
 export interface PlatformFees {
@@ -148,6 +149,39 @@ export interface PlatformFees {
   cookerCommissionRate: number;
   deliveryBaseFee: number;
   updatedAt?: unknown;
+}
+
+export type PromotionAudience = "all" | "consumer" | "cooker" | "delivery";
+export type PromotionStatus = "draft" | "active" | "paused" | "expired";
+export type PromotionDiscountType = "percent" | "fixed";
+
+export interface Promotion {
+  promotionId: string;
+  title: string;
+  code: string;
+  description: string;
+  audience: PromotionAudience;
+  discountType: PromotionDiscountType;
+  discountValue: number;
+  maxRedemptions: number;
+  redemptionCount: number;
+  startsAt: string;
+  endsAt: string;
+  status: PromotionStatus;
+  createdBy: string;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
+export interface AccountControlAction {
+  actionId: string;
+  targetUserId: string;
+  targetEmail: string;
+  actionType: "approve" | "suspend" | "reject" | "restore" | "manual_adjustment" | "note";
+  amount: number;
+  note: string;
+  createdBy: string;
+  createdAt?: unknown;
 }
 
 export interface ConsumerProfile {

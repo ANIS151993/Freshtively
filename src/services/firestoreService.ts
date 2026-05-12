@@ -25,6 +25,7 @@ import type {
   OrderStatus,
   PaymentRecord,
   PlatformFees,
+  Promotion,
   Review,
   SupportTicket,
 } from "../types/firestore";
@@ -348,6 +349,13 @@ export async function getAllPayments() {
   return mapSnapshot<PaymentRecord>(snapshot);
 }
 
+export async function updatePaymentRecord(paymentId: string, data: Partial<PaymentRecord>) {
+  await updateDoc(doc(db, "payments", paymentId), {
+    ...data,
+    updatedAt: serverTimestamp(),
+  });
+}
+
 export async function getPlatformFees() {
   const fees = await getTypedDoc<PlatformFees>("platformSettings", "fees");
 
@@ -367,6 +375,55 @@ export async function upsertPlatformFees(fees: PlatformFees) {
     ...fees,
     updatedAt: serverTimestamp(),
   });
+}
+
+export async function createPromotion(promotion: Omit<Promotion, "promotionId" | "createdAt" | "updatedAt">) {
+  const reference = await addDoc(collection(db, "promotions"), {
+    ...promotion,
+    promotionId: "",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+
+  await updateDoc(reference, {
+    promotionId: reference.id,
+    updatedAt: serverTimestamp(),
+  });
+
+  return reference.id;
+}
+
+export async function getAllPromotions() {
+  const snapshot = await getDocs(query(collection(db, "promotions"), orderBy("createdAt", "desc")));
+  return mapSnapshot<Promotion>(snapshot);
+}
+
+export async function updatePromotion(promotionId: string, data: Partial<Promotion>) {
+  await updateDoc(doc(db, "promotions", promotionId), {
+    ...data,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+export async function createAccountControlAction(action: {
+  targetUserId: string;
+  targetEmail: string;
+  actionType: "approve" | "suspend" | "reject" | "restore" | "manual_adjustment" | "note";
+  amount: number;
+  note: string;
+  createdBy: string;
+}) {
+  const reference = await addDoc(collection(db, "accountActions"), {
+    ...action,
+    actionId: "",
+    createdAt: serverTimestamp(),
+  });
+
+  await updateDoc(reference, {
+    actionId: reference.id,
+  });
+
+  return reference.id;
 }
 
 async function getTypedDoc<T>(collectionName: string, id: string) {

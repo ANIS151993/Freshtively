@@ -3,188 +3,702 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Freshtively Documentation</title>
+    <title>Freshtively | Homemade Cultural Food Marketplace</title>
     <style>
       :root {
-        color: #18211c;
-        background: #f4fbf4;
+        --ink: #17211c;
+        --muted: #526155;
+        --cream: #f5fbf4;
+        --paper: #ffffff;
+        --line: #c5d4c8;
+        --emerald: #087a52;
+        --emerald-soft: #dff7eb;
+        --saffron: #f5a623;
+        --clay: #b85636;
         font-family:
           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-      }
-
-      main {
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
-
-      header {
-        padding: 56px 0 28px;
-        border-bottom: 1px solid #bbcabf;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.5rem, 6vw, 5rem);
-        line-height: 1;
-      }
-
-      h2 {
-        margin-top: 42px;
-        font-size: 1.75rem;
-      }
-
-      h3 {
-        margin-top: 24px;
-      }
-
-      p,
-      li {
-        color: #526155;
-        line-height: 1.7;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 10%, rgba(245, 166, 35, 0.2), transparent 24rem),
+          radial-gradient(circle at 90% 2%, rgba(8, 122, 82, 0.16), transparent 24rem),
+          linear-gradient(135deg, #f7fff6 0%, #eef8ee 100%);
       }
 
       a {
-        color: #087a52;
-        font-weight: 700;
+        color: inherit;
       }
 
-      .panel {
-        margin-top: 24px;
-        border: 1px solid #bbcabf;
-        border-radius: 8px;
-        background: #ffffff;
-        padding: 22px;
+      .wrap {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid rgba(197, 212, 200, 0.75);
+        background: rgba(245, 251, 244, 0.88);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 72px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+      }
+
+      .mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 12px;
+        color: white;
+        background: linear-gradient(135deg, var(--emerald), #12b981);
+        box-shadow: 0 16px 36px rgba(8, 122, 82, 0.24);
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .links a {
+        border-radius: 999px;
+        padding: 9px 13px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          color 180ms ease;
+      }
+
+      .links a:hover {
+        transform: translateY(-1px);
+        color: var(--emerald);
+        background: var(--emerald-soft);
+      }
+
+      .hero {
+        display: grid;
+        align-items: center;
+        gap: 42px;
+        min-height: calc(100vh - 72px);
+        padding: 64px 0;
+      }
+
+      @media (min-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr 0.82fr;
+        }
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        background: var(--saffron);
+        padding: 10px 15px;
+        color: #2f1b00;
+        font-size: 0.88rem;
+        font-weight: 900;
+        box-shadow: 0 16px 38px rgba(245, 166, 35, 0.2);
+      }
+
+      h1 {
+        margin: 22px 0 0;
+        max-width: 820px;
+        font-size: clamp(3.2rem, 8vw, 6.6rem);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 700px;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: clamp(1.08rem, 2vw, 1.28rem);
+        line-height: 1.75;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        border-radius: 10px;
+        padding: 0 18px;
+        font-weight: 900;
+        text-decoration: none;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .button.primary {
+        color: white;
+        background: var(--emerald);
+        box-shadow: 0 18px 36px rgba(8, 122, 82, 0.22);
+      }
+
+      .button.secondary {
+        color: var(--ink);
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 42px rgba(23, 33, 28, 0.14);
+      }
+
+      .demo-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(197, 212, 200, 0.85);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.86);
+        padding: 24px;
+        box-shadow: 0 26px 80px rgba(23, 33, 28, 0.12);
+        animation: floatCard 5s ease-in-out infinite;
+      }
+
+      .demo-card::before {
+        position: absolute;
+        inset: -120px -90px auto auto;
+        width: 240px;
+        height: 240px;
+        content: "";
+        border-radius: 50%;
+        background: rgba(245, 166, 35, 0.22);
+      }
+
+      .order-line {
+        position: relative;
+        display: grid;
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--paper);
+        padding: 14px;
+        animation: slideUp 700ms ease both;
+      }
+
+      .step:nth-child(2) {
+        animation-delay: 100ms;
+      }
+
+      .step:nth-child(3) {
+        animation-delay: 200ms;
+      }
+
+      .step:nth-child(4) {
+        animation-delay: 300ms;
+      }
+
+      .dot {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 12px;
+        color: white;
+        background: var(--emerald);
+        font-weight: 900;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      h2 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(2rem, 4vw, 3.7rem);
+        line-height: 1.05;
+      }
+
+      .section-text {
+        max-width: 760px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.75;
       }
 
       .grid {
         display: grid;
-        gap: 16px;
+        gap: 18px;
+        margin-top: 30px;
       }
 
-      @media (min-width: 760px) {
-        .grid {
+      @media (min-width: 780px) {
+        .grid.three {
           grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid.two {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
-      code,
-      pre {
-        background: #e8f0e9;
-        border-radius: 6px;
+      .card {
+        border: 1px solid rgba(197, 212, 200, 0.85);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.88);
+        padding: 22px;
+        box-shadow: 0 18px 52px rgba(23, 33, 28, 0.08);
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
       }
 
-      code {
-        padding: 2px 5px;
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(8, 122, 82, 0.35);
+        box-shadow: 0 24px 70px rgba(23, 33, 28, 0.13);
       }
 
-      pre {
-        overflow-x: auto;
-        padding: 16px;
+      .card h3 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .icon {
+        display: grid;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 16px;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--emerald-soft);
+        color: var(--emerald);
+        font-size: 1.4rem;
+      }
+
+      .flow {
+        display: grid;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      @media (min-width: 860px) {
+        .flow {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+      }
+
+      .flow-item {
+        position: relative;
+        border-radius: 18px;
+        background: var(--ink);
+        padding: 20px;
+        color: white;
+        overflow: hidden;
+      }
+
+      .flow-item p {
+        color: #dce8df;
+      }
+
+      .badge {
+        display: inline-flex;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.13);
+        padding: 7px 10px;
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
+
+      .profile {
+        border-radius: 26px;
+        background:
+          linear-gradient(135deg, rgba(8, 122, 82, 0.96), rgba(14, 153, 102, 0.92)),
+          var(--emerald);
+        color: white;
+        padding: clamp(24px, 5vw, 42px);
+        box-shadow: 0 28px 90px rgba(8, 122, 82, 0.26);
+      }
+
+      .profile p {
+        color: #e5f7ec;
+      }
+
+      .profile-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .profile-links a {
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 999px;
+        padding: 10px 13px;
+        color: white;
+        font-size: 0.92rem;
+        font-weight: 900;
+        text-decoration: none;
+        transition:
+          background 180ms ease,
+          transform 180ms ease;
+      }
+
+      .profile-links a:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.14);
       }
 
       footer {
-        margin-top: 48px;
-        border-top: 1px solid #bbcabf;
-        padding-top: 24px;
-        font-size: 0.95rem;
+        padding: 32px 0 48px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .reveal {
+        animation: reveal 760ms ease both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 30%;
+      }
+
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatCard {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        .links {
+          justify-content: flex-start;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <header>
-        <p><strong>Freshtively System Documentation</strong></p>
-        <h1>Homemade cultural food marketplace</h1>
-        <p>
-          Freshtively connects consumers, verified household cookers, delivery partners, and administrators through a
-          role-based React, Firebase, and Cloudflare Pages application.
-        </p>
-      </header>
-
-      <section class="panel">
-        <h2>Creator Profile</h2>
-        <p>
-          <strong>Md Anisur Rahman Chowdhury</strong> is the creator, owner, and copyright holder of Freshtively.
-        </p>
-        <ul>
-          <li><a href="https://linkedin.com/in/md-anisur-rahman-chowdhury-15862420a">LinkedIn</a></li>
-          <li><a href="https://github.com/ANIS151993">GitHub</a></li>
-          <li><a href="https://scholar.google.com/citations?user=NQyywPoAAAAJ">Google Scholar</a></li>
-          <li><a href="https://marcbd.site">Portfolio</a></li>
-          <li><a href="https://researchgate.net/profile/Md-Anisur-Rahman-Chowdhury">ResearchGate</a></li>
-        </ul>
-      </section>
-
-      <h2>System Overview</h2>
-      <p>
-        The platform supports public discovery, account creation, role selection, Firebase Authentication, Firestore
-        workflows, Firebase Storage uploads, cart and checkout UI, menu management, delivery handoffs, support pages,
-        verification screens, and admin monitoring.
-      </p>
-
-      <div class="grid">
-        <section class="panel">
-          <h3>Consumer</h3>
-          <p>Discovers food, manages cart, checks out, tracks orders, manages profile, and submits support requests.</p>
-        </section>
-        <section class="panel">
-          <h3>Cooker</h3>
-          <p>Completes verification, manages menu items, reviews order requests, and coordinates handoffs.</p>
-        </section>
-        <section class="panel">
-          <h3>Delivery</h3>
-          <p>Uploads documents, accepts requests, manages active deliveries, and completes pickup/drop-off flows.</p>
-        </section>
+    <nav class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top" aria-label="Freshtively home">
+          <span class="mark">F</span>
+          <span>Freshtively</span>
+        </a>
+        <div class="links" aria-label="Page navigation">
+          <a href="#concept">Concept</a>
+          <a href="#goal">Goal</a>
+          <a href="#users">Users</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#creator">Creator</a>
+        </div>
       </div>
+    </nav>
 
-      <section class="panel">
-        <h2>Admin System</h2>
-        <p>
-          Admin users can review users, cookers, delivery partners, orders, dishes, payments, verification workflows,
-          support, reviews, analytics, settings, and seed data. Admin access requires the Firestore user role to be
-          <code>admin</code>.
-        </p>
+    <main id="top">
+      <section class="wrap hero">
+        <div>
+          <span class="eyebrow">Homemade food, trusted local workflow</span>
+          <h1>Freshtively explains a new way to order cultural homemade meals.</h1>
+          <p class="lead">
+            Freshtively is a marketplace concept where customers find authentic homemade dishes, cookers sell food from
+            their kitchens, and delivery partners help each order reach the customer with clear steps.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#users">See how each user uses it</a>
+            <a class="button secondary" href="#workflow">Follow the order journey</a>
+          </div>
+        </div>
+
+        <aside class="demo-card" aria-label="Freshtively order journey preview">
+          <span class="badge">Live concept journey</span>
+          <h2 style="margin-top: 18px; font-size: 2rem">One meal, three people, one clear system.</h2>
+          <div class="order-line">
+            <div class="step">
+              <span class="dot">1</span>
+              <div><strong>Customer</strong><br />Finds homemade food and places an order.</div>
+            </div>
+            <div class="step">
+              <span class="dot">2</span>
+              <div><strong>Cooker</strong><br />Accepts the request and prepares the meal.</div>
+            </div>
+            <div class="step">
+              <span class="dot">3</span>
+              <div><strong>Delivery partner</strong><br />Picks up the order and delivers it.</div>
+            </div>
+            <div class="step">
+              <span class="dot">4</span>
+              <div><strong>Customer</strong><br />Tracks the order and receives fresh food.</div>
+            </div>
+          </div>
+        </aside>
       </section>
 
-      <h2>Development</h2>
-      <pre><code>npm install
-cp .env.example .env.local
-npm run dev
-npm run build</code></pre>
+      <section class="wrap reveal" id="concept">
+        <h2>What is Freshtively?</h2>
+        <p class="section-text">
+          Freshtively is a homemade cultural food marketplace system. It is built for communities where many meaningful
+          meals are cooked at home, passed through family recipes, and shared through culture. The system gives those
+          meals a digital place to be discovered, ordered, prepared, and delivered.
+        </p>
+        <div class="grid three">
+          <article class="card">
+            <div class="icon">C</div>
+            <h3>Customer side</h3>
+            <p>Customers discover homemade dishes, review cooker information, add food to cart, and track the order.</p>
+          </article>
+          <article class="card">
+            <div class="icon">K</div>
+            <h3>Cooker side</h3>
+            <p>Cookers create a profile, complete verification steps, publish dishes, and manage incoming orders.</p>
+          </article>
+          <article class="card">
+            <div class="icon">D</div>
+            <h3>Delivery side</h3>
+            <p>Delivery partners accept requests, pick up meals, complete drop-offs, and support the final handoff.</p>
+          </article>
+        </div>
+      </section>
 
-      <h2>Cloudflare Pages</h2>
-      <ul>
-        <li>Repository: <code>ANIS151993/Freshtively</code></li>
-        <li>Branch: <code>main</code></li>
-        <li>Framework preset: <code>Vite</code></li>
-        <li>Build command: <code>npm run build</code></li>
-        <li>Output directory: <code>dist</code></li>
-        <li>SPA redirects: <code>public/_redirects</code></li>
-      </ul>
+      <section class="wrap reveal" id="goal">
+        <h2>Main goal of the system</h2>
+        <p class="section-text">
+          The main goal is simple: make homemade food easier to find, sell, and deliver. Freshtively gives customers
+          access to authentic meals, gives cookers a way to grow a home-based food business, and gives delivery partners
+          a clear local delivery workflow.
+        </p>
+        <div class="grid two">
+          <article class="card">
+            <h3>Why it matters for customers</h3>
+            <p>
+              A customer may want food that tastes like home, but that food may not exist in regular restaurants.
+              Freshtively helps the customer find cultural dishes from trusted local kitchens.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Why it matters for cookers</h3>
+            <p>
+              A cooker may have strong recipes and cooking skill, but no easy digital marketplace. Freshtively gives
+              that cooker a profile, menu, and order workflow.
+            </p>
+          </article>
+        </div>
+      </section>
 
-      <h2>Firebase</h2>
-      <p>
-        Configure Firebase Authentication, Cloud Firestore, Firebase Storage, and Firebase Analytics. Add all
-        <code>VITE_FIREBASE_*</code> variables in local development and Cloudflare Pages production settings.
-      </p>
-      <pre><code>firebase login
-firebase use freshtively
-firebase deploy --only firestore:rules,storage</code></pre>
+      <section class="wrap reveal" id="users">
+        <h2>How each user uses the app</h2>
+        <p class="section-text">
+          Freshtively is designed so every person sees the tools they need. Customers order, cookers prepare, and
+          delivery partners move the food.
+        </p>
 
-      <h2>Ownership</h2>
-      <p>
-        Freshtively, its documentation, design implementation, source code, and system concept are owned by Md Anisur
-        Rahman Chowdhury unless a separate written license says otherwise.
-      </p>
+        <div class="grid three">
+          <article class="card">
+            <div class="icon">1</div>
+            <h3>Customer</h3>
+            <ol>
+              <li>Open Freshtively and create a customer account.</li>
+              <li>Discover homemade cultural food.</li>
+              <li>Choose a dish and review details.</li>
+              <li>Add food to cart and review checkout.</li>
+              <li>Track the order until delivery.</li>
+            </ol>
+            <p><strong>Value:</strong> Customers find authentic homemade meals and support local cooks.</p>
+          </article>
 
-      <footer>
-        Copyright (c) 2026 Md Anisur Rahman Chowdhury. All rights reserved.
-      </footer>
+          <article class="card">
+            <div class="icon">2</div>
+            <h3>Cooker</h3>
+            <ol>
+              <li>Create a cooker account and profile.</li>
+              <li>Complete kitchen and safety verification steps.</li>
+              <li>Add dishes, prices, and availability.</li>
+              <li>Accept orders and prepare meals.</li>
+              <li>Coordinate handoff for delivery.</li>
+            </ol>
+            <p><strong>Value:</strong> Cookers can share cultural recipes and manage a flexible food business.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">3</div>
+            <h3>Delivery partner</h3>
+            <ol>
+              <li>Create a delivery account.</li>
+              <li>Complete profile, vehicle, and document steps.</li>
+              <li>View and accept delivery requests.</li>
+              <li>Pick up food from the cooker.</li>
+              <li>Deliver the meal to the customer.</li>
+            </ol>
+            <p><strong>Value:</strong> Delivery partners help homemade food move through the neighborhood.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="wrap reveal" id="workflow">
+        <h2>The full food journey</h2>
+        <p class="section-text">
+          The concept is easy to understand when you follow one order from discovery to delivery.
+        </p>
+        <div class="flow">
+          <div class="flow-item">
+            <span class="badge">Step 1</span>
+            <h3>Discover</h3>
+            <p>The customer searches for homemade cultural food.</p>
+          </div>
+          <div class="flow-item">
+            <span class="badge">Step 2</span>
+            <h3>Order</h3>
+            <p>The customer selects food, adds it to cart, and starts checkout.</p>
+          </div>
+          <div class="flow-item">
+            <span class="badge">Step 3</span>
+            <h3>Prepare</h3>
+            <p>The cooker accepts the request and prepares the meal.</p>
+          </div>
+          <div class="flow-item">
+            <span class="badge">Step 4</span>
+            <h3>Deliver</h3>
+            <p>The delivery partner picks up and completes the drop-off.</p>
+          </div>
+          <div class="flow-item">
+            <span class="badge">Step 5</span>
+            <h3>Receive</h3>
+            <p>The customer receives the food and can review the experience.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap reveal">
+        <h2>Why people can understand the idea quickly</h2>
+        <div class="grid three">
+          <article class="card">
+            <h3>It uses familiar roles</h3>
+            <p>Everyone understands customer, cook, and delivery. Freshtively connects them in one system.</p>
+          </article>
+          <article class="card">
+            <h3>It protects local trust</h3>
+            <p>The cooker profile and verification flow help customers feel more confident before ordering.</p>
+          </article>
+          <article class="card">
+            <h3>It keeps the process visible</h3>
+            <p>The order journey is broken into clear stages, so each user knows what to do next.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="wrap reveal" id="creator">
+        <div class="profile">
+          <span class="badge">Creator and copyright holder</span>
+          <h2 style="margin-top: 18px">Md Anisur Rahman Chowdhury</h2>
+          <p class="section-text">
+            Freshtively, its concept, source code, documentation, design implementation, and system materials are owned
+            by Md Anisur Rahman Chowdhury unless a separate written license says otherwise.
+          </p>
+          <div class="profile-links">
+            <a href="https://linkedin.com/in/md-anisur-rahman-chowdhury-15862420a">LinkedIn</a>
+            <a href="https://github.com/ANIS151993">GitHub</a>
+            <a href="https://scholar.google.com/citations?user=NQyywPoAAAAJ">Google Scholar</a>
+            <a href="https://marcbd.site">Portfolio</a>
+            <a href="https://researchgate.net/profile/Md-Anisur-Rahman-Chowdhury">ResearchGate</a>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="wrap">
+      Copyright (c) 2026 Md Anisur Rahman Chowdhury. All rights reserved.
+    </footer>
   </body>
 </html>

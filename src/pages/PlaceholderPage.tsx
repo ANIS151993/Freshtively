@@ -39,7 +39,7 @@ export function PlaceholderPage({
       <div className="mt-8 grid gap-5 md:grid-cols-3">
         <DashboardStatCard label="Role area" value={area} helper="Route and layout are connected." icon={iconMap[area]} />
         <DashboardStatCard label="Status" value="Ready" helper="Placeholder page for Phase 1." icon={<ShieldCheck size={22} />} />
-        <DashboardStatCard label="Design" value="Stitch" helper="Uses Artisanal Hearth tokens." icon={<ChefHat size={22} />} />
+        <DashboardStatCard label="Design" value="System UI" helper="Uses Freshtively visual tokens." icon={<ChefHat size={22} />} />
       </div>
 
       <Card className="mt-8">

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Freshtively Developer Portal</title>
+    <style>
+      :root {
+        color: #17211c;
+        background: #f4fbf4;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      .hidden { display: none !important; }
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px;
+        background:
+          radial-gradient(circle at 12% 8%, rgba(245,166,35,.24), transparent 28rem),
+          radial-gradient(circle at 85% 10%, rgba(8,122,82,.22), transparent 26rem),
+          #101815;
+        color: white;
+      }
+      .wrap { width: min(1160px, 100%); margin: 0 auto; }
+      .login-grid { display: grid; gap: 28px; align-items: center; }
+      @media (min-width: 900px) { .login-grid { grid-template-columns: 1fr 420px; } }
+      h1 { margin: 0; font-size: clamp(3rem, 7vw, 6.2rem); line-height: .96; letter-spacing: 0; }
+      h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; }
+      p { color: #526155; line-height: 1.7; }
+      .hero p { color: #d8e6dc; font-size: 1.05rem; }
+      .pill {
+        display: inline-flex;
+        border-radius: 999px;
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.16);
+        padding: 10px 14px;
+        color: #dff7eb;
+        font-weight: 800;
+        font-size: .92rem;
+      }
+      .card {
+        border: 1px solid rgba(197,212,200,.78);
+        border-radius: 18px;
+        background: rgba(255,255,255,.94);
+        padding: 24px;
+        box-shadow: 0 24px 80px rgba(23,33,28,.12);
+      }
+      label { display: block; color: #17211c; font-weight: 800; font-size: .92rem; }
+      input, select, textarea {
+        width: 100%;
+        min-height: 48px;
+        margin-top: 8px;
+        border: 1px solid #bbcabf;
+        border-radius: 14px;
+        padding: 10px 14px;
+        color: #17211c;
+        background: #fbfffb;
+        font: inherit;
+      }
+      textarea { min-height: 100px; resize: vertical; }
+      button, .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        border: 0;
+        border-radius: 10px;
+        padding: 0 16px;
+        background: #087a52;
+        color: white;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      button.secondary, .button.secondary { background: #f5a623; color: #17211c; }
+      button.ghost, .button.ghost { background: #e4f3e9; color: #087a52; }
+      button.danger { background: #b85636; }
+      .form { display: grid; gap: 16px; margin-top: 22px; }
+      .console { min-height: 100vh; background: #f4fbf4; }
+      .topbar { background: #101815; color: white; padding: 28px 16px; }
+      .topbar-inner { width: min(1160px, 100%); margin: 0 auto; display: flex; gap: 20px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+      .content { width: min(1160px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+      .grid { display: grid; gap: 18px; }
+      @media (min-width: 760px) { .grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); } .grid.four { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+      .stat strong { display: block; margin-top: 8px; color: #17211c; font-size: 2rem; }
+      .table { overflow: hidden; border: 1px solid #bbcabf; border-radius: 16px; background: white; }
+      .row { display: grid; gap: 10px; padding: 14px; border-bottom: 1px solid #e1ebe3; }
+      @media (min-width: 860px) { .row { grid-template-columns: 1fr 120px 120px 260px; align-items: center; } }
+      .badge { display: inline-flex; width: fit-content; border-radius: 999px; background: #dff7eb; color: #087a52; padding: 6px 10px; font-size: .78rem; font-weight: 900; }
+      .badge.warn { background: #fff1cf; color: #6b4100; }
+      .badge.danger { background: #ffe5dc; color: #b85636; }
+      .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+      .section { margin-top: 24px; }
+      .notice { margin-top: 16px; border-radius: 14px; background: #dff7eb; color: #087a52; padding: 14px; font-weight: 800; }
+    </style>
+  </head>
+  <body>
+    <main id="login" class="hero">
+      <div class="wrap login-grid">
+        <section>
+          <span class="pill">Private developer portal</span>
+          <h1 style="margin-top: 22px">Freshtively owner console</h1>
+          <p>Control and monitor customers, cookers, delivery partners, commissions, promotions, money flow, accounts, and deployment status from one portal.</p>
+        </section>
+        <section class="card">
+          <h2>Developer Login</h2>
+          <p>Use your private developer credential.</p>
+          <form id="loginForm" class="form">
+            <label>Email <input id="email" type="email" value="engr.aanis@gmail.com" /></label>
+            <label>Password <input id="password" type="password" /></label>
+            <button type="submit">Enter developer portal</button>
+            <p id="error" class="hidden" style="color:#b85636;font-weight:800">Invalid developer login.</p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <main id="console" class="console hidden">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div>
+            <span class="pill">Developer portal active</span>
+            <h2 style="margin-top:12px;color:white">Freshtively system control center</h2>
+            <p>Professional owner panel for monitoring and controlling the marketplace concept.</p>
+          </div>
+          <button class="ghost" id="logout">Logout</button>
+        </div>
+      </header>
+      <div class="content">
+        <section class="grid four">
+          <div class="card stat"><span>Gross order volume</span><strong>$12,480.50</strong><p>Total marketplace value.</p></div>
+          <div class="card stat"><span>Platform commission</span><strong>$1,872.08</strong><p>System owner revenue.</p></div>
+          <div class="card stat"><span>Cooker payouts</span><strong>$8,340.22</strong><p>Cooker earnings.</p></div>
+          <div class="card stat"><span>Delivery payouts</span><strong>$1,228.40</strong><p>Delivery earnings.</p></div>
+        </section>
+
+        <section class="section card">
+          <h2>User Control</h2>
+          <p>Control customers, cookers, and delivery partners. Production writes require Firebase Admin backend connection.</p>
+          <div class="table" id="usersTable"></div>
+        </section>
+
+        <section class="section grid two">
+          <div class="card">
+            <h2>Commission Control</h2>
+            <div class="form">
+              <label>Service fee percent <input value="8" type="number" /></label>
+              <label>Cooker commission percent <input value="15" type="number" /></label>
+              <label>Delivery base fee <input value="5" type="number" /></label>
+              <label>Tax rate percent <input value="8.875" type="number" /></label>
+              <button onclick="notify('Commission settings prepared for production backend.')">Save commission</button>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Promotion Control</h2>
+            <div class="form">
+              <label>Campaign title <input value="Launch discount" /></label>
+              <label>Promo code <input value="FRESH10" /></label>
+              <label>Audience <select><option>All users</option><option>Customers</option><option>Cookers</option><option>Delivery partners</option></select></label>
+              <label>Message <textarea>Welcome promotion for Freshtively users.</textarea></label>
+              <button class="secondary" onclick="notify('Promotion prepared for publishing.')">Publish promotion</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section grid two">
+          <div class="card">
+            <h2>Deployment Status</h2>
+            <p><strong>Cloudflare Pages:</strong> main branch -> npm run build -> dist</p>
+            <p><strong>Firebase mode:</strong> Firestore-only test mode, no Storage billing required.</p>
+            <p><strong>Developer:</strong> engr.aanis@gmail.com</p>
+          </div>
+          <div class="card">
+            <h2>Quick Links</h2>
+            <div class="actions">
+              <a class="button" href="/admin">Protected admin</a>
+              <a class="button secondary" href="https://github.com/ANIS151993/Freshtively">GitHub</a>
+              <a class="button ghost" href="/">Live site</a>
+            </div>
+          </div>
+        </section>
+        <div id="notice" class="notice hidden"></div>
+      </div>
+    </main>
+
+    <script>
+      const expectedEmail = "engr.aanis@gmail.com";
+      const expectedHash = "5b484d8b2799daf74779ce686501847d4a08b5e917c1e8395e1da7f7e73bce0d";
+      const users = [
+        ["Ayesha Rahman", "consumer.demo@freshtively.local", "Customer", "approved"],
+        ["Nadia Kitchen", "cooker.demo@freshtively.local", "Cooker", "pending"],
+        ["Samir Delivery", "delivery.demo@freshtively.local", "Delivery", "approved"],
+        ["Suspended Demo", "blocked.demo@freshtively.local", "Customer", "suspended"]
+      ];
+      const login = document.getElementById("login");
+      const consolePanel = document.getElementById("console");
+      const error = document.getElementById("error");
+      const notice = document.getElementById("notice");
+
+      function showConsole() {
+        login.classList.add("hidden");
+        consolePanel.classList.remove("hidden");
+        renderUsers();
+      }
+      async function sha256(value) {
+        const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+        return Array.from(new Uint8Array(buffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
+      }
+      document.getElementById("loginForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const hash = await sha256(document.getElementById("password").value);
+        if (document.getElementById("email").value.trim().toLowerCase() === expectedEmail && hash === expectedHash) {
+          sessionStorage.setItem("freshtively_static_developer", "1");
+          showConsole();
+        } else {
+          error.classList.remove("hidden");
+        }
+      });
+      document.getElementById("logout").addEventListener("click", () => {
+        sessionStorage.removeItem("freshtively_static_developer");
+        location.reload();
+      });
+      function badge(status) {
+        const cls = status === "approved" ? "badge" : status === "pending" ? "badge warn" : "badge danger";
+        return `<span class="${cls}">${status}</span>`;
+      }
+      function renderUsers() {
+        document.getElementById("usersTable").innerHTML = users.map((u) => `
+          <div class="row">
+            <div><strong>${u[0]}</strong><br><span style="color:#526155">${u[1]}</span></div>
+            <span class="badge">${u[2]}</span>
+            ${badge(u[3])}
+            <div class="actions">
+              <button class="secondary" onclick="notify('Approve prepared for ${u[1]}')">Approve</button>
+              <button class="ghost" onclick="notify('Suspend prepared for ${u[1]}')">Suspend</button>
+              <button class="danger" onclick="notify('Block prepared for ${u[1]}')">Block</button>
+            </div>
+          </div>
+        `).join("");
+      }
+      function notify(message) {
+        notice.textContent = message;
+        notice.classList.remove("hidden");
+      }
+      if (sessionStorage.getItem("freshtively_static_developer") === "1") showConsole();
+    </script>
+  </body>
+</html>

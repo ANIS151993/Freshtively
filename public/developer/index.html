@@ -33,26 +33,98 @@
 
       .login {
         min-height: 100vh;
+        height: 100vh;
         display: grid;
         place-items: center;
-        padding: 32px 16px;
+        overflow: hidden;
+        padding: 0;
         color: var(--ink);
-        background:
-          linear-gradient(90deg, rgba(13, 95, 53, .05) 1px, transparent 1px),
-          linear-gradient(rgba(13, 95, 53, .05) 1px, transparent 1px),
-          linear-gradient(135deg, #f7f8f4 0%, #eef4ee 100%);
-        background-size: 34px 34px, 34px 34px, auto;
+        background: #f7f8f4;
       }
 
       .login-wrap {
-        width: min(1040px, 100%);
+        width: 100%;
+        height: 100%;
         display: grid;
         align-items: center;
-        gap: 28px;
       }
 
       @media (min-width: 920px) {
-        .login-wrap { grid-template-columns: .95fr 410px; }
+        .login-wrap { grid-template-columns: minmax(0, 1fr) 430px; }
+      }
+
+      .brand-panel {
+        position: relative;
+        display: grid;
+        align-content: center;
+        min-height: 100%;
+        overflow: hidden;
+        padding: clamp(32px, 6vw, 72px);
+        background:
+          linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+          linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+          linear-gradient(135deg, #111915 0%, #17231d 56%, #0d5f35 140%);
+        background-size: 40px 40px, 40px 40px, auto;
+        color: white;
+      }
+
+      .brand-panel::before {
+        position: absolute;
+        inset: 11% auto auto 58%;
+        width: 320px;
+        height: 320px;
+        content: "";
+        border-radius: 50%;
+        background: rgba(210, 107, 45, .28);
+        filter: blur(26px);
+        animation: brandPulse 6s ease-in-out infinite;
+      }
+
+      .brand-panel::after {
+        position: absolute;
+        right: 9%;
+        bottom: 10%;
+        width: 190px;
+        height: 190px;
+        content: "";
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 28px;
+        transform: rotate(14deg);
+        animation: panelDrift 8s ease-in-out infinite;
+      }
+
+      .brand-panel-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+      }
+
+      .login-panel {
+        display: grid;
+        align-content: center;
+        height: 100%;
+        padding: clamp(24px, 5vw, 44px);
+        background: #f7f8f4;
+      }
+
+      @media (max-width: 919px) {
+        .login {
+          height: auto;
+          min-height: 100vh;
+          overflow: auto;
+        }
+
+        .login-wrap {
+          min-height: 100vh;
+        }
+
+        .brand-panel {
+          min-height: 42vh;
+        }
+
+        .login-panel {
+          min-height: 58vh;
+        }
       }
 
       .pill {
@@ -70,11 +142,12 @@
       }
 
       h1, h2, h3 { margin: 0; letter-spacing: 0; }
-      h1 { margin-top: 22px; max-width: 720px; font-size: clamp(2.65rem, 6vw, 5.2rem); line-height: .98; }
+      h1 { margin-top: 22px; max-width: 720px; font-size: clamp(2.45rem, 5vw, 4.9rem); line-height: .98; }
       h2 { font-size: clamp(1.5rem, 2.4vw, 2.2rem); line-height: 1.12; }
       h3 { font-size: 1.02rem; }
       p { color: var(--muted); line-height: 1.65; }
       .login p { max-width: 650px; color: var(--muted); font-size: 1.02rem; }
+      .brand-panel p { color: #d8e6dc; }
 
       .card {
         border: 1px solid var(--line);
@@ -87,9 +160,18 @@
       .login-card { background: white; color: var(--ink); }
       .login-logo {
         display: block;
-        width: 186px;
+        width: 205px;
         height: auto;
-        margin-bottom: 28px;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 18px 40px rgba(0,0,0,.2));
+        animation: logoFloat 5.5s ease-in-out infinite;
+      }
+
+      .login-panel-logo {
+        display: none;
+        width: 148px;
+        height: auto;
+        margin-bottom: 24px;
       }
 
       label { display: block; color: var(--ink); font-size: .9rem; font-weight: 850; }
@@ -106,6 +188,25 @@
       }
       textarea { min-height: 104px; resize: vertical; }
       input:focus, select:focus, textarea:focus { border-color: var(--emerald); box-shadow: 0 0 0 3px var(--green-soft); }
+      .password-field {
+        position: relative;
+      }
+      .password-field input {
+        padding-right: 74px;
+      }
+      .password-toggle {
+        position: absolute;
+        right: 7px;
+        bottom: 7px;
+        min-height: 30px;
+        border: 0;
+        border-radius: 7px;
+        background: #eef2ed;
+        padding: 0 10px;
+        color: var(--emerald);
+        font-size: .78rem;
+        font-weight: 900;
+      }
 
       .btn {
         display: inline-flex;
@@ -131,7 +232,36 @@
       .login-points { display: grid; gap: 12px; margin-top: 28px; }
       @media (min-width: 720px) { .login-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
       .login-point { border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.72); padding: 16px; }
+      .brand-panel .login-point {
+        border-color: rgba(255,255,255,.12);
+        background: rgba(255,255,255,.08);
+        color: white;
+      }
       .login-point strong { display: block; margin-bottom: 6px; }
+
+      @keyframes logoFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      @keyframes brandPulse {
+        0%, 100% { opacity: .45; transform: scale(.96); }
+        50% { opacity: .75; transform: scale(1.08); }
+      }
+
+      @keyframes panelDrift {
+        0%, 100% { transform: rotate(14deg) translateY(0); }
+        50% { transform: rotate(18deg) translateY(-12px); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: .01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: .01ms !important;
+        }
+      }
 
       .shell { min-height: 100vh; display: grid; background: var(--cream); }
       @media (min-width: 1120px) { .shell { grid-template-columns: 248px minmax(0, 1fr); } }
@@ -297,30 +427,39 @@
   <body>
     <main id="login" class="login">
       <div class="login-wrap">
-        <section>
-          <img class="login-logo" src="/logo/main-logo.png" alt="Freshtively" />
-          <span class="pill">Private developer portal</span>
-          <h1>Operations control for Freshtively</h1>
-          <p>
-            A focused owner console for account governance, marketplace permissions, commission controls, promotions,
-            order oversight, content moderation, and system release status.
-          </p>
-          <div class="login-points">
-            <div class="login-point"><strong>Governance</strong><span>Users, permissions, roles.</span></div>
-            <div class="login-point"><strong>Finance</strong><span>Fees, payouts, adjustments.</span></div>
-            <div class="login-point"><strong>Platform</strong><span>Features, releases, audit.</span></div>
+        <section class="brand-panel">
+          <div class="brand-panel-inner">
+            <img class="login-logo" src="/logo/main-logo.png" alt="Freshtively" />
+            <span class="pill">Private developer portal</span>
+            <h1>Operations control for Freshtively</h1>
+            <p>
+              A focused owner console for account governance, marketplace permissions, commission controls, promotions,
+              order oversight, content moderation, and system release status.
+            </p>
+            <div class="login-points">
+              <div class="login-point"><strong>Governance</strong><span>Users, permissions, roles.</span></div>
+              <div class="login-point"><strong>Finance</strong><span>Fees, payouts, adjustments.</span></div>
+              <div class="login-point"><strong>Platform</strong><span>Features, releases, audit.</span></div>
+            </div>
           </div>
         </section>
 
-        <section class="card login-card">
-          <h2>Sign in</h2>
-          <p>Developer access only.</p>
-          <form id="loginForm" class="form">
-            <label>Email <input id="email" type="email" value="engr.aanis@gmail.com" autocomplete="username" /></label>
-            <label>Password <input id="password" type="password" autocomplete="current-password" /></label>
-            <button class="btn full" type="submit">Open console</button>
-            <p id="error" class="hidden compact" style="color:var(--clay);font-weight:900">Invalid developer login.</p>
-          </form>
+        <section class="login-panel">
+          <img class="login-panel-logo" src="/logo/main-logo.png" alt="Freshtively" />
+          <div class="card login-card">
+            <h2>Sign in</h2>
+            <p>Developer access only.</p>
+            <form id="loginForm" class="form">
+              <label>Email <input id="email" type="email" value="engr.aanis@gmail.com" autocomplete="username" /></label>
+              <label class="password-field">
+                Password
+                <input id="password" type="password" autocomplete="current-password" />
+                <button class="password-toggle" id="passwordToggle" type="button">Show</button>
+              </label>
+              <button class="btn full" type="submit">Open console</button>
+              <p id="error" class="hidden compact" style="color:var(--clay);font-weight:900">Invalid developer login.</p>
+            </form>
+          </div>
         </section>
       </div>
     </main>
@@ -599,6 +738,13 @@
       document.getElementById("logout").addEventListener("click", () => {
         sessionStorage.removeItem(sessionKey);
         location.reload();
+      });
+
+      document.getElementById("passwordToggle").addEventListener("click", () => {
+        const passwordInput = document.getElementById("password");
+        const isHidden = passwordInput.type === "password";
+        passwordInput.type = isHidden ? "text" : "password";
+        document.getElementById("passwordToggle").textContent = isHidden ? "Hide" : "Show";
       });
 
       document.getElementById("permissionUser").addEventListener("change", renderPermissions);

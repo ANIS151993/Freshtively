@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Freshtively Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "tertiary": "#a43a3a",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-low": "#eef6ee",
+                        "surface-bright": "#f4fbf4",
+                        "tertiary-container": "#fc7c78",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#fea619",
+                        "primary-fixed": "#6ffbbe",
+                        "on-tertiary-container": "#711419",
+                        "inverse-on-surface": "#ebf3eb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#684000",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#4edea3",
+                        "on-error-container": "#93000a",
+                        "surface": "#f4fbf4",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-error": "#ffffff",
+                        "on-background": "#161d19",
+                        "on-tertiary-fixed-variant": "#842225",
+                        "outline": "#6c7a71",
+                        "on-tertiary-fixed": "#410005",
+                        "surface-container-high": "#e3eae3",
+                        "on-primary-fixed": "#002113",
+                        "primary": "#006c49",
+                        "on-primary-fixed-variant": "#005236",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#3c4a42",
+                        "outline-variant": "#bbcabf",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "secondary": "#855300",
+                        "primary-container": "#10b981",
+                        "on-primary-container": "#00422b",
+                        "inverse-surface": "#2b322d",
+                        "on-surface": "#161d19",
+                        "surface-container": "#e8f0e9",
+                        "surface-container-highest": "#dde4dd",
+                        "surface-dim": "#d4dcd5",
+                        "surface-tint": "#006c49",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#dde4dd",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "secondary-fixed": "#ffddb8",
+                        "on-secondary-fixed": "#2a1700",
+                        "background": "#f4fbf4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["outfit"],
+                        "body-lg": ["outfit"],
+                        "label-md": ["outfit"],
+                        "headline-lg": ["outfit"],
+                        "headline-md": ["outfit"],
+                        "display-lg": ["outfit"],
+                        "body-md": ["outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f4fbf4; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dde4dd; border-radius: 10px; }
+        .sparkline-svg { height: 32px; width: 100px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col z-30">
+<div class="px-6 py-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[24px]">cooking</span>
+</div>
+<span class="text-headline-md font-bold text-primary tracking-tight">Freshtively</span>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<div class="bg-primary/10 text-primary rounded-xl font-bold px-4 py-3 flex items-center gap-3 transition-all duration-200 cursor-pointer shadow-sm shadow-primary/5">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md">Dashboard</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-xl flex items-center gap-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="text-label-md">Active Orders</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-xl flex items-center gap-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-md">Kitchen Stats</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-xl flex items-center gap-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="text-label-md">Earnings</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-container-low px-4 py-3 rounded-xl flex items-center gap-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md">Settings</span>
+</div>
+</nav>
+<div class="mt-auto px-4 py-8 border-t border-outline-variant/10">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-2xl mb-4">
+<img alt="Chef Maria" class="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM5q50fpvugPhuyknocMt44YWx8hLw1NssjJABDiRROZH1UavYXtnVq0z5b2Hynx4wK62qUQ1LUs8nJrnIchNwoEaHhSpMI2-BkZ6SEd8XYG2q2n8NI86fRnLkFZuVzSc5tKZrpohsXVxhFb-lZZxT7dy3RyEyuv-LGAR6K_NMT_09c69Q5u6HI1yR0MjTqK2RKvPYoQOpP4d4Vls96MZ0mLDLmQsaxemiKNz2yvvqPyv0cQU38CkpFt0LicNG4K9d7oC24K-_Kcs"/>
+<div class="min-w-0">
+<p class="text-label-md font-bold text-on-surface truncate">Chef Maria</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Verified Admin</p>
+</div>
+</div>
+<button class="w-full py-3.5 bg-primary text-on-primary rounded-xl font-bold hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98] mb-4">Go Online</button>
+<div class="space-y-1">
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer text-label-md font-medium">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+<span>Help Center</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 rounded-lg transition-all cursor-pointer text-label-md font-medium">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span>Logout</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="ml-64 min-h-screen p-margin-desktop space-y-gutter">
+<header class="flex justify-between items-center">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Admin Overview</h1>
+<p class="text-body-md text-on-surface-variant">Welcome back, Maria. Here's a snapshot of today's kitchen activity.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<div class="p-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl hover:bg-surface-variant/20 transition-colors cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-tertiary text-on-tertiary text-[10px] flex items-center justify-center rounded-full border-2 border-surface font-bold">3</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2.5 rounded-xl border border-outline-variant/30 shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-bold text-on-surface">Oct 24, 2024</span>
+</div>
+</div>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Analytics Cards -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/20 hover:border-primary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/5 text-primary rounded-xl group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-primary text-[12px] font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                    </span>
+<p class="text-[10px] text-on-surface-variant font-medium">vs last week</p>
+</div>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-medium">Total Orders</p>
+<div class="flex items-end justify-between">
+<h3 class="text-headline-lg font-bold text-on-surface">1,284</h3>
+<svg class="sparkline-svg" viewbox="0 0 100 32">
+<path d="M0 25 L20 22 L40 28 L60 15 L80 10 L100 5" fill="none" stroke="#006c49" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/20 hover:border-secondary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary/5 text-secondary rounded-xl group-hover:bg-secondary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-secondary text-[12px] font-bold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 5%
+                    </span>
+<p class="text-[10px] text-on-surface-variant font-medium">vs last week</p>
+</div>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-medium">Active Users</p>
+<div class="flex items-end justify-between">
+<h3 class="text-headline-lg font-bold text-on-surface">8,432</h3>
+<svg class="sparkline-svg" viewbox="0 0 100 32">
+<path d="M0 20 L20 22 L40 18 L60 20 L80 15 L100 12" fill="none" stroke="#855300" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/20 hover:border-primary-container/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/10 text-primary-container rounded-xl group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] rounded font-bold">New High</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-medium">Daily Revenue</p>
+<div class="flex items-end justify-between">
+<h3 class="text-headline-lg font-bold text-on-surface">$42.1k</h3>
+<svg class="sparkline-svg" viewbox="0 0 100 32">
+<path d="M0 30 L20 28 L40 22 L60 25 L80 12 L100 2" fill="none" stroke="#10b981" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/20 hover:border-tertiary/30 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary/5 text-tertiary rounded-xl group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] rounded font-bold uppercase tracking-wide">Action</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-medium">Verifications</p>
+<div class="flex items-end justify-between">
+<h3 class="text-headline-lg font-bold text-on-surface">18</h3>
+<svg class="sparkline-svg" viewbox="0 0 100 32">
+<path d="M0 5 L20 12 L40 10 L60 18 L80 25 L100 22" fill="none" stroke="#a43a3a" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Table Section -->
+<section class="lg:col-span-8 bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Live Order Monitoring</h2>
+<p class="text-[14px] text-on-surface-variant">Real-time status updates from active kitchens</p>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all text-label-md group">
+                    View All Orders <span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-on-surface-variant text-[13px] uppercase tracking-wider font-bold border-b border-outline-variant/30">
+<th class="pb-5 font-bold">Order ID</th>
+<th class="pb-5 font-bold">Chef</th>
+<th class="pb-5 font-bold">Customer</th>
+<th class="pb-5 font-bold">Total</th>
+<th class="pb-5 font-bold">Status</th>
+<th class="pb-5 font-bold text-center">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-5 font-bold text-on-surface">#ORD-9021</td>
+<td class="py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[11px] font-bold">AN</div>
+                                Chef Ananya
+                            </td>
+<td class="py-5 text-on-surface-variant">Marcus J.</td>
+<td class="py-5 font-semibold text-on-surface">$42.50</td>
+<td class="py-5">
+<span class="px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-lg text-[11px] font-bold flex items-center w-fit gap-1.5">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></span> Cooking
+                                </span>
+</td>
+<td class="py-5 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-5 font-bold text-on-surface">#ORD-9022</td>
+<td class="py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[11px] font-bold">RO</div>
+                                Chef Roberto
+                            </td>
+<td class="py-5 text-on-surface-variant">Sarah L.</td>
+<td class="py-5 font-semibold text-on-surface">$38.00</td>
+<td class="py-5">
+<span class="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-lg text-[11px] font-bold flex items-center w-fit gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span> On the way
+                                </span>
+</td>
+<td class="py-5 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-5 font-bold text-on-surface">#ORD-9023</td>
+<td class="py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[11px] font-bold">YU</div>
+                                Chef Yuki
+                            </td>
+<td class="py-5 text-on-surface-variant">David K.</td>
+<td class="py-5 font-semibold text-on-surface">$55.20</td>
+<td class="py-5">
+<span class="px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-lg text-[11px] font-bold flex items-center w-fit gap-1.5">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></span> Cooking
+                                </span>
+</td>
+<td class="py-5 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="py-5 font-bold text-on-surface">#ORD-9024</td>
+<td class="py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center text-[11px] font-bold">EL</div>
+                                Chef Elena
+                            </td>
+<td class="py-5 text-on-surface-variant">Amara P.</td>
+<td class="py-5 font-semibold text-on-surface">$29.00</td>
+<td class="py-5">
+<span class="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-lg text-[11px] font-bold flex items-center w-fit gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span> On the way
+                                </span>
+</td>
+<td class="py-5 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Sidebar Actions Section -->
+<section class="lg:col-span-4 space-y-gutter">
+<!-- Safety Reports -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-tertiary/10 text-tertiary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+</div>
+<h2 class="font-bold text-headline-md text-[20px] text-on-surface tracking-tight">Safety Reports</h2>
+</div>
+<span class="w-2.5 h-2.5 bg-tertiary rounded-full animate-ping"></span>
+</div>
+<div class="space-y-4">
+<div class="p-5 bg-tertiary-fixed/20 border border-tertiary/20 rounded-2xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2">
+<span class="text-[10px] bg-tertiary text-on-tertiary px-2 py-1 rounded-md font-bold shadow-sm">CRITICAL</span>
+</div>
+<div class="mb-3">
+<p class="text-label-md font-bold text-on-tertiary-fixed-variant">Dispute #SFT-442</p>
+<p class="text-[13px] text-on-tertiary-fixed-variant/80 font-medium">Chef Roberto • Missing Item</p>
+</div>
+<p class="text-[14px] text-on-tertiary-fixed-variant leading-relaxed mb-4">"Consumer reports missing side order from lunch special delivered at 12:45 PM."</p>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-tertiary text-on-tertiary text-[12px] font-bold rounded-xl hover:shadow-lg hover:shadow-tertiary/20 transition-all">Investigate</button>
+<button class="px-4 py-2 bg-white/50 border border-tertiary/20 text-tertiary text-[12px] font-bold rounded-xl hover:bg-white transition-colors">Dismiss</button>
+</div>
+</div>
+<div class="p-5 bg-surface-container rounded-2xl border border-outline-variant/30">
+<div class="flex justify-between mb-2">
+<p class="text-label-md font-bold text-on-surface">Feedback #FB-109</p>
+<span class="text-[10px] text-on-surface-variant font-bold uppercase">Log</span>
+</div>
+<p class="text-[14px] text-on-surface-variant leading-relaxed">Delivery partner reported difficult gated access at building 402 today.</p>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
+<h2 class="font-bold text-[20px] text-on-surface mb-6 tracking-tight">Quick Management</h2>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center gap-3 p-5 bg-surface-container-low hover:bg-primary/5 hover:border-primary/30 border border-transparent rounded-2xl transition-all group">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="person_add">person_add</span>
+</div>
+<span class="text-[13px] font-bold text-on-surface-variant group-hover:text-primary">Add Cooker</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-5 bg-surface-container-low hover:bg-primary/5 hover:border-primary/30 border border-transparent rounded-2xl transition-all group">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="local_shipping">local_shipping</span>
+</div>
+<span class="text-[13px] font-bold text-on-surface-variant group-hover:text-primary">Partners</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-5 bg-surface-container-low hover:bg-primary/5 hover:border-primary/30 border border-transparent rounded-2xl transition-all group">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="map">map</span>
+</div>
+<span class="text-[13px] font-bold text-on-surface-variant group-hover:text-primary">Tracking</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-5 bg-surface-container-low hover:bg-primary/5 hover:border-primary/30 border border-transparent rounded-2xl transition-all group">
+<div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="campaign">campaign</span>
+</div>
+<span class="text-[13px] font-bold text-on-surface-variant group-hover:text-primary">Broadcast</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Charts Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-bold text-[20px] text-on-surface tracking-tight">Revenue Growth</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container text-[11px] font-bold rounded-full cursor-pointer">Week</span>
+<span class="px-3 py-1 bg-primary text-on-primary text-[11px] font-bold rounded-full cursor-pointer shadow-sm">Month</span>
+</div>
+</div>
+<div class="h-[200px] w-full bg-surface-container-low rounded-2xl border border-outline-variant/20 flex items-end justify-between p-6 gap-3">
+<div class="w-full bg-primary/10 rounded-xl h-[40%] hover:bg-primary/20 transition-all cursor-help relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$12.4k</div>
+</div>
+<div class="w-full bg-primary/10 rounded-xl h-[55%] hover:bg-primary/20 transition-all cursor-help relative group"></div>
+<div class="w-full bg-primary/10 rounded-xl h-[45%] hover:bg-primary/20 transition-all cursor-help relative group"></div>
+<div class="w-full bg-primary/10 rounded-xl h-[70%] hover:bg-primary/20 transition-all cursor-help relative group"></div>
+<div class="w-full bg-primary/10 rounded-xl h-[60%] hover:bg-primary/20 transition-all cursor-help relative group"></div>
+<div class="w-full bg-primary/40 rounded-xl h-[85%] hover:bg-primary/50 transition-all cursor-help relative group"></div>
+<div class="w-full bg-primary h-[95%] rounded-xl shadow-lg relative group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 rounded opacity-100 transition-opacity whitespace-nowrap">$42.1k</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/20">
+<h2 class="font-bold text-[20px] text-on-surface mb-8 tracking-tight">Recent Verifications</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-primary/20 transition-all">
+<div class="flex items-center gap-4">
+<img alt="Chef Marco" class="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuqloesFO0BWp5JtvkGUumJe50mTPCXJQ9ZkdH9XhkXnmmc1Imc_ZYvl_LXxsXsoWwum1ycJ4DSMKAo5eu5xA9pRbm654O9gZBmRaCIdeaTLSuRrHIacwHB4E0dq9N5nwdn92HsXAGWfU4c6MhQ2EszaivbCr91lj7CFBTiDkazY0516Vjm8C50HP76d1fC5FAwQMUAWMf7xqfYNeAvLUZNrGSCMqwU_3UYhjQOtmGF_R769_Ggm7zu-KB6FExDbU6t3gJ7EvLI0o"/>
+<div>
+<p class="text-label-md font-bold text-on-surface">Chef Marco Silva</p>
+<p class="text-[12px] text-on-surface-variant font-medium">Italian • Home Kitchen</p>
+</div>
+</div>
+<button class="px-5 py-2.5 bg-primary/10 text-primary rounded-xl font-bold text-[12px] hover:bg-primary hover:text-on-primary transition-all shadow-sm">Verify Now</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl border border-outline-variant/10 hover:border-primary/20 transition-all">
+<div class="flex items-center gap-4">
+<img alt="Elena" class="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1Hy3y9uHdsihgEWcdYEspxEALjzGABx-QgUMOBHqIN2C4Wk99NyPqcC0KDzLGZFQ7vvAOdb72zX4yfw3i51jNYJqVfrpSdrbwc2gXiCni3cCn8mT0YFGI9KV4mdbid91TG8unY1N9RzKKEfrIByRvPYLDpHVUe5MyhhXFpic3Xmjdag4aV5tbWYv78NloXkP-xAN632yM4azehZV2_cOY-Jp9Tw-ZcI_lccS3WpV1SucZ4iwrSKbBaLJk710rGxly9A8vRTgly5Y"/>
+<div>
+<p class="text-label-md font-bold text-on-surface">Elena Rodriguez</p>
+<p class="text-[12px] text-on-surface-variant font-medium">Delivery Partner • Tier 1</p>
+</div>
+</div>
+<button class="px-5 py-2.5 bg-primary/10 text-primary rounded-xl font-bold text-[12px] hover:bg-primary hover:text-on-primary transition-all shadow-sm">Verify Now</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="ml-64 bg-surface-container-highest py-16 border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[18px]">cooking</span>
+</div>
+<span class="text-headline-md font-bold text-primary tracking-tight">Freshtively</span>
+</div>
+<p class="text-on-surface-variant text-body-md leading-relaxed">Empowering home chefs and bringing authentic neighborhood warmth to every plate through culturally rich experiences.</p>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[13px]">Platform</h4>
+<nav class="flex flex-col gap-3">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Explore Kitchens</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Quality Standards</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Merchant Portal</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[13px]">Company</h4>
+<nav class="flex flex-col gap-3">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Privacy Policy</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-on-surface uppercase tracking-widest text-[13px]">Support</h4>
+<nav class="flex flex-col gap-3">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Live Chat</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Partner Help</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-medium" href="#">Safety Guidelines</a>
+</nav>
+</div>
+</div>
+<div class="mt-16 text-center text-on-surface-variant text-[13px] px-margin-desktop border-t border-outline-variant/10 pt-8 max-w-container-max-width mx-auto font-medium">
+        © 2024 Freshtively Inc. Bringing neighborhood flavors to life with high-end safety and quality.
+    </div>
+</footer>
+</body></html>

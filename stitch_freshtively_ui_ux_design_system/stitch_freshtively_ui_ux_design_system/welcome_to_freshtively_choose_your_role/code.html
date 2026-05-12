@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Freshtively | Choose Your Journey</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3c4a42",
+                        "surface-container-low": "#eef6ee",
+                        "primary-fixed": "#6ffbbe",
+                        "on-secondary-fixed": "#2a1700",
+                        "inverse-surface": "#2b322d",
+                        "on-primary-container": "#00422b",
+                        "primary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#ebf3eb",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f4fbf4",
+                        "tertiary-container": "#fc7c78",
+                        "error": "#ba1a1a",
+                        "surface": "#f4fbf4",
+                        "primary-container": "#10b981",
+                        "background": "#f4fbf4",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#a43a3a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#684000",
+                        "primary": "#006c49",
+                        "surface-container-highest": "#dde4dd",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary-container": "#711419",
+                        "surface-tint": "#006c49",
+                        "outline-variant": "#bbcabf",
+                        "on-tertiary-fixed-variant": "#842225",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "inverse-primary": "#4edea3",
+                        "on-error-container": "#93000a",
+                        "secondary": "#855300",
+                        "surface-container-high": "#e3eae3",
+                        "on-surface": "#161d19",
+                        "surface-dim": "#d4dcd5",
+                        "on-error": "#ffffff",
+                        "surface-container": "#e8f0e9",
+                        "outline": "#6c7a71",
+                        "secondary-container": "#fea619",
+                        "on-background": "#161d19",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-primary-fixed-variant": "#005236",
+                        "surface-variant": "#dde4dd",
+                        "on-primary-fixed": "#002113",
+                        "on-tertiary-fixed": "#410005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "base": "8px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["outfit"],
+                        "headline-lg-mobile": ["outfit"],
+                        "body-lg": ["outfit"],
+                        "body-md": ["outfit"],
+                        "headline-lg": ["outfit"],
+                        "display-lg": ["outfit"],
+                        "label-md": ["outfit"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Top Navigation (Shell suppressed for Transactional/Onboarding focus) -->
+<header class="w-full py-gutter px-margin-mobile md:px-margin-desktop flex justify-center">
+<div class="font-display-lg text-display-lg text-primary">Freshtively</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile py-gutter max-w-container-max-width mx-auto w-full">
+<!-- Title Section -->
+<div class="text-center mb-12 space-y-4">
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg text-on-surface">Welcome to the Kitchen</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Join our community of food lovers, master chefs, and delivery experts. How would you like to experience Freshtively today?
+            </p>
+</div>
+<!-- Role Selection Bento-ish Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full">
+<!-- I want to Order -->
+<button class="group relative flex flex-col text-left bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully plated gourmet meal featuring roasted vegetables and artisanal grains on a ceramic plate. The scene is set in a sun-drenched, rustic kitchen with warm natural light filtering through a window, creating a welcoming and authentic atmosphere. The color palette emphasizes fresh greens and earthy browns, perfectly matching the Freshtively brand aesthetic of premium, homemade quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf0wvep23uNX34zHXTT7SwCCiVYMOsDuv7WwwRj3IJry51gOmm5huLXtipKyipFJawWpmo1UJmcmVJxum4vF5hTOr8V9vK1ZlIr3wW3EFwlQ0gJubIHjJXY0rHiV5umbNIYvTHCwYs_OAuA5dG72FQ6xEKSS-AQRIOnZVIcKs2m0e0aNrAfGJkInpn_RjoM3UNXjJW4gJ9W3U3sohLzLwZcnKTZ3jrGUYP00rSNjdWu5eCR5mL_bz4VbX3WQ6IdcsTEc2mkmRMnrE"/>
+</div>
+<div class="p-gutter flex flex-col h-full">
+<div class="flex items-center gap-base mb-base text-primary">
+<span class="material-symbols-outlined text-headline-md" data-icon="restaurant">restaurant</span>
+<span class="font-label-md text-label-md tracking-wider uppercase">Experience</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">I want to Order</h2>
+<p class="text-on-surface-variant font-body-md mb-gutter flex-grow">
+                        Discover authentic cultural dishes prepared by passionate home chefs in your neighborhood.
+                    </p>
+<div class="flex items-center text-primary font-label-md group-hover:gap-4 gap-2 transition-all">
+<span>Start Browsing</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</button>
+<!-- I want to Cook -->
+<button class="group relative flex flex-col text-left bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional home chef with a warm smile preparing fresh ingredients on a wooden countertop. The kitchen is modern yet cozy, filled with stainless steel utensils and fresh herbs in terracotta pots. Soft ambient lighting highlights the texture of the vegetables and the craftsmanship of the cooking environment, embodying the Freshtively spirit of authentic culinary heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPs5VZVnfcLyXWVrlC3COuL0uSfb0uN7zdQ_znZg66j23tghSXVoNDxbZQArs-DRYmjJHurrilKDs0alqKyZNFg2rN-3pX5A5fQS_Slorr7szcM-vJZpeHX9VUAHVESkz2nBGSjgKjlhQCXDEDOwY3b0bXSv7OadcrLYpUZu_zuon-fayaY-zXxuBCogCMO8OvjSahGS834Y0T_NY5r-mk9sVkFkh7XN3CFwR4Ksr5jds097zq5dU3jhsbkH6q7NehqCzuvGXBxDA"/>
+</div>
+<div class="p-gutter flex flex-col h-full">
+<div class="flex items-center gap-base mb-base text-secondary">
+<span class="material-symbols-outlined text-headline-md" data-icon="skillet">skillet</span>
+<span class="font-label-md text-label-md tracking-wider uppercase">Entrepreneur</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">I want to Cook</h2>
+<p class="text-on-surface-variant font-body-md mb-gutter flex-grow">
+                        Turn your kitchen into a business. Share your cultural recipes and earn by cooking what you love.
+                    </p>
+<div class="flex items-center text-secondary font-label-md group-hover:gap-4 gap-2 transition-all">
+<span>Open Your Kitchen</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</button>
+<!-- I want to Deliver -->
+<button class="group relative flex flex-col text-left bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-hover transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A friendly delivery person on a stylish electric bicycle riding through a clean, modern suburban neighborhood street during the golden hour. The sunlight creates long, soft shadows and a warm glow. The scene is bright and optimistic, showcasing the reliability and speed of the service while maintaining the neighborhood-friendly vibe of the Freshtively brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPpO1UeXGyRoHoVqnBtkmFjflREm9W_hpRdFkeEIkX4hOqC4J_BcQXwS6U3GbFpZNPRbcPQHAKwhQP1th4Jd4bbfGxxdNLYkxPIFNqUHYNZNgi1aptlzdoU0qyuAGSEjg_ajGry6a8NJCPXOlmlrCFbAUUo0Ej0pkLxtm_DOwcDXnrWoexWyQ6OEHi1FJFABl3jj_p-P3C0YAKfTduslNA6Hdept__9SbnQezL9x9AOz8ZWzzvvinqBdZueS9gVUegUaqLZf-NUyk"/>
+</div>
+<div class="p-gutter flex flex-col h-full">
+<div class="flex items-center gap-base mb-base text-tertiary">
+<span class="material-symbols-outlined text-headline-md" data-icon="delivery_dining">delivery_dining</span>
+<span class="font-label-md text-label-md tracking-wider uppercase">Logistics</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">I want to Deliver</h2>
+<p class="text-on-surface-variant font-body-md mb-gutter flex-grow">
+                        Support your local community and earn extra income by delivering fresh meals to hungry neighbors.
+                    </p>
+<div class="flex items-center text-tertiary font-label-md group-hover:gap-4 gap-2 transition-all">
+<span>Become a Courier</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</button>
+</div>
+<!-- Secondary Actions -->
+<div class="mt-16 text-center">
+<p class="text-on-surface-variant font-label-md mb-4">Already have an account?</p>
+<button class="px-gutter py-3 bg-primary text-on-primary font-label-md rounded-full hover:bg-on-primary-container transition-all active:scale-95 shadow-md">
+                Sign In to Freshtively
+            </button>
+</div>
+</main>
+<footer class="py-gutter px-margin-mobile text-center">
+<p class="text-on-surface-variant font-label-md opacity-60">© 2024 Freshtively. Authenticity delivered fresh.</p>
+</footer>
+</body></html>

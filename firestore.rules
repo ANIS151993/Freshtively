@@ -1,0 +1,133 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function userDoc(uid) {
+      return get(/databases/$(database)/documents/users/$(uid));
+    }
+
+    function currentRole() {
+      return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        ? userDoc(request.auth.uid).data.role
+        : "";
+    }
+
+    function isAdmin() {
+      return currentRole() == "admin";
+    }
+
+    function isConsumer() {
+      return currentRole() == "consumer";
+    }
+
+    function isCooker() {
+      return currentRole() == "cooker";
+    }
+
+    function isDelivery() {
+      return currentRole() == "delivery";
+    }
+
+    function isOrderParticipant() {
+      return isSignedIn()
+        && (
+          resource.data.consumerId == request.auth.uid
+          || resource.data.cookerId == request.auth.uid
+          || resource.data.deliveryPersonId == request.auth.uid
+        );
+    }
+
+    function isIncomingOrderParticipant() {
+      return isSignedIn()
+        && (
+          request.resource.data.consumerId == request.auth.uid
+          || request.resource.data.cookerId == request.auth.uid
+          || request.resource.data.deliveryPersonId == request.auth.uid
+        );
+    }
+
+    match /users/{uid} {
+      allow read, update: if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /consumers/{uid} {
+      allow read, update: if isOwner(uid) || isAdmin();
+      allow create: if (isOwner(uid) && request.resource.data.uid == uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /cookers/{uid} {
+      allow read: if isSignedIn() || (resource.data.verificationStatus == "approved" && resource.data.isAvailable == true);
+      allow update: if isOwner(uid) || isAdmin();
+      allow create: if (isOwner(uid) && request.resource.data.uid == uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /deliveryPersons/{uid} {
+      allow read, update: if isOwner(uid) || isAdmin();
+      allow create: if (isOwner(uid) && request.resource.data.uid == uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /dishes/{dishId} {
+      allow read: if resource.data.isAvailable == true || isAdmin() || (isSignedIn() && resource.data.cookerId == request.auth.uid);
+      allow create: if isAdmin() || (isCooker() && request.resource.data.cookerId == request.auth.uid);
+      allow update, delete: if isAdmin() || (isCooker() && resource.data.cookerId == request.auth.uid);
+    }
+
+    match /orders/{orderId} {
+      allow create: if isAdmin() || (isConsumer() && request.resource.data.consumerId == request.auth.uid);
+      allow read: if isAdmin() || isOrderParticipant();
+      allow update: if isAdmin()
+        || (isConsumer() && resource.data.consumerId == request.auth.uid)
+        || (isCooker() && resource.data.cookerId == request.auth.uid)
+        || (isDelivery() && resource.data.deliveryPersonId == request.auth.uid)
+        || (isDelivery() && resource.data.deliveryPersonId == "" && request.resource.data.deliveryPersonId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    match /notifications/{notificationId} {
+      allow read, update: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isIncomingOrderParticipant() || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isAdmin() || (isConsumer() && request.resource.data.consumerId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    match /supportTickets/{ticketId} {
+      allow create: if isAdmin() || (isSignedIn() && request.resource.data.userId == request.auth.uid);
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow update: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    match /payments/{paymentId} {
+      allow read: if isAdmin()
+        || (isSignedIn()
+          && (
+            resource.data.consumerId == request.auth.uid
+            || resource.data.cookerId == request.auth.uid
+            || resource.data.deliveryPersonId == request.auth.uid
+          ));
+      allow write: if isAdmin();
+    }
+
+    match /platformSettings/{settingId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}

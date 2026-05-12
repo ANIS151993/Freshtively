@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#3c4a42",
+            "surface-container-low": "#eef6ee",
+            "primary-fixed": "#6ffbbe",
+            "on-secondary-fixed": "#2a1700",
+            "inverse-surface": "#2b322d",
+            "on-primary-container": "#00422b",
+            "primary-fixed-dim": "#4edea3",
+            "inverse-on-surface": "#ebf3eb",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f4fbf4",
+            "tertiary-container": "#fc7c78",
+            "error": "#ba1a1a",
+            "surface": "#f4fbf4",
+            "primary-container": "#10b981",
+            "background": "#f4fbf4",
+            "on-primary": "#ffffff",
+            "tertiary": "#a43a3a",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#684000",
+            "primary": "#006c49",
+            "surface-container-highest": "#dde4dd",
+            "secondary-fixed": "#ffddb8",
+            "on-tertiary-container": "#711419",
+            "surface-tint": "#006c49",
+            "outline-variant": "#bbcabf",
+            "on-tertiary-fixed-variant": "#842225",
+            "tertiary-fixed-dim": "#ffb3af",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#653e00",
+            "secondary-fixed-dim": "#ffb95f",
+            "inverse-primary": "#4edea3",
+            "on-error-container": "#93000a",
+            "secondary": "#855300",
+            "surface-container-high": "#e3eae3",
+            "on-surface": "#161d19",
+            "surface-dim": "#d4dcd5",
+            "on-error": "#ffffff",
+            "surface-container": "#e8f0e9",
+            "outline": "#6c7a71",
+            "secondary-container": "#fea619",
+            "on-background": "#161d19",
+            "tertiary-fixed": "#ffdad7",
+            "on-primary-fixed-variant": "#005236",
+            "surface-variant": "#dde4dd",
+            "on-primary-fixed": "#002113",
+            "on-tertiary-fixed": "#410005"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "16px",
+            "gutter": "24px",
+            "margin-desktop": "40px",
+            "base": "8px",
+            "container-max-width": "1280px"
+          },
+          "fontFamily": {
+            "headline-md": ["outfit"],
+            "headline-lg-mobile": ["outfit"],
+            "body-lg": ["outfit"],
+            "body-md": ["outfit"],
+            "headline-lg": ["outfit"],
+            "display-lg": ["outfit"],
+            "label-md": ["outfit"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #f4fbf4;
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest py-gutter space-y-base z-40">
+<div class="font-headline-lg text-primary text-2xl px-base mb-gutter">Freshtively</div>
+<div class="px-base mb-base">
+<div class="flex items-center gap-3 p-3 bg-surface-container-high rounded-xl">
+<img alt="Chef profile" class="w-10 h-10 rounded-full object-cover" data-alt="A professional female chef with a warm smile, wearing a clean white culinary jacket with green accents. She is standing in a brightly lit, modern kitchen with sun-drenched marble countertops. The visual style is high-end and inviting, using a palette of soft whites and emerald greens to emphasize fresh, authentic food preparation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMgpGcKLzj7Qy1i79GN1_ezOnDyEKU2xfSguyl-AKStWezYkt84ML_ubb6hV49wOPNjawsI5kYjawuElJIR1x_BTM2Y_Xpa893CqFFzMLoaBjS7Pj46ASHDh11OQoW4SWDFaygZcBY6yrHpIjbEeq_G6LTpivF_kdUfWFYKnn7qrnbiAq88aQqEjhGPnq1QGcqkSFukInR1Bc1ZJPFxvpprRbHtJu4htA7miMJxvBbDtJ9YaTP--C549q_e6efTO3ZLSAdUfdpGVE"/>
+<div>
+<p class="font-label-md text-on-surface font-bold">Chef Maria</p>
+<p class="text-xs text-on-surface-variant">Premium Cook</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="bg-primary-container text-on-primary-container rounded-lg font-bold mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu Management</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Earnings</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</nav>
+<div class="px-base pt-base mt-auto">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md hover:shadow-lg transition-all scale-95 active:scale-90">
+        Go Online
+      </button>
+<div class="mt-base">
+<a class="text-on-surface-variant hover:bg-surface-variant rounded-lg mx-2 flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Mobile Top Bar -->
+<header class="md:hidden w-full sticky top-0 z-50 bg-surface shadow-sm px-margin-mobile py-base flex justify-between items-center">
+<div class="font-display-lg text-headline-md text-primary">Freshtively</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="material-symbols-outlined text-primary">settings</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="md:ml-64 p-margin-mobile md:p-margin-desktop pb-32">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-gutter mb-gutter">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Menu Management</h1>
+<p class="font-body-md text-on-surface-variant">Update your dishes, adjust prices, and manage availability.</p>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary text-on-primary px-6 py-4 rounded-xl font-label-md shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+<span class="material-symbols-outlined">add</span>
+        Add New Dish
+      </button>
+</header>
+<!-- Filter/Search Bar -->
+<section class="mb-gutter flex flex-wrap gap-4 items-center">
+<div class="relative flex-1 min-w-[280px]">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary-container text-on-surface placeholder-on-surface-variant" placeholder="Search your dishes..." type="text"/>
+</div>
+<div class="flex gap-2">
+<span class="px-4 py-2 bg-primary-container text-on-primary-container rounded-full font-label-md">All</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-surface-variant cursor-pointer transition-colors">Vegetarian</span>
+<span class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-md hover:bg-surface-variant cursor-pointer transition-colors">Non-Veg</span>
+</div>
+</section>
+<!-- Dish Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Dish Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<div class="relative h-48 overflow-hidden">
+<img alt="Fresh Salad Bowl" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A vibrant, fresh Mediterranean salad bowl featuring crisp greens, cherry tomatoes, cucumbers, kalamata olives, and creamy feta cheese. The lighting is bright and airy, suggesting a mid-day meal in a sun-lit patio. The aesthetic is clean, wholesome, and premium, with a focus on fresh ingredient textures and natural colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4RAVBGdNW8jqvh4inDAjwRqwlcTrCE43PYJI3NLYINhTfqF9DL_JfokdKSFcGJOI5LZqps0lizx0k_ABbaOM4kW_4DTAuKh1hFpIAZ2xf5J3F3hrRll9n-PImpSF9GcKwj-qJFP1UgfVBK7yRT7GVYAw0DTbbWaerWe2ZB8dvnZY4VFjcaNEc3UXHM_ZQuhVIQMzTUKti5gXnJioas9iQjcvuACiaRfAjS1LN6mZ_5a9AL316za538nM7AQdrexfSTE32v7EuVI8"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-bold text-on-surface-variant">AVAILABLE</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Garden Harvest Bowl</h3>
+<span class="font-display-lg text-primary text-lg font-bold">$14.50</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Locally sourced organic greens, quinoa, roasted chickpeas, and tahini dressing.</p>
+<div class="pt-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-xs font-label-md text-on-surface-variant">Active</span>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container text-error rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Dish Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<div class="relative h-48 overflow-hidden">
+<img alt="Avocado Toast" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Gourmet avocado toast on sourdough bread, topped with a perfectly poached egg, chili flakes, and microgreens. The image is captured from a top-down angle on a rustic wooden table with soft, natural morning light. The color palette emphasizes rich greens and warm wood tones, creating an authentic, homemade feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRYlcky0g7GcVQGKwiYxmzwRcuxngJuT_Dl3d5rY8D0TYjO-0htr_pjrsKWdT5sxcffswr9DioMVzWJOn6ja03klFfOZ8RCfcW_jLG7V2Kf7IET6HanlF7JUUlzIU6ODH8VGTRapOXSvng09xeFZatJhqJxd3_2Umkx0izM2-7Yavt2JtwylejGzfwY3zU11fqH94vv2FX0Zbcsi2U3ZWMkim9FLw5OAvYe5iFs13lD5bOwBEF4HFlGqkCwn5gKbrPvI6IbbxN0cc"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-bold text-on-surface-variant">AVAILABLE</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Sunset Avocado Toast</h3>
+<span class="font-display-lg text-primary text-lg font-bold">$12.00</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Sourdough, smashed Hass avocado, poached egg, and red pepper flakes.</p>
+<div class="pt-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-xs font-label-md text-on-surface-variant">Active</span>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container text-error rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Dish Card 3 (Inactive) -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group overflow-hidden opacity-75">
+<div class="relative h-48 overflow-hidden grayscale">
+<img alt="Beef Pasta" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A plate of hearty beef ragu pasta with freshly grated parmesan cheese and basil leaves. The setting is a cozy, low-lit dining room that feels like a traditional trattoria. The visual style is rich and comforting, emphasizing the deep red tones of the sauce and the rustic texture of the pasta." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Yqcx9DVt3ieRFMYj1lbKxzJeViZfXRqBapq0C0frIIiqnAhGXN7aWYFlcXdC1WC-gSpj2UyeHpyjebX-ArO-7qMhd8qHEmHCTgIwRods83T2X4LOm814oCETMKCmhVXhb3VDuCQoDeGgBMUF_UWFlMzPpufFscLItDN06s6OubqryST4fMrqNqE1PeRFlTq2aTvOXq4Wepx2DFJ8Cbd9OSL5EFIgCdSCJt8m_WX-Hpxr3SyINrpGjf8idMjxMgIEJ0VRdnLDke8"/>
+<div class="absolute inset-0 bg-inverse-surface/40 flex items-center justify-center">
+<span class="bg-error text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Sold Out</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Grandma's Beef Ragu</h3>
+<span class="font-display-lg text-primary text-lg font-bold">$18.90</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Slow-cooked 8-hour beef shoulder in rich tomato wine sauce with pappardelle.</p>
+<div class="pt-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-xs font-label-md text-on-surface-variant">Paused</span>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container text-error rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Dish Card 4 -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group overflow-hidden">
+<div class="relative h-48 overflow-hidden">
+<img alt="Spicy Taco" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Three authentic street tacos served on a colorful ceramic plate with fresh lime wedges, cilantro, and diced onions. The lighting is warm and sun-drenched, capturing the vibrant colors of the salsa and tortillas. The mood is festive and appetizing, set in a modern cultural kitchen environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4wgGvra8V2bMqWw8jhldfo_J8uSUgJ9O7ZSZR3Y3mWFYl1zJfspAAmWz43xVvyaBki6ZVZkHq2t_Qf-7ExMG-U6hjc9SR2KgPkioXbghCE3rtl11Vj4LGsLexw97YvhHA8TUh2EVJ6y64JIYjb6o48Igm9I3S0Uw8z1ZnPW2gRZeCmewGI6WGaZcSXchQn8HDQmzOqe2c3DvBPXQ4ru7c2BfJ-TqDQcFfUqqO3hC-Kyy1TpUe65VUKprrnR9gKQD_TdTziax3bZY"/>
+<div class="absolute top-3 right-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-bold text-on-surface-variant">AVAILABLE</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Street Style Tacos</h3>
+<span class="font-display-lg text-primary text-lg font-bold">$11.25</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">Authentic corn tortillas, slow-roasted pork, fresh cilantro, onion and lime.</p>
+<div class="pt-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="text-xs font-label-md text-on-surface-variant">Active</span>
+</div>
+<div class="flex gap-1">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-error-container text-error rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Add New Card Placeholder -->
+<button class="border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-8 bg-surface-container-low hover:bg-surface-container-high transition-all group min-h-[400px]">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">add</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">Add New Dish</p>
+<p class="text-sm text-on-surface-variant mt-2">Start showcasing your culinary art.</p>
+</button>
+</section>
+</main>
+<!-- BottomNavBar Anchor (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Tracking</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 scale-110 duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</body></html>

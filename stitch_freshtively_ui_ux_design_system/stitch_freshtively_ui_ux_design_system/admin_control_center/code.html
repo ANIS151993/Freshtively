@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Freshtively Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#005236",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "surface-container-high": "#e3eae3",
+                        "on-primary-fixed": "#002113",
+                        "surface": "#f4fbf4",
+                        "error": "#ba1a1a",
+                        "on-background": "#161d19",
+                        "on-secondary-fixed": "#2a1700",
+                        "surface-container": "#e8f0e9",
+                        "on-primary-container": "#00422b",
+                        "tertiary-container": "#fc7c78",
+                        "outline-variant": "#bbcabf",
+                        "surface-container-low": "#eef6ee",
+                        "primary-fixed": "#6ffbbe",
+                        "on-tertiary-container": "#711419",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#410005",
+                        "outline": "#6c7a71",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "on-secondary-container": "#684000",
+                        "primary-container": "#10b981",
+                        "on-surface": "#161d19",
+                        "on-tertiary-fixed-variant": "#842225",
+                        "surface-bright": "#f4fbf4",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffddb8",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "surface-variant": "#dde4dd",
+                        "tertiary-fixed": "#ffdad7",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#ebf3eb",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#006c49",
+                        "secondary-container": "#fea619",
+                        "surface-container-highest": "#dde4dd",
+                        "tertiary": "#a43a3a",
+                        "on-surface-variant": "#3c4a42",
+                        "inverse-primary": "#4edea3",
+                        "primary": "#006c49",
+                        "surface-dim": "#d4dcd5",
+                        "secondary": "#855300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["outfit"],
+                        "headline-lg-mobile": ["outfit"],
+                        "headline-md": ["outfit"],
+                        "body-lg": ["outfit"],
+                        "headline-lg": ["outfit"],
+                        "display-lg": ["outfit"],
+                        "label-md": ["outfit"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; background-color: #f4fbf4; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dde4dd; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant/30 flex flex-col py-base z-30">
+<div class="px-6 py-8 flex items-center gap-2">
+<span class="text-headline-md font-headline-md font-bold text-primary">Freshtively</span>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-secondary-container text-on-secondary-container rounded-lg font-bold mx-2 px-4 py-3 flex items-center gap-3 translate-x-1 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg flex items-center gap-3 transition-all">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-md text-label-md">Active Orders</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg flex items-center gap-3 transition-all">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Kitchen Stats</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg flex items-center gap-3 transition-all">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Earnings</span>
+</div>
+<div class="text-on-surface-variant hover:bg-surface-variant mx-2 px-4 py-3 rounded-lg flex items-center gap-3 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</div>
+</nav>
+<div class="mt-auto px-4 py-6 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl mb-4 shadow-sm">
+<img alt="Chef Maria" class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a female chef in a clean white kitchen. She is smiling warmly at the camera, wearing a high-quality linen apron. The lighting is soft and natural, emphasizing a premium and trustworthy culinary expert persona in a light-filled environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM5q50fpvugPhuyknocMt44YWx8hLw1NssjJABDiRROZH1UavYXtnVq0z5b2Hynx4wK62qUQ1LUs8nJrnIchNwoEaHhSpMI2-BkZ6SEd8XYG2q2n8NI86fRnLkFZuVzSc5tKZrpohsXVxhFb-lZZxT7dy3RyEyuv-LGAR6K_NMT_09c69Q5u6HI1yR0MjTqK2RKvPYoQOpP4d4Vls96MZ0mLDLmQsaxemiKNz2yvvqPyv0cQU38CkpFt0LicNG4K9d7oC24K-_Kcs"/>
+<div>
+<p class="text-label-md font-bold text-on-surface">Chef Maria</p>
+<p class="text-[10px] text-on-surface-variant">Verified Admin</p>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold hover:shadow-lg transition-all active:scale-95">Go Online</button>
+<div class="mt-4 space-y-1">
+<div class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-md font-label-md">Help Center</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 text-error cursor-pointer">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="ml-64 min-h-screen p-margin-desktop space-y-gutter">
+<header class="flex justify-between items-center pb-base">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Admin Overview</h1>
+<p class="text-body-md text-on-surface-variant">Welcome back, Maria. Here's what's happening with Freshtively today.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant p-2 bg-surface-container rounded-full hover:bg-surface-variant cursor-pointer" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-3 h-3 bg-tertiary rounded-full border-2 border-surface"></span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-bold">Oct 24, 2024</span>
+</div>
+</div>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary bg-primary-fixed/20 p-3 rounded-xl" data-icon="receipt_long">receipt_long</span>
+<span class="text-primary text-[12px] font-bold">+12% vs last week</span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant text-label-md">Total Orders</p>
+<h3 class="text-display-lg font-display-lg text-on-surface">1,284</h3>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary bg-secondary-fixed/20 p-3 rounded-xl" data-icon="group">group</span>
+<span class="text-secondary text-[12px] font-bold">+5% vs last week</span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant text-label-md">Active Users</p>
+<h3 class="text-display-lg font-display-lg text-on-surface">8,432</h3>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary-container bg-primary-container/10 p-3 rounded-xl" data-icon="payments">payments</span>
+<span class="text-primary text-[12px] font-bold">New Daily High</span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant text-label-md">Revenue</p>
+<h3 class="text-display-lg font-display-lg text-on-surface">$42.1k</h3>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col justify-between hover:translate-y-[-4px] transition-transform">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed/20 p-3 rounded-xl" data-icon="verified_user">verified_user</span>
+<span class="text-tertiary text-[12px] font-bold">Action Required</span>
+</div>
+<div class="mt-4">
+<p class="text-on-surface-variant text-label-md">Pending Verifications</p>
+<h3 class="text-display-lg font-display-lg text-on-surface">18</h3>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<section class="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Live Order Monitoring</h2>
+<button class="flex items-center gap-2 text-primary font-bold hover:opacity-80">
+                        View All <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-on-surface-variant text-label-md border-b border-outline-variant/20">
+<th class="pb-4 font-semibold">Order ID</th>
+<th class="pb-4 font-semibold">Chef</th>
+<th class="pb-4 font-semibold">Customer</th>
+<th class="pb-4 font-semibold">Total</th>
+<th class="pb-4 font-semibold">Status</th>
+<th class="pb-4 font-semibold">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-bold">#ORD-9021</td>
+<td class="py-4">Chef Ananya</td>
+<td class="py-4">Marcus J.</td>
+<td class="py-4">$42.50</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-secondary-fixed-dim/30 text-on-secondary-fixed-variant rounded-full text-[12px] font-bold flex items-center w-fit gap-1">
+<span class="w-2 h-2 bg-secondary rounded-full"></span> Cooking
+                                    </span>
+</td>
+<td class="py-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-bold">#ORD-9022</td>
+<td class="py-4">Chef Roberto</td>
+<td class="py-4">Sarah L.</td>
+<td class="py-4">$38.00</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-primary-fixed/30 text-on-primary-fixed-variant rounded-full text-[12px] font-bold flex items-center w-fit gap-1">
+<span class="w-2 h-2 bg-primary rounded-full"></span> On the way
+                                    </span>
+</td>
+<td class="py-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-bold">#ORD-9023</td>
+<td class="py-4">Chef Yuki</td>
+<td class="py-4">David K.</td>
+<td class="py-4">$55.20</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-secondary-fixed-dim/30 text-on-secondary-fixed-variant rounded-full text-[12px] font-bold flex items-center w-fit gap-1">
+<span class="w-2 h-2 bg-secondary rounded-full"></span> Cooking
+                                    </span>
+</td>
+<td class="py-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-bold">#ORD-9024</td>
+<td class="py-4">Chef Elena</td>
+<td class="py-4">Amara P.</td>
+<td class="py-4">$29.00</td>
+<td class="py-4">
+<span class="px-3 py-1 bg-primary-fixed/30 text-on-primary-fixed-variant rounded-full text-[12px] font-bold flex items-center w-fit gap-1">
+<span class="w-2 h-2 bg-primary rounded-full"></span> On the way
+                                    </span>
+</td>
+<td class="py-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="more_vert">more_vert</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="lg:col-span-4 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-tertiary" data-icon="report">report</span>
+<h2 class="font-headline-md text-[20px] text-on-surface">Safety Reports</h2>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-tertiary-fixed/10 border-l-4 border-tertiary rounded-lg">
+<div class="flex justify-between items-start mb-1">
+<p class="text-label-md font-bold text-on-tertiary-fixed-variant">Dispute #SFT-442</p>
+<span class="text-[10px] bg-tertiary text-on-tertiary px-2 py-0.5 rounded">High Priority</span>
+</div>
+<p class="text-[13px] text-on-tertiary-fixed-variant leading-relaxed">Consumer reports missing item from Chef Roberto's lunch special.</p>
+<div class="mt-3 flex gap-2">
+<button class="px-3 py-1.5 bg-tertiary text-on-tertiary text-[11px] font-bold rounded hover:opacity-90 transition-opacity">Investigate</button>
+<button class="px-3 py-1.5 border border-tertiary text-tertiary text-[11px] font-bold rounded hover:bg-tertiary/10 transition-colors">Dismiss</button>
+</div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border-l-4 border-outline">
+<p class="text-label-md font-bold text-on-surface">Feedback #FB-109</p>
+<p class="text-[13px] text-on-surface-variant leading-relaxed mt-1">Delivery partner 'John D.' reported difficult access at customer location.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+<h2 class="font-headline-md text-[20px] text-on-surface mb-6">Quick Actions</h2>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container hover:bg-primary/10 hover:text-primary rounded-xl border border-outline-variant/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="person_add">person_add</span>
+<span class="text-[12px] font-bold">Add Cooker</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container hover:bg-primary/10 hover:text-primary rounded-xl border border-outline-variant/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="local_shipping">local_shipping</span>
+<span class="text-[12px] font-bold">Partners</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container hover:bg-primary/10 hover:text-primary rounded-xl border border-outline-variant/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="map">map</span>
+<span class="text-[12px] font-bold">Geo Tracking</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container hover:bg-primary/10 hover:text-primary rounded-xl border border-outline-variant/20 transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="campaign">campaign</span>
+<span class="text-[12px] font-bold">Broadcast</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 h-[300px] flex flex-col">
+<h2 class="font-headline-md text-[20px] text-on-surface mb-6">Revenue Growth</h2>
+<div class="flex-1 w-full bg-surface rounded-xl border border-dashed border-outline-variant/40 flex items-end justify-between p-4 gap-2">
+<div class="w-full bg-primary/20 rounded-t-lg h-[40%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[55%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[45%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[70%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[60%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary/20 rounded-t-lg h-[85%] hover:bg-primary/40 transition-colors"></div>
+<div class="w-full bg-primary h-[95%] rounded-t-lg shadow-lg"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+<h2 class="font-headline-md text-[20px] text-on-surface mb-6">Recent Verifications</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Cooker" class="w-10 h-10 rounded-full object-cover" data-alt="A close-up shot of an artisanal home cook in an apron, holding a fresh loaf of sourdough bread in a bright, rustic sunlit kitchen. The atmosphere is warm, authentic, and high-end, showcasing the human element of a neighborhood-focused food platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuqloesFO0BWp5JtvkGUumJe50mTPCXJQ9ZkdH9XhkXnmmc1Imc_ZYvl_LXxsXsoWwum1ycJ4DSMKAo5eu5xA9pRbm654O9gZBmRaCIdeaTLSuRrHIacwHB4E0dq9N5nwdn92HsXAGWfU4c6MhQ2EszaivbCr91lj7CFBTiDkazY0516Vjm8C50HP76d1fC5FAwQMUAWMf7xqfYNeAvLUZNrGSCMqwU_3UYhjQOtmGF_R769_Ggm7zu-KB6FExDbU6t3gJ7EvLI0o"/>
+<div>
+<p class="text-label-md font-bold">Chef Marco Silva</p>
+<p class="text-[12px] text-on-surface-variant">Home Kitchen - Italian</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary/10 text-primary rounded-lg font-bold text-[12px] hover:bg-primary hover:text-on-primary transition-all">Verify Now</button>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface rounded-xl border border-outline-variant/10">
+<div class="flex items-center gap-3">
+<img alt="Cooker" class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a smiling delivery partner wearing a professional branded green vest, standing next to a modern electric bicycle in a clean urban setting. The image is bright and airy, communicating efficiency and friendliness in a modern city environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1Hy3y9uHdsihgEWcdYEspxEALjzGABx-QgUMOBHqIN2C4Wk99NyPqcC0KDzLGZFQ7vvAOdb72zX4yfw3i51jNYJqVfrpSdrbwc2gXiCni3cCn8mT0YFGI9KV4mdbid91TG8unY1N9RzKKEfrIByRvPYLDpHVUe5MyhhXFpic3Xmjdag4aV5tbWYv78NloXkP-xAN632yM4azehZV2_cOY-Jp9Tw-ZcI_lccS3WpV1SucZ4iwrSKbBaLJk710rGxly9A8vRTgly5Y"/>
+<div>
+<p class="text-label-md font-bold">Elena Rodriguez</p>
+<p class="text-[12px] text-on-surface-variant">Delivery Partner - Tier 1</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary/10 text-primary rounded-lg font-bold text-[12px] hover:bg-primary hover:text-on-primary transition-all">Verify Now</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="ml-64 bg-surface-container-highest py-12 border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max-width mx-auto">
+<div class="space-y-4">
+<span class="text-headline-md font-headline-md text-primary font-bold">Freshtively</span>
+<p class="text-on-surface-variant text-body-md">Bringing neighborly warmth to every delivery through culturally rich, home-cooked experiences.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface">Platform</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Explore</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">How it Works</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Become a Partner</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface">Legal</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Privacy Policy</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface">Support</h4>
+<nav class="flex flex-col gap-2">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md" href="#">Help Center</a>
+</nav>
+</div>
+</div>
+<div class="mt-12 text-center text-on-surface-variant text-label-md px-margin-desktop">
+            © 2024 Freshtively. Bringing neighborly warmth to every delivery.
+        </div>
+</footer>
+</body></html>

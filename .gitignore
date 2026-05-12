@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Local tool state
+.codex
+.agents/
+
+# Sensitive prompt/source notes for local development only
+prompt.md
+details.md
+
+# Logs and caches
+*.log
+.DS_Store
+tsconfig.tsbuildinfo
+*.tsbuildinfo

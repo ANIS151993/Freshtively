@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#3c4a42",
+                    "surface-container-low": "#eef6ee",
+                    "primary-fixed": "#6ffbbe",
+                    "on-secondary-fixed": "#2a1700",
+                    "inverse-surface": "#2b322d",
+                    "on-primary-container": "#00422b",
+                    "primary-fixed-dim": "#4edea3",
+                    "inverse-on-surface": "#ebf3eb",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f4fbf4",
+                    "tertiary-container": "#fc7c78",
+                    "error": "#ba1a1a",
+                    "surface": "#f4fbf4",
+                    "primary-container": "#10b981",
+                    "background": "#f4fbf4",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#a43a3a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#684000",
+                    "primary": "#006c49",
+                    "surface-container-highest": "#dde4dd",
+                    "secondary-fixed": "#ffddb8",
+                    "on-tertiary-container": "#711419",
+                    "surface-tint": "#006c49",
+                    "outline-variant": "#bbcabf",
+                    "on-tertiary-fixed-variant": "#842225",
+                    "tertiary-fixed-dim": "#ffb3af",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "inverse-primary": "#4edea3",
+                    "on-error-container": "#93000a",
+                    "secondary": "#855300",
+                    "surface-container-high": "#e3eae3",
+                    "on-surface": "#161d19",
+                    "surface-dim": "#d4dcd5",
+                    "on-error": "#ffffff",
+                    "surface-container": "#e8f0e9",
+                    "outline": "#6c7a71",
+                    "secondary-container": "#fea619",
+                    "on-background": "#161d19",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-primary-fixed-variant": "#005236",
+                    "surface-variant": "#dde4dd",
+                    "on-primary-fixed": "#002113",
+                    "on-tertiary-fixed": "#410005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "base": "8px",
+                    "container-max-width": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["outfit"],
+                    "headline-lg-mobile": ["outfit"],
+                    "body-lg": ["outfit"],
+                    "body-md": ["outfit"],
+                    "headline-lg": ["outfit"],
+                    "display-lg": ["outfit"],
+                    "label-md": ["outfit"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Outfit', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar Component -->
+<nav class="bg-surface w-full sticky top-0 z-50 shadow-sm dark:bg-surface-container-high">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base max-w-container-max-width mx-auto">
+<div class="flex items-center gap-gutter">
+<span class="font-display-lg text-headline-md text-primary dark:text-primary-fixed">Freshtively</span>
+<div class="hidden md:flex items-center bg-surface-container rounded-full px-4 py-2 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Search dishes, chefs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-gutter items-center">
+<a class="text-on-surface-variant font-body-md hover:text-primary-container transition-colors" href="#">Explore</a>
+<a class="text-primary font-headline-md border-b-2 border-primary" href="#">Orders</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors" data-icon="notifications">notifications</span>
+<div class="relative cursor-pointer">
+<span class="material-symbols-outlined text-primary hover:text-primary-container transition-colors" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute -top-2 -right-2 bg-secondary text-on-secondary text-[10px] rounded-full w-4 h-4 flex items-center justify-center">3</span>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-primary" data-alt="A professional headshot of a friendly young man with a warm smile, set against a soft-focus indoor background with warm, sun-drenched natural lighting. The image maintains a high-key, modern aesthetic consistent with a premium service platform, using a clean and bright color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC66j4fz4MIji9VKvofRIWQ8jDwD0S4hnEXmdCIW8SasQa-ng-_VoXbygvCFQYZ_is4cx96IH7ipCKr0oLcmcw1K3-IwMK9btsyesxPmTGg2Y-aboZcZl2p_acPa_nfyE7CUifW1JC3YHy_ZKUcmGtaetUavXdjD9ransNYN_lDRXCRmmnL_C2n8jJQ_bi9dYEJ4-1QS7WyBtq_Hmc_PxoueGYxbeExe4dR1ezMpyQB6ZJuX21xsMYT1XuihVUDPr3bo_7zyy_xlXE"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-gutter mb-24 md:mb-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Side: Cart Items -->
+<div class="lg:col-span-8 space-y-gutter">
+<header>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Review Your Cart</h1>
+<p class="font-body-md text-on-surface-variant">Your fresh selections from local chefs are almost ready.</p>
+</header>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 shadow-sm border border-outline-variant hover:shadow-md transition-shadow group">
+<img alt="Spicy Thai Salad" class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover" data-alt="A close-up, vibrant overhead shot of a fresh Spicy Thai Salad featuring crisp greens, bright red chilis, toasted peanuts, and grilled shrimp. The dish is presented in a minimalist ceramic bowl on a light-colored wooden table, illuminated by soft morning sunlight that emphasizes the fresh ingredients and organic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAZJFxZERLQ4Zo5FsprjpS_YoanMfD6VCgeWtME-ZT70rfgfy0kuYAM99nXIFZAmBEJXfFG0UyEtVrDtqTu8Rk3LqcxbZaRCtzInYRiGgXOm0W60E-_dwk8yNOcEwqbkk0zWo77BkQbLQwEfy5jkyE44kcRAa3Mrr2ccKgUiEVV8H-0lXJrkNaqcR0Wb4IwEqHec8ruIWiudXV68F8xNNpeF_h5Resdz_Jvxqn4iCkKMRG7qdQ6zlMb5KElciTqhXl9dsUcEwpIk0"/>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Spicy Thai Shrimp Salad</h3>
+<p class="font-label-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="restaurant">restaurant</span>
+                                        Chef Maria's Kitchen
+                                    </p>
+</div>
+<span class="font-headline-md text-primary">$18.50</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex items-center bg-surface-container-low rounded-full px-2 py-1 border border-outline-variant">
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="remove">remove</span>
+</button>
+<span class="px-4 font-label-md">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+<button class="text-error font-label-md flex items-center gap-1 hover:bg-error-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+                                    Remove
+                                </button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 flex gap-4 shadow-sm border border-outline-variant hover:shadow-md transition-shadow group">
+<img alt="Harvest Bowl" class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover" data-alt="A beautifully composed Harvest Bowl with quinoa, roasted sweet potatoes, avocado slices, and fresh kale, drizzled with a light tahini dressing. The lighting is warm and natural, creating soft shadows on a rustic linen background, evoking a sense of healthy, homemade authenticity and premium food photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlVNr7GJiKna_X35t874nxCVv8z2q3CLAHZB9MyCrjiUgtgIOAlxgZju18c-3ZtgrowsQ4fxTmJxriba-5CZy8Tc0VddBkP0tkNPdXPbHqUIp9GukO6C0UjmXACxzXqthDl5gJRkOmGM5KHqY8djjINKBXxo59uKEGC1cXHMjTQhDcruuxDpyjcWrn6XLb_ls7ZwzJH9mP1BGn-ofT3_4Qn7_jZsaiU2wmDOeBnYTUzCypxADxxhrTDyecxNvxvVp-j1oUYMMfJw4"/>
+<div class="flex-1 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-body-lg text-on-surface">Organic Harvest Bowl</h3>
+<p class="font-label-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="restaurant">restaurant</span>
+                                        Green Root Kitchen
+                                    </p>
+</div>
+<span class="font-headline-md text-primary">$15.00</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex items-center bg-surface-container-low rounded-full px-2 py-1 border border-outline-variant">
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="remove">remove</span>
+</button>
+<span class="px-4 font-label-md">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+<button class="text-error font-label-md flex items-center gap-1 hover:bg-error-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+                                    Remove
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Tip the Cook -->
+<div class="bg-surface-container rounded-2xl p-6 border border-outline-variant">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="volunteer_activism">volunteer_activism</span>
+<h4 class="font-headline-md text-on-surface">Support your Cook</h4>
+</div>
+<p class="font-body-md text-on-surface-variant mb-6">Tips go directly to the chef as a token of appreciation for their craft.</p>
+<div class="grid grid-cols-4 gap-3">
+<button class="py-3 px-4 rounded-xl border border-outline font-label-md hover:bg-primary-container hover:border-primary-container hover:text-on-primary-container transition-all">5%</button>
+<button class="py-3 px-4 rounded-xl border-2 border-primary bg-primary-container text-on-primary-container font-label-md">10%</button>
+<button class="py-3 px-4 rounded-xl border border-outline font-label-md hover:bg-primary-container hover:border-primary-container hover:text-on-primary-container transition-all">15%</button>
+<button class="py-3 px-4 rounded-xl border border-outline font-label-md hover:bg-primary-container hover:border-primary-container hover:text-on-primary-container transition-all">Custom</button>
+</div>
+</div>
+</div>
+<!-- Right Side: Checkout Summary -->
+<aside class="lg:col-span-4 lg:sticky lg:top-24 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-lg border border-outline-variant">
+<h2 class="font-headline-md text-on-surface mb-6">Order Summary</h2>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$48.50</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Delivery Fee</span>
+<span class="text-primary font-label-md uppercase tracking-wider">Free</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span class="flex items-center gap-1">
+                                Service Fee
+                                <span class="material-symbols-outlined text-[16px] cursor-help" data-icon="info">info</span>
+</span>
+<span>$2.45</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Estimated Taxes</span>
+<span>$3.88</span>
+</div>
+<div class="flex justify-between font-body-md text-secondary">
+<span>Cook's Tip (10%)</span>
+<span>$4.85</span>
+</div>
+<div class="pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="font-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-primary text-2xl">$59.68</span>
+</div>
+</div>
+<!-- Coupon Code -->
+<div class="relative mb-6">
+<input class="w-full pl-4 pr-20 py-3 bg-surface-container rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none text-body-md" placeholder="Promo code" type="text"/>
+<button class="absolute right-2 top-2 bottom-2 px-4 bg-on-surface text-surface rounded-lg font-label-md hover:bg-primary transition-colors">Apply</button>
+</div>
+<button class="w-full bg-primary py-4 rounded-xl text-on-primary font-headline-md shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-2">
+                        Proceed to Checkout
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="mt-4 text-center text-[12px] text-on-surface-variant font-body-md">
+                        By placing your order, you agree to Freshtively's 
+                        <a class="underline" href="#">Terms of Service</a>.
+                    </p>
+</div>
+<!-- Trust Factor Card -->
+<div class="bg-primary-container/10 rounded-2xl p-4 border border-primary-container/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<div>
+<p class="font-label-md text-on-primary-container">Secure &amp; Hygienic</p>
+<p class="text-[12px] text-on-primary-container/80">Every chef is vetted and follows strict local health guidelines to ensure your safety.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar Component (Mobile Only) -->
+<div class="md:hidden">
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-surface dark:bg-inverse-surface shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-md text-label-md">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 scale-110 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-label-md">Tracking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

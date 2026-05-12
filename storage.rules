@@ -1,0 +1,54 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function currentRole() {
+      return isSignedIn() && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        ? firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role
+        : "";
+    }
+
+    function isAdmin() {
+      return currentRole() == "admin";
+    }
+
+    function isCooker() {
+      return currentRole() == "cooker";
+    }
+
+    function isDelivery() {
+      return currentRole() == "delivery";
+    }
+
+    match /profilePhotos/{uid}/{fileName} {
+      allow read, write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    match /dishes/{cookerId}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn() && request.auth.uid == cookerId && isCooker();
+    }
+
+    match /verification/cookers/{uid}/{allPaths=**} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow write: if isSignedIn() && request.auth.uid == uid && isCooker();
+    }
+
+    match /verification/deliveryPersons/{uid}/{allPaths=**} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow write: if isSignedIn() && request.auth.uid == uid && isDelivery();
+    }
+
+    match /users/{uid}/{allPaths=**} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

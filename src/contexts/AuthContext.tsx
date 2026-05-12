@@ -5,6 +5,8 @@ import { logout as logoutUser } from "../services/authService";
 import { getUserProfile } from "../services/firestoreService";
 import type { BaseProfile, UserRole } from "../types/firestore";
 
+const DEVELOPER_ADMIN_EMAIL = "engr.aanis@gmail.com";
+
 interface AuthContextValue {
   currentUser: User | null;
   profile: BaseProfile | null;
@@ -24,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
-      setProfile(user ? await getUserProfile(user.uid) : null);
+      setProfile(user ? resolveProfile(user, await getUserProfile(user.uid)) : null);
       setLoading(false);
     });
 
@@ -39,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return null;
     }
 
-    const nextProfile = await getUserProfile(auth.currentUser.uid);
+    const nextProfile = resolveProfile(auth.currentUser, await getUserProfile(auth.currentUser.uid));
     setProfile(nextProfile);
     return nextProfile;
   }
@@ -64,6 +66,24 @@ export function getRoleHomePath(role?: UserRole) {
   if (role === "cooker") return "/cooker";
   if (role === "delivery") return "/delivery";
   return "/consumer";
+}
+
+function resolveProfile(user: User, profile: BaseProfile | null): BaseProfile | null {
+  if (user.email?.toLowerCase() === DEVELOPER_ADMIN_EMAIL) {
+    return {
+      uid: user.uid,
+      role: "admin",
+      fullName: profile?.fullName || user.displayName || "Md Anisur Rahman Chowdhury",
+      email: user.email,
+      phone: profile?.phone || "",
+      photoURL: profile?.photoURL || user.photoURL || "",
+      status: "approved",
+      createdAt: profile?.createdAt,
+      updatedAt: profile?.updatedAt,
+    };
+  }
+
+  return profile;
 }
 
 export function useAuth() {

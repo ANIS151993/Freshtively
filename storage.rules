@@ -11,8 +11,13 @@ service firebase.storage {
         : "";
     }
 
+    function isDeveloperAdmin() {
+      return isSignedIn()
+        && request.auth.token.email == "engr.aanis@gmail.com";
+    }
+
     function isAdmin() {
-      return currentRole() == "admin";
+      return currentRole() == "admin" || isDeveloperAdmin();
     }
 
     function isCooker() {

@@ -6,246 +6,801 @@
     <title>Freshtively Developer Portal</title>
     <style>
       :root {
-        color: #17211c;
-        background: #f4fbf4;
+        --ink: #17211c;
+        --muted: #5a675d;
+        --paper: #ffffff;
+        --cream: #f4fbf4;
+        --line: #c2d3c6;
+        --dark: #101815;
+        --emerald: #087a52;
+        --emerald-2: #0ea36e;
+        --green-soft: #dff7eb;
+        --saffron: #f5a623;
+        --saffron-soft: #fff1cf;
+        --clay: #b85636;
+        --clay-soft: #ffe5dc;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
+
       * { box-sizing: border-box; }
-      body { margin: 0; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; color: var(--ink); background: var(--cream); }
+      button, input, select, textarea { font: inherit; }
+      button { cursor: pointer; }
+      a { color: inherit; text-decoration: none; }
       .hidden { display: none !important; }
-      .hero {
+
+      .login {
         min-height: 100vh;
         display: grid;
         place-items: center;
-        padding: 32px 16px;
-        background:
-          radial-gradient(circle at 12% 8%, rgba(245,166,35,.24), transparent 28rem),
-          radial-gradient(circle at 85% 10%, rgba(8,122,82,.22), transparent 26rem),
-          #101815;
+        padding: 28px 16px;
         color: white;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(245, 166, 35, .28), transparent 28rem),
+          radial-gradient(circle at 84% 8%, rgba(8, 122, 82, .34), transparent 30rem),
+          linear-gradient(135deg, #101815, #17231d);
       }
-      .wrap { width: min(1160px, 100%); margin: 0 auto; }
-      .login-grid { display: grid; gap: 28px; align-items: center; }
-      @media (min-width: 900px) { .login-grid { grid-template-columns: 1fr 420px; } }
-      h1 { margin: 0; font-size: clamp(3rem, 7vw, 6.2rem); line-height: .96; letter-spacing: 0; }
-      h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; }
-      p { color: #526155; line-height: 1.7; }
-      .hero p { color: #d8e6dc; font-size: 1.05rem; }
+
+      .login-wrap {
+        width: min(1180px, 100%);
+        display: grid;
+        align-items: center;
+        gap: 32px;
+      }
+
+      @media (min-width: 920px) {
+        .login-wrap { grid-template-columns: 1fr 430px; }
+      }
+
       .pill {
         display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        border: 1px solid rgba(255,255,255,.16);
         border-radius: 999px;
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.16);
-        padding: 10px 14px;
-        color: #dff7eb;
-        font-weight: 800;
-        font-size: .92rem;
+        padding: 9px 13px;
+        color: #e1f6e9;
+        font-size: .88rem;
+        font-weight: 900;
       }
+
+      h1, h2, h3 { margin: 0; letter-spacing: 0; }
+      h1 { margin-top: 22px; max-width: 850px; font-size: clamp(3.1rem, 7vw, 6.4rem); line-height: .94; }
+      h2 { font-size: clamp(1.65rem, 3vw, 2.55rem); line-height: 1.08; }
+      h3 { font-size: 1.08rem; }
+      p { color: var(--muted); line-height: 1.65; }
+      .login p { max-width: 720px; color: #d8e6dc; font-size: 1.07rem; }
+
       .card {
-        border: 1px solid rgba(197,212,200,.78);
-        border-radius: 18px;
-        background: rgba(255,255,255,.94);
-        padding: 24px;
-        box-shadow: 0 24px 80px rgba(23,33,28,.12);
+        border: 1px solid rgba(194, 211, 198, .82);
+        border-radius: 16px;
+        background: rgba(255,255,255,.96);
+        padding: 22px;
+        box-shadow: 0 22px 70px rgba(23,33,28,.10);
       }
-      label { display: block; color: #17211c; font-weight: 800; font-size: .92rem; }
+
+      .login-card { background: white; color: var(--ink); }
+
+      label { display: block; color: var(--ink); font-size: .9rem; font-weight: 850; }
       input, select, textarea {
         width: 100%;
-        min-height: 48px;
+        min-height: 46px;
         margin-top: 8px;
-        border: 1px solid #bbcabf;
-        border-radius: 14px;
-        padding: 10px 14px;
-        color: #17211c;
+        border: 1px solid var(--line);
+        border-radius: 12px;
         background: #fbfffb;
-        font: inherit;
+        padding: 10px 12px;
+        color: var(--ink);
+        outline: none;
       }
-      textarea { min-height: 100px; resize: vertical; }
-      button, .button {
+      textarea { min-height: 104px; resize: vertical; }
+      input:focus, select:focus, textarea:focus { border-color: var(--emerald); box-shadow: 0 0 0 4px var(--green-soft); }
+
+      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 46px;
+        gap: 8px;
+        min-height: 42px;
         border: 0;
-        border-radius: 10px;
-        padding: 0 16px;
-        background: #087a52;
+        border-radius: 9px;
+        background: var(--emerald);
+        padding: 0 14px;
         color: white;
+        font-size: .9rem;
         font-weight: 900;
-        text-decoration: none;
-        cursor: pointer;
       }
-      button.secondary, .button.secondary { background: #f5a623; color: #17211c; }
-      button.ghost, .button.ghost { background: #e4f3e9; color: #087a52; }
-      button.danger { background: #b85636; }
-      .form { display: grid; gap: 16px; margin-top: 22px; }
-      .console { min-height: 100vh; background: #f4fbf4; }
-      .topbar { background: #101815; color: white; padding: 28px 16px; }
-      .topbar-inner { width: min(1160px, 100%); margin: 0 auto; display: flex; gap: 20px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-      .content { width: min(1160px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
-      .grid { display: grid; gap: 18px; }
-      @media (min-width: 760px) { .grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); } .grid.four { grid-template-columns: repeat(4, minmax(0,1fr)); } }
-      .stat strong { display: block; margin-top: 8px; color: #17211c; font-size: 2rem; }
-      .table { overflow: hidden; border: 1px solid #bbcabf; border-radius: 16px; background: white; }
-      .row { display: grid; gap: 10px; padding: 14px; border-bottom: 1px solid #e1ebe3; }
-      @media (min-width: 860px) { .row { grid-template-columns: 1fr 120px 120px 260px; align-items: center; } }
-      .badge { display: inline-flex; width: fit-content; border-radius: 999px; background: #dff7eb; color: #087a52; padding: 6px 10px; font-size: .78rem; font-weight: 900; }
-      .badge.warn { background: #fff1cf; color: #6b4100; }
-      .badge.danger { background: #ffe5dc; color: #b85636; }
+      .btn.secondary { background: var(--saffron); color: #2b1a00; }
+      .btn.ghost { background: var(--green-soft); color: var(--emerald); }
+      .btn.danger { background: var(--clay); color: white; }
+      .btn.dark { background: #1f2b25; color: white; }
+      .btn.full { width: 100%; }
+
+      .form { display: grid; gap: 15px; margin-top: 22px; }
+      .login-points { display: grid; gap: 12px; margin-top: 28px; }
+      @media (min-width: 720px) { .login-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      .login-point { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(255,255,255,.08); padding: 16px; }
+      .login-point strong { display: block; margin-bottom: 6px; }
+
+      .shell { min-height: 100vh; display: grid; background: var(--cream); }
+      @media (min-width: 1040px) { .shell { grid-template-columns: 278px 1fr; } }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 8;
+        align-self: start;
+        min-height: 100vh;
+        background: var(--dark);
+        color: white;
+        padding: 22px;
+      }
+      @media (max-width: 1039px) { .sidebar { position: relative; min-height: auto; } }
+      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+      .mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--emerald), var(--emerald-2)); font-weight: 950; }
+      .nav { display: grid; gap: 8px; }
+      .nav button {
+        justify-content: flex-start;
+        min-height: 40px;
+        border-radius: 10px;
+        background: transparent;
+        color: #d8e6dc;
+      }
+      .nav button.active, .nav button:hover { background: rgba(255,255,255,.1); color: white; }
+      .sidebar-foot { margin-top: 28px; display: grid; gap: 10px; }
+
+      .main { min-width: 0; }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,255,255,.84);
+        backdrop-filter: blur(16px);
+        padding: 18px 18px;
+      }
+      .topbar-inner {
+        width: min(1240px, 100%);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .content { width: min(1240px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 54px; }
+
+      .grid { display: grid; gap: 16px; }
+      @media (min-width: 760px) {
+        .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      }
+      .section { display: none; }
+      .section.active { display: block; }
+      .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+      .stat strong { display: block; margin-top: 7px; font-size: 2rem; color: var(--ink); }
+      .muted { color: var(--muted); }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--emerald);
+        padding: 6px 10px;
+        font-size: .76rem;
+        font-weight: 950;
+      }
+      .badge.warn { background: var(--saffron-soft); color: #654000; }
+      .badge.danger { background: var(--clay-soft); color: var(--clay); }
+      .badge.dark { background: #e9eee9; color: #26332c; }
+
+      .table { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
+      .row { display: grid; gap: 12px; border-bottom: 1px solid #e1ebe3; padding: 14px; }
+      .row:last-child { border-bottom: 0; }
+      @media (min-width: 920px) { .row.users { grid-template-columns: 1.3fr 110px 110px 280px; align-items: center; } }
+      @media (min-width: 920px) { .row.orders { grid-template-columns: 1.2fr 120px 120px 260px; align-items: center; } }
+      @media (min-width: 920px) { .row.simple { grid-template-columns: 1fr 150px 220px; align-items: center; } }
       .actions { display: flex; flex-wrap: wrap; gap: 8px; }
-      .section { margin-top: 24px; }
-      .notice { margin-top: 16px; border-radius: 14px; background: #dff7eb; color: #087a52; padding: 14px; font-weight: 800; }
+      .split { display: grid; gap: 16px; }
+      @media (min-width: 960px) { .split { grid-template-columns: 420px 1fr; } }
+      .notice {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 20;
+        max-width: 420px;
+        border: 1px solid rgba(8,122,82,.2);
+        border-radius: 14px;
+        background: var(--green-soft);
+        color: var(--emerald);
+        padding: 14px 16px;
+        font-weight: 850;
+        box-shadow: 0 18px 50px rgba(23,33,28,.15);
+      }
+      .warning { border-color: rgba(245,166,35,.4); background: var(--saffron-soft); color: #523400; }
+      .audit { max-height: 420px; overflow: auto; }
+      .audit-item { border-bottom: 1px solid #e1ebe3; padding: 12px 0; }
+      .audit-item:last-child { border-bottom: 0; }
+      .compact { margin: 0; font-size: .9rem; }
     </style>
   </head>
   <body>
-    <main id="login" class="hero">
-      <div class="wrap login-grid">
+    <main id="login" class="login">
+      <div class="login-wrap">
         <section>
           <span class="pill">Private developer portal</span>
-          <h1 style="margin-top: 22px">Freshtively owner console</h1>
-          <p>Control and monitor customers, cookers, delivery partners, commissions, promotions, money flow, accounts, and deployment status from one portal.</p>
+          <h1>Freshtively owner command center</h1>
+          <p>
+            A professional developer portal for controlling the full Freshtively marketplace concept: users, accounts,
+            roles, commissions, payments, promotions, orders, content, system settings, and deployment status.
+          </p>
+          <div class="login-points">
+            <div class="login-point"><strong>Users</strong><span>Control customers, cookers, delivery partners.</span></div>
+            <div class="login-point"><strong>Money</strong><span>Commission, payouts, refunds, adjustments.</span></div>
+            <div class="login-point"><strong>System</strong><span>Routes, deployment, Firebase mode, audit log.</span></div>
+          </div>
         </section>
-        <section class="card">
-          <h2>Developer Login</h2>
-          <p>Use your private developer credential.</p>
+
+        <section class="card login-card">
+          <h2>Developer login</h2>
+          <p>Use your private portal credential.</p>
           <form id="loginForm" class="form">
-            <label>Email <input id="email" type="email" value="engr.aanis@gmail.com" /></label>
-            <label>Password <input id="password" type="password" /></label>
-            <button type="submit">Enter developer portal</button>
-            <p id="error" class="hidden" style="color:#b85636;font-weight:800">Invalid developer login.</p>
+            <label>Email <input id="email" type="email" value="engr.aanis@gmail.com" autocomplete="username" /></label>
+            <label>Password <input id="password" type="password" autocomplete="current-password" /></label>
+            <button class="btn full" type="submit">Enter developer portal</button>
+            <p id="error" class="hidden compact" style="color:var(--clay);font-weight:900">Invalid developer login.</p>
           </form>
         </section>
       </div>
     </main>
 
-    <main id="console" class="console hidden">
-      <header class="topbar">
-        <div class="topbar-inner">
+    <main id="console" class="shell hidden">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="mark">F</span>
           <div>
-            <span class="pill">Developer portal active</span>
-            <h2 style="margin-top:12px;color:white">Freshtively system control center</h2>
-            <p>Professional owner panel for monitoring and controlling the marketplace concept.</p>
+            <strong>Freshtively</strong>
+            <p class="compact" style="color:#d8e6dc">Developer Portal</p>
           </div>
-          <button class="ghost" id="logout">Logout</button>
         </div>
-      </header>
-      <div class="content">
-        <section class="grid four">
-          <div class="card stat"><span>Gross order volume</span><strong>$12,480.50</strong><p>Total marketplace value.</p></div>
-          <div class="card stat"><span>Platform commission</span><strong>$1,872.08</strong><p>System owner revenue.</p></div>
-          <div class="card stat"><span>Cooker payouts</span><strong>$8,340.22</strong><p>Cooker earnings.</p></div>
-          <div class="card stat"><span>Delivery payouts</span><strong>$1,228.40</strong><p>Delivery earnings.</p></div>
-        </section>
+        <nav class="nav" id="nav"></nav>
+        <div class="sidebar-foot">
+          <a class="btn secondary" href="/">Live site</a>
+          <a class="btn ghost" href="/admin">Protected admin</a>
+          <button class="btn danger" id="logout">Logout</button>
+        </div>
+      </aside>
 
-        <section class="section card">
-          <h2>User Control</h2>
-          <p>Control customers, cookers, and delivery partners. Production writes require Firebase Admin backend connection.</p>
-          <div class="table" id="usersTable"></div>
-        </section>
-
-        <section class="section grid two">
-          <div class="card">
-            <h2>Commission Control</h2>
-            <div class="form">
-              <label>Service fee percent <input value="8" type="number" /></label>
-              <label>Cooker commission percent <input value="15" type="number" /></label>
-              <label>Delivery base fee <input value="5" type="number" /></label>
-              <label>Tax rate percent <input value="8.875" type="number" /></label>
-              <button onclick="notify('Commission settings prepared for production backend.')">Save commission</button>
+      <section class="main">
+        <header class="topbar">
+          <div class="topbar-inner">
+            <div>
+              <span class="badge">Owner access</span>
+              <h2 style="margin-top:8px">Full system control portal</h2>
             </div>
-          </div>
-          <div class="card">
-            <h2>Promotion Control</h2>
-            <div class="form">
-              <label>Campaign title <input value="Launch discount" /></label>
-              <label>Promo code <input value="FRESH10" /></label>
-              <label>Audience <select><option>All users</option><option>Customers</option><option>Cookers</option><option>Delivery partners</option></select></label>
-              <label>Message <textarea>Welcome promotion for Freshtively users.</textarea></label>
-              <button class="secondary" onclick="notify('Promotion prepared for publishing.')">Publish promotion</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="section grid two">
-          <div class="card">
-            <h2>Deployment Status</h2>
-            <p><strong>Cloudflare Pages:</strong> main branch -> npm run build -> dist</p>
-            <p><strong>Firebase mode:</strong> Firestore-only test mode, no Storage billing required.</p>
-            <p><strong>Developer:</strong> engr.aanis@gmail.com</p>
-          </div>
-          <div class="card">
-            <h2>Quick Links</h2>
             <div class="actions">
-              <a class="button" href="/admin">Protected admin</a>
-              <a class="button secondary" href="https://github.com/ANIS151993/Freshtively">GitHub</a>
-              <a class="button ghost" href="/">Live site</a>
+              <button class="btn ghost" onclick="exportState()">Export state</button>
+              <button class="btn secondary" onclick="resetDemo()">Reset demo</button>
             </div>
           </div>
-        </section>
-        <div id="notice" class="notice hidden"></div>
-      </div>
+        </header>
+
+        <div class="content">
+          <section id="overview" class="section active">
+            <div class="section-head">
+              <div>
+                <h2>System overview</h2>
+                <p>Monitor the full marketplace from one owner console.</p>
+              </div>
+              <span class="badge warn">Firestore-only test mode</span>
+            </div>
+            <div class="grid four" id="kpis"></div>
+            <div class="grid two" style="margin-top:16px">
+              <div class="card">
+                <h3>Operational command areas</h3>
+                <div class="grid two" style="margin-top:14px" id="moduleCards"></div>
+              </div>
+              <div class="card warning">
+                <h3>Production note</h3>
+                <p>
+                  This portal gives you professional UI/UX and browser-side test control. To modify live Firestore
+                  records from this standalone page, connect it to a secure Firebase Admin backend or Cloud Function.
+                  Do not put service-account secrets in frontend code.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="users" class="section">
+            <div class="section-head"><div><h2>User and account control</h2><p>Approve, suspend, block, verify, and change role views.</p></div></div>
+            <div class="split">
+              <div class="card">
+                <h3>Target account action</h3>
+                <div class="form">
+                  <label>Select user <select id="targetUser"></select></label>
+                  <label>Action <select id="accountAction"><option>Approve</option><option>Suspend</option><option>Block</option><option>Require verification</option><option>Restore</option></select></label>
+                  <label>Developer note <textarea id="accountNote" placeholder="Reason for action"></textarea></label>
+                  <button class="btn" onclick="applyAccountAction()">Apply account action</button>
+                </div>
+              </div>
+              <div class="table" id="usersTable"></div>
+            </div>
+          </section>
+
+          <section id="money" class="section">
+            <div class="section-head"><div><h2>Money, commission, and payout control</h2><p>Set owner commission and manage payment states.</p></div></div>
+            <div class="grid four" id="moneyStats"></div>
+            <div class="grid two" style="margin-top:16px">
+              <div class="card">
+                <h3>Commission settings</h3>
+                <div class="form">
+                  <label>Service fee percent <input id="serviceFee" type="number" step="0.01" /></label>
+                  <label>Cooker commission percent <input id="cookerCommission" type="number" step="0.01" /></label>
+                  <label>Delivery base fee <input id="deliveryBase" type="number" step="0.01" /></label>
+                  <label>Tax rate percent <input id="taxRate" type="number" step="0.001" /></label>
+                  <button class="btn" onclick="saveCommission()">Save commission settings</button>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Manual money adjustment</h3>
+                <div class="form">
+                  <label>Target user <select id="moneyUser"></select></label>
+                  <label>Amount <input id="moneyAmount" type="number" step="0.01" value="0" /></label>
+                  <label>Reason <textarea id="moneyReason" placeholder="Reason for adjustment"></textarea></label>
+                  <button class="btn secondary" onclick="recordMoneyAdjustment()">Record adjustment</button>
+                </div>
+              </div>
+            </div>
+            <div class="table" id="paymentsTable" style="margin-top:16px"></div>
+          </section>
+
+          <section id="promotions" class="section">
+            <div class="section-head"><div><h2>Promotion control</h2><p>Create campaigns for all users or one marketplace role.</p></div></div>
+            <div class="split">
+              <div class="card">
+                <h3>Create promotion</h3>
+                <div class="form">
+                  <label>Title <input id="promoTitle" value="Launch discount" /></label>
+                  <label>Code <input id="promoCode" value="FRESH10" /></label>
+                  <label>Audience <select id="promoAudience"><option value="all">All users</option><option value="customer">Customers</option><option value="cooker">Cookers</option><option value="delivery">Delivery partners</option></select></label>
+                  <label>Discount value <input id="promoValue" type="number" value="10" /></label>
+                  <label>Message <textarea id="promoMessage">Welcome promotion for Freshtively users.</textarea></label>
+                  <button class="btn" onclick="createPromotion()">Create promotion</button>
+                </div>
+              </div>
+              <div class="table" id="promotionsTable"></div>
+            </div>
+          </section>
+
+          <section id="orders" class="section">
+            <div class="section-head"><div><h2>Order and content control</h2><p>Inspect orders, force states, and moderate food listings.</p></div></div>
+            <div class="table" id="ordersTable"></div>
+            <div class="table" id="contentTable" style="margin-top:16px"></div>
+          </section>
+
+          <section id="system" class="section">
+            <div class="section-head"><div><h2>System settings and deployment</h2><p>Control system mode and review deployment requirements.</p></div></div>
+            <div class="grid two">
+              <div class="card">
+                <h3>System switches</h3>
+                <div class="form">
+                  <label>Marketplace status <select id="marketStatus"><option>Open</option><option>Maintenance</option><option>Invite only</option></select></label>
+                  <label>Storage mode <select id="storageMode"><option>Firestore URL only</option><option>Firebase Storage disabled</option><option>Firebase Storage enabled later</option></select></label>
+                  <label>Payment mode <select id="paymentMode"><option>Test records only</option><option>Manual review</option><option>Processor integration later</option></select></label>
+                  <button class="btn" onclick="saveSystemSettings()">Save system settings</button>
+                </div>
+              </div>
+              <div class="card">
+                <h3>Deployment checklist</h3>
+                <p><strong>Cloudflare Pages:</strong> main branch, build command <code>npm run build</code>, output <code>dist</code>.</p>
+                <p><strong>Firebase:</strong> Firestore rules added, Storage unused for no-billing test.</p>
+                <p><strong>Developer login:</strong> engr.aanis@gmail.com</p>
+                <div class="actions">
+                  <a class="btn secondary" href="https://github.com/ANIS151993/Freshtively">GitHub</a>
+                  <a class="btn ghost" href="/developer-panel">Developer alias</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="audit" class="section">
+            <div class="section-head"><div><h2>Audit log</h2><p>Every portal action is recorded locally for test review.</p></div><button class="btn danger" onclick="clearAudit()">Clear log</button></div>
+            <div class="card audit" id="auditLog"></div>
+          </section>
+        </div>
+      </section>
     </main>
+
+    <div id="notice" class="notice hidden"></div>
 
     <script>
       const expectedEmail = "engr.aanis@gmail.com";
       const expectedHash = "5b484d8b2799daf74779ce686501847d4a08b5e917c1e8395e1da7f7e73bce0d";
-      const users = [
-        ["Ayesha Rahman", "consumer.demo@freshtively.local", "Customer", "approved"],
-        ["Nadia Kitchen", "cooker.demo@freshtively.local", "Cooker", "pending"],
-        ["Samir Delivery", "delivery.demo@freshtively.local", "Delivery", "approved"],
-        ["Suspended Demo", "blocked.demo@freshtively.local", "Customer", "suspended"]
-      ];
-      const login = document.getElementById("login");
-      const consolePanel = document.getElementById("console");
-      const error = document.getElementById("error");
-      const notice = document.getElementById("notice");
+      const sessionKey = "freshtively_static_developer";
+      const stateKey = "freshtively_developer_state_v2";
 
-      function showConsole() {
-        login.classList.add("hidden");
-        consolePanel.classList.remove("hidden");
-        renderUsers();
+      const defaultState = {
+        settings: { serviceFee: 8, cookerCommission: 15, deliveryBase: 5, taxRate: 8.875, marketStatus: "Open", storageMode: "Firestore URL only", paymentMode: "Test records only" },
+        users: [
+          { id: "u_customer_001", name: "Ayesha Rahman", email: "consumer.demo@freshtively.local", role: "Customer", status: "approved", balance: 0 },
+          { id: "u_cooker_001", name: "Nadia Kitchen", email: "cooker.demo@freshtively.local", role: "Cooker", status: "pending", balance: 832.4 },
+          { id: "u_delivery_001", name: "Samir Delivery", email: "delivery.demo@freshtively.local", role: "Delivery", status: "approved", balance: 218.5 },
+          { id: "u_blocked_001", name: "Suspended Demo", email: "blocked.demo@freshtively.local", role: "Customer", status: "suspended", balance: 0 }
+        ],
+        payments: [
+          { id: "pay_001", order: "order_001", user: "Nadia Kitchen", total: 84.2, platform: 12.63, status: "paid" },
+          { id: "pay_002", order: "order_002", user: "Samir Delivery", total: 23.5, platform: 3.2, status: "pending" },
+          { id: "pay_003", order: "order_003", user: "Ayesha Rahman", total: 46.8, platform: 7.02, status: "failed" }
+        ],
+        promotions: [
+          { id: "promo_001", title: "Launch discount", code: "FRESH10", audience: "all", value: 10, status: "active" }
+        ],
+        orders: [
+          { id: "order_001", customer: "Ayesha Rahman", cooker: "Nadia Kitchen", delivery: "Samir Delivery", total: 84.2, status: "delivered" },
+          { id: "order_002", customer: "Demo Customer", cooker: "Nadia Kitchen", delivery: "Unassigned", total: 32.1, status: "preparing" },
+          { id: "order_003", customer: "Ayesha Rahman", cooker: "Demo Cooker", delivery: "Samir Delivery", total: 46.8, status: "cancelled" }
+        ],
+        content: [
+          { id: "dish_001", title: "Homemade Beef Biryani", owner: "Nadia Kitchen", status: "available" },
+          { id: "dish_002", title: "Chicken Tehari", owner: "Nadia Kitchen", status: "hidden" },
+          { id: "dish_003", title: "Fresh Pupusas", owner: "Demo Cooker", status: "review" }
+        ],
+        audit: []
+      };
+
+      let state = loadState();
+
+      const navItems = [
+        ["overview", "Overview"],
+        ["users", "Users"],
+        ["money", "Money"],
+        ["promotions", "Promotions"],
+        ["orders", "Orders and content"],
+        ["system", "System"],
+        ["audit", "Audit log"]
+      ];
+
+      function loadState() {
+        try { return JSON.parse(localStorage.getItem(stateKey)) || structuredClone(defaultState); }
+        catch { return structuredClone(defaultState); }
       }
+
+      function saveState() {
+        localStorage.setItem(stateKey, JSON.stringify(state));
+      }
+
       async function sha256(value) {
         const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
         return Array.from(new Uint8Array(buffer)).map((b) => b.toString(16).padStart(2, "0")).join("");
       }
+
       document.getElementById("loginForm").addEventListener("submit", async (event) => {
         event.preventDefault();
+        const email = document.getElementById("email").value.trim().toLowerCase();
         const hash = await sha256(document.getElementById("password").value);
-        if (document.getElementById("email").value.trim().toLowerCase() === expectedEmail && hash === expectedHash) {
-          sessionStorage.setItem("freshtively_static_developer", "1");
+        if (email === expectedEmail && hash === expectedHash) {
+          sessionStorage.setItem(sessionKey, "1");
           showConsole();
         } else {
-          error.classList.remove("hidden");
+          document.getElementById("error").classList.remove("hidden");
         }
       });
+
       document.getElementById("logout").addEventListener("click", () => {
-        sessionStorage.removeItem("freshtively_static_developer");
+        sessionStorage.removeItem(sessionKey);
         location.reload();
       });
-      function badge(status) {
-        const cls = status === "approved" ? "badge" : status === "pending" ? "badge warn" : "badge danger";
-        return `<span class="${cls}">${status}</span>`;
+
+      function showConsole() {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("console").classList.remove("hidden");
+        renderNav();
+        renderAll();
       }
+
+      function renderNav() {
+        document.getElementById("nav").innerHTML = navItems.map(([id, label], index) =>
+          `<button class="btn ${index === 0 ? "active" : ""}" data-section="${id}">${label}</button>`
+        ).join("");
+        document.querySelectorAll("[data-section]").forEach((button) => {
+          button.addEventListener("click", () => {
+            document.querySelectorAll("[data-section]").forEach((item) => item.classList.remove("active"));
+            button.classList.add("active");
+            document.querySelectorAll(".section").forEach((section) => section.classList.remove("active"));
+            document.getElementById(button.dataset.section).classList.add("active");
+          });
+        });
+      }
+
+      function renderAll() {
+        renderKpis();
+        renderModules();
+        renderUserOptions();
+        renderUsers();
+        renderMoney();
+        renderPayments();
+        renderPromotions();
+        renderOrders();
+        renderContent();
+        renderSettings();
+        renderAudit();
+      }
+
+      function renderKpis() {
+        const gross = state.payments.reduce((sum, p) => sum + p.total, 0);
+        const platform = state.payments.reduce((sum, p) => sum + p.platform, 0);
+        const activePromos = state.promotions.filter((p) => p.status === "active").length;
+        const blocked = state.users.filter((u) => ["suspended", "blocked"].includes(u.status)).length;
+        const items = [
+          ["Users", state.users.length, `${blocked} blocked/suspended`],
+          ["Orders", state.orders.length, "All marketplace orders"],
+          ["Gross money", money(gross), `Platform ${money(platform)}`],
+          ["Active promotions", activePromos, `${state.promotions.length} total campaigns`]
+        ];
+        document.getElementById("kpis").innerHTML = items.map(([label, value, helper]) =>
+          `<div class="card stat"><span class="muted">${label}</span><strong>${value}</strong><p class="compact">${helper}</p></div>`
+        ).join("");
+      }
+
+      function renderModules() {
+        const modules = ["Customer console", "Cooker console", "Delivery console", "Admin console", "Money control", "Promotion control"];
+        document.getElementById("moduleCards").innerHTML = modules.map((item) =>
+          `<div class="card" style="box-shadow:none"><span class="badge">${item}</span><p class="compact" style="margin-top:10px">Control surface is present in portal UI.</p></div>`
+        ).join("");
+      }
+
+      function renderUserOptions() {
+        const options = state.users.map((user) => `<option value="${user.id}">${user.name} - ${user.role}</option>`).join("");
+        document.getElementById("targetUser").innerHTML = options;
+        document.getElementById("moneyUser").innerHTML = options;
+      }
+
       function renderUsers() {
-        document.getElementById("usersTable").innerHTML = users.map((u) => `
-          <div class="row">
-            <div><strong>${u[0]}</strong><br><span style="color:#526155">${u[1]}</span></div>
-            <span class="badge">${u[2]}</span>
-            ${badge(u[3])}
+        document.getElementById("usersTable").innerHTML = state.users.map((u) => `
+          <div class="row users">
+            <div><strong>${u.name}</strong><br><span class="muted">${u.email}</span></div>
+            ${badge(u.role)}
+            ${badge(u.status)}
             <div class="actions">
-              <button class="secondary" onclick="notify('Approve prepared for ${u[1]}')">Approve</button>
-              <button class="ghost" onclick="notify('Suspend prepared for ${u[1]}')">Suspend</button>
-              <button class="danger" onclick="notify('Block prepared for ${u[1]}')">Block</button>
+              <button class="btn secondary" onclick="setUserStatus('${u.id}', 'approved')">Approve</button>
+              <button class="btn ghost" onclick="setUserStatus('${u.id}', 'suspended')">Suspend</button>
+              <button class="btn danger" onclick="setUserStatus('${u.id}', 'blocked')">Block</button>
             </div>
           </div>
         `).join("");
       }
+
+      function renderMoney() {
+        const gross = state.payments.reduce((sum, p) => sum + p.total, 0);
+        const platform = state.payments.reduce((sum, p) => sum + p.platform, 0);
+        const payouts = gross - platform;
+        const items = [["Gross", money(gross)], ["Platform", money(platform)], ["Payouts", money(payouts)], ["Service fee", `${state.settings.serviceFee}%`]];
+        document.getElementById("moneyStats").innerHTML = items.map(([label, value]) =>
+          `<div class="card stat"><span class="muted">${label}</span><strong>${value}</strong></div>`
+        ).join("");
+        document.getElementById("serviceFee").value = state.settings.serviceFee;
+        document.getElementById("cookerCommission").value = state.settings.cookerCommission;
+        document.getElementById("deliveryBase").value = state.settings.deliveryBase;
+        document.getElementById("taxRate").value = state.settings.taxRate;
+      }
+
+      function renderPayments() {
+        document.getElementById("paymentsTable").innerHTML = state.payments.map((p) => `
+          <div class="row orders">
+            <div><strong>${p.id}</strong><br><span class="muted">${p.order} - ${p.user}</span></div>
+            ${badge(p.status)}
+            <strong>${money(p.total)}</strong>
+            <div class="actions">
+              <button class="btn secondary" onclick="setPaymentStatus('${p.id}', 'paid')">Paid</button>
+              <button class="btn ghost" onclick="setPaymentStatus('${p.id}', 'refunded')">Refund</button>
+              <button class="btn danger" onclick="setPaymentStatus('${p.id}', 'failed')">Fail</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function renderPromotions() {
+        document.getElementById("promotionsTable").innerHTML = state.promotions.map((p) => `
+          <div class="row simple">
+            <div><strong>${p.title}</strong><br><span class="muted">${p.code} - ${p.audience} - ${p.value}%</span></div>
+            ${badge(p.status)}
+            <div class="actions">
+              <button class="btn secondary" onclick="setPromotionStatus('${p.id}', 'active')">Activate</button>
+              <button class="btn ghost" onclick="setPromotionStatus('${p.id}', 'paused')">Pause</button>
+              <button class="btn danger" onclick="setPromotionStatus('${p.id}', 'expired')">Expire</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function renderOrders() {
+        document.getElementById("ordersTable").innerHTML = state.orders.map((o) => `
+          <div class="row orders">
+            <div><strong>${o.id}</strong><br><span class="muted">${o.customer} -> ${o.cooker} -> ${o.delivery}</span></div>
+            ${badge(o.status)}
+            <strong>${money(o.total)}</strong>
+            <div class="actions">
+              <button class="btn secondary" onclick="setOrderStatus('${o.id}', 'delivered')">Deliver</button>
+              <button class="btn ghost" onclick="setOrderStatus('${o.id}', 'preparing')">Prepare</button>
+              <button class="btn danger" onclick="setOrderStatus('${o.id}', 'cancelled')">Cancel</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function renderContent() {
+        document.getElementById("contentTable").innerHTML = state.content.map((c) => `
+          <div class="row simple">
+            <div><strong>${c.title}</strong><br><span class="muted">${c.owner}</span></div>
+            ${badge(c.status)}
+            <div class="actions">
+              <button class="btn secondary" onclick="setContentStatus('${c.id}', 'available')">Publish</button>
+              <button class="btn ghost" onclick="setContentStatus('${c.id}', 'hidden')">Hide</button>
+              <button class="btn danger" onclick="setContentStatus('${c.id}', 'removed')">Remove</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function renderSettings() {
+        document.getElementById("marketStatus").value = state.settings.marketStatus;
+        document.getElementById("storageMode").value = state.settings.storageMode;
+        document.getElementById("paymentMode").value = state.settings.paymentMode;
+      }
+
+      function renderAudit() {
+        document.getElementById("auditLog").innerHTML = state.audit.length
+          ? state.audit.map((item) => `<div class="audit-item"><strong>${item.action}</strong><p class="compact">${item.time} - ${item.detail}</p></div>`).join("")
+          : `<p>No actions recorded yet.</p>`;
+      }
+
+      function setUserStatus(id, status) {
+        const user = state.users.find((u) => u.id === id);
+        user.status = status;
+        audit("Account status", `${user.email} set to ${status}`);
+        persist(`Updated ${user.email} to ${status}`);
+      }
+
+      function applyAccountAction() {
+        const user = state.users.find((u) => u.id === document.getElementById("targetUser").value);
+        const action = document.getElementById("accountAction").value;
+        const note = document.getElementById("accountNote").value || "No note";
+        if (action === "Approve" || action === "Restore") user.status = "approved";
+        if (action === "Suspend") user.status = "suspended";
+        if (action === "Block") user.status = "blocked";
+        if (action === "Require verification") user.status = "pending";
+        audit("Account action", `${action} for ${user.email}. Note: ${note}`);
+        persist(`${action} prepared for ${user.email}`);
+      }
+
+      function saveCommission() {
+        state.settings.serviceFee = Number(document.getElementById("serviceFee").value);
+        state.settings.cookerCommission = Number(document.getElementById("cookerCommission").value);
+        state.settings.deliveryBase = Number(document.getElementById("deliveryBase").value);
+        state.settings.taxRate = Number(document.getElementById("taxRate").value);
+        audit("Commission settings", `Service ${state.settings.serviceFee}%, cooker ${state.settings.cookerCommission}%`);
+        persist("Commission settings saved in portal state");
+      }
+
+      function recordMoneyAdjustment() {
+        const user = state.users.find((u) => u.id === document.getElementById("moneyUser").value);
+        const amount = Number(document.getElementById("moneyAmount").value);
+        const reason = document.getElementById("moneyReason").value || "Manual adjustment";
+        user.balance += amount;
+        audit("Money adjustment", `${money(amount)} for ${user.email}. ${reason}`);
+        persist(`Manual adjustment recorded for ${user.email}`);
+      }
+
+      function setPaymentStatus(id, status) {
+        const item = state.payments.find((p) => p.id === id);
+        item.status = status;
+        audit("Payment status", `${id} set to ${status}`);
+        persist(`Payment ${id} set to ${status}`);
+      }
+
+      function createPromotion() {
+        const promo = {
+          id: `promo_${Date.now()}`,
+          title: document.getElementById("promoTitle").value,
+          code: document.getElementById("promoCode").value.toUpperCase(),
+          audience: document.getElementById("promoAudience").value,
+          value: Number(document.getElementById("promoValue").value),
+          status: "draft"
+        };
+        state.promotions.unshift(promo);
+        audit("Promotion created", `${promo.code} for ${promo.audience}`);
+        persist(`Promotion ${promo.code} created`);
+      }
+
+      function setPromotionStatus(id, status) {
+        const item = state.promotions.find((p) => p.id === id);
+        item.status = status;
+        audit("Promotion status", `${item.code} set to ${status}`);
+        persist(`Promotion ${item.code} set to ${status}`);
+      }
+
+      function setOrderStatus(id, status) {
+        const order = state.orders.find((o) => o.id === id);
+        order.status = status;
+        audit("Order status", `${id} set to ${status}`);
+        persist(`Order ${id} set to ${status}`);
+      }
+
+      function setContentStatus(id, status) {
+        const content = state.content.find((c) => c.id === id);
+        content.status = status;
+        audit("Content status", `${content.title} set to ${status}`);
+        persist(`Content ${content.title} set to ${status}`);
+      }
+
+      function saveSystemSettings() {
+        state.settings.marketStatus = document.getElementById("marketStatus").value;
+        state.settings.storageMode = document.getElementById("storageMode").value;
+        state.settings.paymentMode = document.getElementById("paymentMode").value;
+        audit("System settings", `${state.settings.marketStatus}, ${state.settings.storageMode}, ${state.settings.paymentMode}`);
+        persist("System settings saved");
+      }
+
+      function clearAudit() {
+        state.audit = [];
+        persist("Audit log cleared");
+      }
+
+      function audit(action, detail) {
+        state.audit.unshift({ action, detail, time: new Date().toLocaleString() });
+      }
+
+      function persist(message) {
+        saveState();
+        renderAll();
+        notify(message);
+      }
+
+      function resetDemo() {
+        state = structuredClone(defaultState);
+        saveState();
+        renderAll();
+        notify("Demo portal state reset");
+      }
+
+      function exportState() {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "freshtively-developer-state.json";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function badge(value) {
+        const normalized = String(value).toLowerCase();
+        const cls = ["pending", "preparing", "review", "paused"].includes(normalized)
+          ? "badge warn"
+          : ["blocked", "suspended", "cancelled", "failed", "removed", "expired"].includes(normalized)
+            ? "badge danger"
+            : ["customer", "cooker", "delivery"].includes(normalized)
+              ? "badge dark"
+              : "badge";
+        return `<span class="${cls}">${value}</span>`;
+      }
+
+      function money(value) {
+        return `$${Number(value).toFixed(2)}`;
+      }
+
       function notify(message) {
+        const notice = document.getElementById("notice");
         notice.textContent = message;
         notice.classList.remove("hidden");
+        window.clearTimeout(window.noticeTimer);
+        window.noticeTimer = window.setTimeout(() => notice.classList.add("hidden"), 4500);
       }
-      if (sessionStorage.getItem("freshtively_static_developer") === "1") showConsole();
+
+      if (sessionStorage.getItem(sessionKey) === "1") showConsole();
     </script>
   </body>
 </html>

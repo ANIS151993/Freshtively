@@ -98,9 +98,27 @@ const featuredSlides = [
 ];
 
 const cookers = [
-  { name: "Ayesha Rahman", cuisine: "Bangladeshi home kitchen", rating: "4.9", orders: "128 orders" },
-  { name: "Lucia Martinez", cuisine: "Mexican family recipes", rating: "4.8", orders: "94 orders" },
-  { name: "Mariam Haddad", cuisine: "Levant comfort food", rating: "4.9", orders: "111 orders" },
+  {
+    name: "Ayesha Rahman",
+    cuisine: "Bangladeshi home kitchen",
+    rating: "4.9",
+    orders: "128 orders",
+    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    name: "Lucia Martinez",
+    cuisine: "Mexican family recipes",
+    rating: "4.8",
+    orders: "94 orders",
+    image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    name: "Mariam Haddad",
+    cuisine: "Levant comfort food",
+    rating: "4.9",
+    orders: "111 orders",
+    image: "https://images.unsplash.com/photo-1556911073-52527ac43761?auto=format&fit=crop&w=700&q=80",
+  },
 ];
 
 const rolePanels = [
@@ -166,8 +184,14 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="bg-[#f6f7f4]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-14">
+      <section className="relative overflow-hidden bg-[#f6f7f4]">
+        <SafeImage
+          alt=""
+          className="absolute inset-0 h-full w-full"
+          src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1800&q=80"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f6f7f4] via-[#f6f7f4]/95 to-[#f6f7f4]/75" />
+        <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-10 md:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-14">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-md border border-[#d8dfd8] bg-white px-3 py-2 text-sm font-bold text-emerald shadow-sm">
               <BadgeCheck size={18} />
@@ -360,18 +384,25 @@ export default function HomePage() {
       <PublicSection eyebrow="Featured cookers" title="Local kitchens with trusted taste">
         <div className="grid gap-5 md:grid-cols-3">
           {cookers.map((cook) => (
-            <Card key={cook.name} className="transition hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
-              <div className="flex items-start justify-between gap-4">
-                <span className="grid h-14 w-14 place-items-center rounded-lg bg-saffron-soft text-saffron-dark">
-                  <Home size={26} />
-                </span>
-                <span className="flex items-center gap-1 rounded-full bg-emerald-soft px-3 py-1 text-sm font-bold text-emerald">
-                  <Star size={15} fill="currentColor" /> {cook.rating}
-                </span>
+            <Card key={cook.name} className="group overflow-hidden p-0 transition hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
+              <SafeImage
+                alt={cook.name}
+                className="h-44 w-full object-cover transition duration-300 group-hover:scale-105"
+                src={cook.image}
+              />
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-saffron-soft text-saffron-dark">
+                    <Home size={24} />
+                  </span>
+                  <span className="flex items-center gap-1 rounded-full bg-emerald-soft px-3 py-1 text-sm font-bold text-emerald">
+                    <Star size={15} fill="currentColor" /> {cook.rating}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-ink">{cook.name}</h3>
+                <p className="mt-2 text-sm text-muted">{cook.cuisine}</p>
+                <p className="mt-4 text-sm font-semibold text-saffron-dark">{cook.orders}</p>
               </div>
-              <h3 className="mt-5 text-xl font-bold text-ink">{cook.name}</h3>
-              <p className="mt-2 text-sm text-muted">{cook.cuisine}</p>
-              <p className="mt-4 text-sm font-semibold text-saffron-dark">{cook.orders}</p>
             </Card>
           ))}
         </div>
@@ -475,7 +506,6 @@ function FeatureCard({
       <SafeImage
         alt={title}
         className="h-36 w-full object-cover transition duration-300 group-hover:scale-105"
-        fallbackLabel={title}
         src={image}
       />
       <div className="p-5">
@@ -491,19 +521,20 @@ function SafeImage({
   src,
   alt,
   className,
-  fallbackLabel,
 }: {
   src: string;
   alt: string;
   className: string;
-  fallbackLabel: string;
+  fallbackLabel?: string;
 }) {
   const [failed, setFailed] = useState(false);
 
   return (
     <div className={`relative overflow-hidden bg-[#e8eee8] ${className}`}>
-      <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-[#eef4ef] via-white to-[#f7eadf] px-5 text-center">
-        <span className="text-sm font-extrabold text-emerald">{fallbackLabel}</span>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#e6f1e8] via-white to-[#f7eadf]">
+        <div className="absolute left-5 top-5 h-16 w-16 rounded-full bg-emerald/15" />
+        <div className="absolute bottom-5 right-5 h-20 w-20 rounded-full bg-[#d26b2d]/15" />
+        <div className="absolute inset-x-6 bottom-7 h-2 rounded-full bg-white/70" />
       </div>
       {!failed ? (
         <img

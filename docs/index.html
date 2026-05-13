@@ -447,6 +447,98 @@
         margin-bottom: 8px;
       }
 
+      .investor-options {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      @media (min-width: 780px) {
+        .investor-options {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      .investor-option {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: white;
+        padding: 18px;
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          box-shadow 180ms ease;
+      }
+
+      .investor-option:hover {
+        transform: translateY(-3px);
+        border-color: rgba(8, 122, 82, 0.45);
+        box-shadow: 0 18px 46px rgba(18, 32, 25, 0.1);
+      }
+
+      .investor-option p {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .investor-option .button {
+        width: 100%;
+        margin-top: 12px;
+      }
+
+      .proposal-form {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: white;
+        padding: 18px;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      @media (min-width: 760px) {
+        .field-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .proposal-form label {
+        display: grid;
+        gap: 7px;
+        color: var(--ink);
+        font-size: 0.88rem;
+        font-weight: 900;
+      }
+
+      .proposal-form input,
+      .proposal-form textarea,
+      .proposal-form select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        color: var(--ink);
+        background: #fbfdfb;
+        font: inherit;
+      }
+
+      .proposal-form textarea {
+        min-height: 130px;
+        resize: vertical;
+      }
+
+      .proposal-form .small-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
       .proposal-body {
         padding: clamp(24px, 5vw, 38px);
       }
@@ -564,7 +656,7 @@
           <a href="#roadmap">Roadmap</a>
           <a href="#proposal">Proposal</a>
           <a href="#founder">Founder</a>
-          <a class="nav-cta" href="https://freshtively.marcbd.site/">Main system</a>
+          <a class="nav-cta" href="https://freshtively.marcbd.site/" rel="noreferrer" target="_blank">Main system</a>
         </div>
       </div>
     </nav>
@@ -580,7 +672,7 @@
             order, prepare, deliver, review, and support.
           </p>
           <div class="actions">
-            <a class="button primary" href="https://freshtively.marcbd.site/">Visit main system</a>
+            <a class="button primary" href="https://freshtively.marcbd.site/" rel="noreferrer" target="_blank">Visit main system</a>
             <a class="button dark" href="#proposal">Open business proposal</a>
             <a class="button secondary" href="#platform">Review platform model</a>
           </div>
@@ -773,10 +865,10 @@
                 delivery workflows, customer care, and early team capacity.
               </p>
               <div class="actions">
-                <a class="button primary" href="https://freshtively.marcbd.site/">Visit main system</a>
+                <a class="button primary" href="https://freshtively.marcbd.site/" rel="noreferrer" target="_blank">Visit main system</a>
                 <a
                   class="button dark"
-                  href="mailto:support@freshtively.com?subject=Investment%20Interest%20in%20Freshtively"
+                  href="mailto:engr.aanis@gmail.com?subject=Investment%20Agreement%20Interest%20in%20Freshtively&body=Hello%20Md%20Anisur%20Rahman%20Chowdhury%2C%0A%0AI%20visited%20the%20Freshtively%20business%20proposal%20website%20and%20I%20am%20interested%20in%20discussing%20an%20investment%20agreement.%0A%0AInvestor%20name%3A%0ACompany%20or%20organization%3A%0AInvestment%20interest%3A%0APreferred%20meeting%20time%3A%0AMessage%3A%0A%0AThank%20you."
                   >Send investment interest</a
                 >
               </div>
@@ -791,6 +883,104 @@
           </div>
 
           <div class="proposal-body">
+            <div class="section-head">
+              <div>
+                <span class="eyebrow">Investor action center</span>
+                <h2>Choose the right conversation and send an investment agreement message.</h2>
+              </div>
+              <p class="section-text">
+                Investors can start with a strategic call, launch funding discussion, or partnership conversation. Each
+                option opens a prepared email to the founder so the next step is direct and professional.
+              </p>
+            </div>
+
+            <div class="investor-options">
+              <article class="investor-option">
+                <span class="label">Option 1</span>
+                <h3>Seed investment discussion</h3>
+                <p>
+                  For investors interested in funding product hardening, compliance work, launch marketing, and pilot
+                  operations.
+                </p>
+                <a
+                  class="button primary"
+                  href="mailto:engr.aanis@gmail.com?subject=Seed%20Investment%20Discussion%20for%20Freshtively&body=Hello%20Md%20Anisur%20Rahman%20Chowdhury%2C%0A%0AI%20visited%20the%20Freshtively%20GitHub%20website%20and%20I%20am%20interested%20in%20a%20seed%20investment%20discussion.%0A%0AInvestor%20name%3A%0ACompany%3A%0AApproximate%20investment%20range%3A%0AQuestions%3A%0APreferred%20meeting%20time%3A%0A%0AThank%20you."
+                  >Email founder</a
+                >
+              </article>
+
+              <article class="investor-option">
+                <span class="label">Option 2</span>
+                <h3>Strategic partnership</h3>
+                <p>
+                  For food, delivery, community, or local business partners who can help launch and scale the
+                  marketplace.
+                </p>
+                <a
+                  class="button dark"
+                  href="mailto:engr.aanis@gmail.com?subject=Strategic%20Partnership%20Interest%20for%20Freshtively&body=Hello%20Md%20Anisur%20Rahman%20Chowdhury%2C%0A%0AI%20visited%20the%20Freshtively%20business%20proposal%20and%20I%20would%20like%20to%20discuss%20a%20strategic%20partnership.%0A%0AName%3A%0AOrganization%3A%0APartnership%20type%3A%0AHow%20we%20can%20help%3A%0APreferred%20meeting%20time%3A%0A%0AThank%20you."
+                  >Propose partnership</a
+                >
+              </article>
+
+              <article class="investor-option">
+                <span class="label">Option 3</span>
+                <h3>Advisor or mentor support</h3>
+                <p>
+                  For experienced operators, startup advisors, and food-tech leaders who can guide the launch plan.
+                </p>
+                <a
+                  class="button secondary"
+                  href="mailto:engr.aanis@gmail.com?subject=Advisor%20Support%20for%20Freshtively&body=Hello%20Md%20Anisur%20Rahman%20Chowdhury%2C%0A%0AI%20visited%20the%20Freshtively%20proposal%20website%20and%20I%20am%20interested%20in%20supporting%20as%20an%20advisor%20or%20mentor.%0A%0AName%3A%0AExperience%3A%0AHow%20I%20can%20support%3A%0APreferred%20meeting%20time%3A%0A%0AThank%20you."
+                  >Offer guidance</a
+                >
+              </article>
+            </div>
+
+            <form
+              id="investment-form"
+              class="proposal-form"
+            >
+              <h3>Investment agreement message</h3>
+              <p class="small-note">
+                This form opens the visitor's email app with the message details. Investors can also use the direct
+                buttons above for a prefilled email.
+              </p>
+              <div class="field-grid">
+                <label>
+                  Investor name
+                <input name="investorName" placeholder="Full name" required />
+                </label>
+                <label>
+                  Email
+                <input name="email" type="email" placeholder="investor@example.com" required />
+                </label>
+                <label>
+                  Company or organization
+                <input name="company" placeholder="Company name" />
+                </label>
+                <label>
+                  Interest type
+                  <select name="interestType" required>
+                    <option value="">Select one</option>
+                    <option>Seed investment</option>
+                    <option>Strategic partnership</option>
+                    <option>Advisor support</option>
+                    <option>Launch collaboration</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                Message
+                <textarea
+                  name="message"
+                  placeholder="Write your investment agreement message, funding interest, partnership idea, or meeting request."
+                  required
+                ></textarea>
+              </label>
+              <button class="button primary" type="submit">Send message to engr.aanis@gmail.com</button>
+            </form>
+
             <div class="grid three">
               <article class="card accent">
                 <h3>Use of funds</h3>
@@ -846,7 +1036,7 @@
               <div class="actions">
                 <a
                   class="button primary"
-                  href="mailto:support@freshtively.com?subject=Investor%20Proposal%20for%20Freshtively"
+                  href="mailto:engr.aanis@gmail.com?subject=Investor%20Proposal%20for%20Freshtively&body=Hello%20Md%20Anisur%20Rahman%20Chowdhury%2C%0A%0AI%20visited%20your%20Freshtively%20proposal%20website%20and%20I%20would%20like%20to%20discuss%20investment%20or%20partnership.%0A%0AName%3A%0ACompany%3A%0AInterest%3A%0APreferred%20meeting%20time%3A%0AMessage%3A%0A%0AThank%20you."
                   >Discuss the proposal</a
                 >
                 <a class="button secondary" href="#founder">View founder profile</a>
@@ -878,7 +1068,7 @@
               <a href="https://scholar.google.com/citations?user=NQyywPoAAAAJ">Google Scholar</a>
               <a href="https://marcbd.site">Portfolio</a>
               <a href="https://researchgate.net/profile/Md-Anisur-Rahman-Chowdhury">ResearchGate</a>
-              <a href="https://freshtively.marcbd.site/">Main system</a>
+              <a href="https://freshtively.marcbd.site/" rel="noreferrer" target="_blank">Main system</a>
             </div>
           </div>
         </div>
@@ -888,8 +1078,39 @@
     <footer class="footer">
       <div class="wrap footer-inner">
         <span>Copyright (c) 2026 Md Anisur Rahman Chowdhury. All rights reserved.</span>
-        <a href="https://freshtively.marcbd.site/">Visit Freshtively main system</a>
+        <a href="https://freshtively.marcbd.site/" rel="noreferrer" target="_blank">Visit Freshtively main system</a>
       </div>
     </footer>
+    <script>
+      const investmentForm = document.getElementById("investment-form");
+
+      investmentForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(investmentForm);
+        const name = String(formData.get("investorName") || "");
+        const email = String(formData.get("email") || "");
+        const company = String(formData.get("company") || "");
+        const interestType = String(formData.get("interestType") || "");
+        const message = String(formData.get("message") || "");
+        const subject = `Investment agreement message for Freshtively - ${interestType}`;
+        const body = [
+          "Hello Md Anisur Rahman Chowdhury,",
+          "",
+          "I visited the Freshtively GitHub website and I am interested in discussing an investment agreement.",
+          "",
+          `Investor name: ${name}`,
+          `Email: ${email}`,
+          `Company or organization: ${company}`,
+          `Interest type: ${interestType}`,
+          "",
+          "Message:",
+          message,
+          "",
+          "Thank you.",
+        ].join("\n");
+
+        window.location.href = `mailto:engr.aanis@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    </script>
   </body>
 </html>

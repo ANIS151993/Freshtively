@@ -163,6 +163,9 @@ const trustPanels = [
   },
 ];
 
+const fallbackFoodImage =
+  "https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1200&q=80";
+
 export default function HomePage() {
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
@@ -428,7 +431,12 @@ export default function HomePage() {
         description="Freshtively is owned, designed, and developed by Md Anisur Rahman Chowdhury, with public profiles connected for professional, academic, and research context."
       >
         <Card>
-          <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)_auto] lg:items-center">
+            <SafeImage
+              alt="Freshtively founder workspace"
+              className="h-56 w-full rounded-lg object-cover lg:h-64 lg:w-80"
+              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+            />
             <div>
               <h3 className="text-2xl font-extrabold text-ink">Md Anisur Rahman Chowdhury</h3>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
@@ -436,7 +444,7 @@ export default function HomePage() {
                 cultural food discovery, ordering, cooking operations, delivery handoffs, and admin oversight.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link to="/founder">
                 <Button leftIcon={<ExternalLink size={18} />}>Founder Profile</Button>
               </Link>
@@ -521,21 +529,34 @@ function SafeImage({
   src,
   alt,
   className,
+  fallbackSrc = fallbackFoodImage,
 }: {
   src: string;
   alt: string;
   className: string;
   fallbackLabel?: string;
+  fallbackSrc?: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const [fallbackFailed, setFallbackFailed] = useState(false);
 
   return (
     <div className={`relative overflow-hidden bg-[#e8eee8] ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-[#e6f1e8] via-white to-[#f7eadf]">
-        <div className="absolute left-5 top-5 h-16 w-16 rounded-full bg-emerald/15" />
-        <div className="absolute bottom-5 right-5 h-20 w-20 rounded-full bg-[#d26b2d]/15" />
-        <div className="absolute inset-x-6 bottom-7 h-2 rounded-full bg-white/70" />
-      </div>
+      {!fallbackFailed ? (
+        <img
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          onError={() => setFallbackFailed(true)}
+          src={fallbackSrc}
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#e6f1e8] via-white to-[#f7eadf]">
+          <div className="absolute left-5 top-5 h-16 w-16 rounded-full bg-emerald/15" />
+          <div className="absolute bottom-5 right-5 h-20 w-20 rounded-full bg-[#d26b2d]/15" />
+          <div className="absolute inset-x-6 bottom-7 h-2 rounded-full bg-white/70" />
+        </div>
+      )}
       {!failed ? (
         <img
           alt={alt}

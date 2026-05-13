@@ -74,6 +74,50 @@ textarea {
   animation: skeleton-shimmer 1.4s ease infinite;
 }
 
+.freshtively-logo-float {
+  animation: logo-float 5.5s ease-in-out infinite;
+}
+
+.freshtively-brand-pulse {
+  animation: brand-pulse 6s ease-in-out infinite;
+}
+
+.freshtively-panel-drift {
+  animation: panel-drift 8s ease-in-out infinite;
+}
+
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes brand-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes panel-drift {
+  0%,
+  100% {
+    transform: rotate(14deg) translateY(0);
+  }
+  50% {
+    transform: rotate(18deg) translateY(-12px);
+  }
+}
+
 @keyframes leaf-sway {
   0%,
   100% {

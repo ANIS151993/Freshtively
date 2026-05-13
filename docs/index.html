@@ -182,6 +182,12 @@
         border: 1px solid var(--line);
       }
 
+      .button.dark {
+        color: white;
+        background: var(--ink);
+        box-shadow: 0 18px 36px rgba(23, 33, 28, 0.18);
+      }
+
       .button:hover {
         transform: translateY(-2px);
         box-shadow: 0 20px 42px rgba(23, 33, 28, 0.14);
@@ -399,6 +405,61 @@
         background: rgba(255, 255, 255, 0.14);
       }
 
+      .proposal {
+        border: 1px solid rgba(197, 212, 200, 0.95);
+        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 248, 239, 0.92)),
+          var(--paper);
+        padding: clamp(24px, 5vw, 44px);
+        box-shadow: 0 28px 90px rgba(23, 33, 28, 0.12);
+      }
+
+      .proposal-header {
+        display: grid;
+        gap: 20px;
+        align-items: start;
+      }
+
+      @media (min-width: 900px) {
+        .proposal-header {
+          grid-template-columns: 1fr 0.48fr;
+        }
+      }
+
+      .metric-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .metric-list li {
+        border: 1px solid rgba(197, 212, 200, 0.85);
+        border-radius: 16px;
+        background: white;
+        padding: 16px;
+      }
+
+      .metric-list strong {
+        display: block;
+        color: var(--ink);
+        font-size: 1.05rem;
+      }
+
+      .proposal-letter {
+        border-left: 5px solid var(--emerald);
+        border-radius: 18px;
+        background: white;
+        padding: 22px;
+      }
+
+      .proposal-letter p {
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
       footer {
         padding: 32px 0 48px;
         color: var(--muted);
@@ -482,7 +543,9 @@
           <a href="#goal">Goal</a>
           <a href="#users">Users</a>
           <a href="#workflow">Workflow</a>
+          <a href="#business-proposal">Proposal</a>
           <a href="#creator">Creator</a>
+          <a href="https://freshtively.web.app">Main system</a>
         </div>
       </div>
     </nav>
@@ -497,6 +560,7 @@
             their kitchens, and delivery partners help each order reach the customer with clear steps.
           </p>
           <div class="actions">
+            <a class="button primary" href="https://freshtively.web.app">Visit main system</a>
             <a class="button primary" href="#users">See how each user uses it</a>
             <a class="button secondary" href="#workflow">Follow the order journey</a>
           </div>
@@ -674,6 +738,116 @@
           <article class="card">
             <h3>It keeps the process visible</h3>
             <p>The order journey is broken into clear stages, so each user knows what to do next.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="wrap reveal" id="business-proposal">
+        <div class="proposal">
+          <div class="proposal-header">
+            <div>
+              <span class="eyebrow">Open business proposal</span>
+              <h2 style="margin-top: 18px">Freshtively is positioned to become a startup marketplace for homemade cultural food.</h2>
+              <p class="section-text">
+                Freshtively is designed as a three-sided local marketplace connecting customers, verified household
+                cookers, and delivery partners. The business goal is to launch a trusted digital platform where cultural
+                homemade food can be discovered, ordered, prepared, delivered, reviewed, and supported through one
+                professional system.
+              </p>
+              <div class="actions">
+                <a class="button primary" href="https://freshtively.web.app">Visit main system</a>
+                <a class="button dark" href="mailto:support@freshtively.com?subject=Investor%20Proposal%20for%20Freshtively">Discuss investment</a>
+              </div>
+            </div>
+            <ul class="metric-list" aria-label="Business highlights">
+              <li>
+                <strong>Market focus</strong>
+                Local homemade and cultural food customers underserved by traditional restaurants.
+              </li>
+              <li>
+                <strong>Marketplace model</strong>
+                Customer orders, cooker sales, delivery workflow, support, verification, and platform oversight.
+              </li>
+              <li>
+                <strong>Launch priority</strong>
+                Funding for product hardening, legal review, pilot operations, marketing, and city-level rollout.
+              </li>
+            </ul>
+          </div>
+
+          <div class="grid three">
+            <article class="card">
+              <h3>Business goal</h3>
+              <p>
+                Build Freshtively into a trusted startup that helps home-based cooks earn income from cultural recipes
+                while giving customers easier access to authentic homemade meals. The company goal is to start locally,
+                prove repeat ordering, and expand city by city.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Revenue opportunity</h3>
+              <p>
+                Freshtively can support revenue through platform commission on orders, delivery service fees, promoted
+                cooker visibility, verified premium cooker tools, local brand partnerships, and future business services
+                for food entrepreneurs.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Investment use</h3>
+              <p>
+                Funding would support production payment integration, compliance and food safety review, onboarding
+                operations, customer acquisition, cooker recruitment, delivery partner growth, support operations, and
+                launch marketing.
+              </p>
+            </article>
+          </div>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Why the product can matter</h3>
+              <ul>
+                <li>Many cultural foods are cooked at home and are hard to find in regular restaurants.</li>
+                <li>Skilled household cooks need a professional way to receive orders and build trust.</li>
+                <li>Customers want transparent food information, order tracking, and support.</li>
+                <li>Local delivery partners can help create a neighborhood food network.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Launch plan</h3>
+              <ol>
+                <li>Complete production-ready payment, support, verification, and compliance workflows.</li>
+                <li>Run a controlled pilot with selected cookers, delivery partners, and customers.</li>
+                <li>Measure order completion, customer retention, cooker earnings, delivery reliability, and support issues.</li>
+                <li>Use pilot data to improve operations, then expand to a larger local market.</li>
+              </ol>
+            </article>
+          </div>
+
+          <article class="proposal-letter">
+            <h3>Investor proposal</h3>
+            <p>Dear Investor,</p>
+            <p>
+              I am seeking funding to launch Freshtively as a startup business for homemade cultural food. Freshtively
+              is built to connect customers with trusted local household cookers and delivery partners through a clear
+              digital marketplace. The platform already defines the core user journeys: customer discovery and checkout,
+              cooker onboarding and order management, delivery request handling, customer support, verification, and
+              administrator oversight.
+            </p>
+            <p>
+              The opportunity is to bring cultural home cooking into a structured marketplace where food traditions,
+              local entrepreneurship, and customer convenience can work together. Investment would help move the system
+              from product development into launch execution, including compliance planning, safety workflows, payments,
+              pilot operations, marketing, and market validation.
+            </p>
+            <p>
+              I am open to strategic investors, advisors, and partners who understand local marketplaces, food
+              technology, community businesses, and startup launch execution. The goal is to build Freshtively into a
+              scalable company that starts with a focused launch market, proves demand, and expands responsibly.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="mailto:support@freshtively.com?subject=Investment%20Interest%20in%20Freshtively">Send investment interest</a>
+              <a class="button secondary" href="#creator">View founder profile</a>
+            </div>
           </article>
         </div>
       </section>

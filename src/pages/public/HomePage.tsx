@@ -1,9 +1,7 @@
 import {
-  Apple,
   BadgeCheck,
   ChefHat,
   Clock,
-  Download,
   ExternalLink,
   Github,
   Heart,
@@ -16,7 +14,7 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-import { type FormEvent, type ReactNode } from "react";
+import { type FormEvent, type ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/cards/Card";
 import { Button } from "../../components/common/Button";
@@ -57,6 +55,24 @@ const cookers = [
   { name: "Ayesha Rahman", cuisine: "Bangladeshi home kitchen", rating: "4.9", orders: "128 orders" },
   { name: "Lucia Martinez", cuisine: "Mexican family recipes", rating: "4.8", orders: "94 orders" },
   { name: "Mariam Haddad", cuisine: "Levant comfort food", rating: "4.9", orders: "111 orders" },
+];
+
+const rolePanels = [
+  {
+    title: "Customer",
+    text: "Search dishes, compare kitchens, place orders, and follow delivery status.",
+    icon: <ShoppingBag />,
+  },
+  {
+    title: "Cooker",
+    text: "Publish menus, manage preparation windows, accept orders, and track payouts.",
+    icon: <ChefHat />,
+  },
+  {
+    title: "Delivery",
+    text: "Review delivery requests, coordinate pickup, complete drop-off, and monitor earnings.",
+    icon: <Truck />,
+  },
 ];
 
 export default function HomePage() {
@@ -128,9 +144,10 @@ export default function HomePage() {
             <div className="grid gap-4 md:grid-cols-[1.05fr_0.95fr]">
               <div className="group overflow-hidden rounded-lg border border-[#d8dfd8] bg-white shadow-sm">
                 <div className="relative">
-                  <img
+                  <SafeImage
                     alt="Fresh homemade meal"
                     className="h-64 w-full object-cover transition duration-300 group-hover:scale-105 md:h-80"
+                    fallbackLabel="Featured homemade meal"
                     src="https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=80"
                   />
                   <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-sm font-extrabold text-emerald shadow-sm">
@@ -186,15 +203,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <PublicSection
-        eyebrow="How it works"
-        title="A connected food workflow for every role"
-        description="Freshtively is designed around the real handoffs between customer, cooker, and delivery partner."
-      >
+      <PublicSection eyebrow="Portals" title="One system for every marketplace role">
         <div className="grid gap-5 md:grid-cols-3">
-          <FeatureCard icon={<Search />} title="Discover" text="Search cultural dishes, nearby cooks, and favorites by location." />
-          <FeatureCard icon={<ChefHat />} title="Cook" text="Verified household cooks accept orders and set ready times." />
-          <FeatureCard icon={<Truck />} title="Deliver" text="Nearby delivery partners coordinate pickup and drop-off." />
+          {rolePanels.map((panel) => (
+            <FeatureCard key={panel.title} icon={panel.icon} title={panel.title} text={panel.text} />
+          ))}
         </div>
       </PublicSection>
 
@@ -217,7 +230,12 @@ export default function HomePage() {
         <div className="grid gap-5 md:grid-cols-3">
           {dishes.map((dish) => (
             <Card key={dish.name} className="group overflow-hidden p-0 transition hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
-              <img alt={dish.name} className="h-52 w-full object-cover transition duration-300 group-hover:scale-105" src={dish.image} />
+              <SafeImage
+                alt={dish.name}
+                className="h-52 w-full object-cover transition duration-300 group-hover:scale-105"
+                fallbackLabel={dish.name}
+                src={dish.image}
+              />
               <div className="p-5">
                 <p className="text-lg font-extrabold text-ink">{dish.name}</p>
                 <p className="mt-1 text-sm text-muted">{dish.cook}</p>
@@ -302,40 +320,6 @@ export default function HomePage() {
         </Card>
       </PublicSection>
 
-      <PublicSection eyebrow="Community voices" title="What Freshtively is built to make possible">
-        <div className="grid gap-5 md:grid-cols-3">
-          {[
-            "I can find food that tastes like home without waiting for a festival.",
-            "My kitchen can become a flexible local business on my own schedule.",
-            "The delivery workflow makes every pickup and drop-off clear.",
-          ].map((quote) => (
-            <Card key={quote}>
-              <Star className="text-saffron" fill="currentColor" />
-              <p className="mt-5 text-base leading-7 text-muted">"{quote}"</p>
-            </Card>
-          ))}
-        </div>
-      </PublicSection>
-
-      <section className="bg-emerald px-4 py-16 text-white md:px-10">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-[1fr_auto]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-emerald-soft">App download placeholder</p>
-            <h2 className="mt-3 text-3xl font-extrabold md:text-5xl">Freshtively is ready for web first.</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-emerald-soft">
-              Mobile app links are placeholder UI for Phase 5 and can connect to real app stores later.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="secondary" leftIcon={<Apple size={18} />}>
-              App Store
-            </Button>
-            <Button variant="ghost" className="bg-white/10 text-white hover:bg-white/20" leftIcon={<Download size={18} />}>
-              Google Play
-            </Button>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
@@ -365,10 +349,41 @@ function PublicSection({
 
 function FeatureCard({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
   return (
-    <Card className="transition duration-200 hover:border-emerald">
+    <Card className="transition duration-200 hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
       <span className="grid h-12 w-12 place-items-center rounded-lg bg-[#edf6ef] text-emerald">{icon}</span>
       <h3 className="mt-5 text-xl font-bold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
     </Card>
+  );
+}
+
+function SafeImage({
+  src,
+  alt,
+  className,
+  fallbackLabel,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+  fallbackLabel: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden bg-[#e8eee8] ${className}`}>
+      <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-[#eef4ef] via-white to-[#f7eadf] px-5 text-center">
+        <span className="text-sm font-extrabold text-emerald">{fallbackLabel}</span>
+      </div>
+      {!failed ? (
+        <img
+          alt={alt}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          onError={() => setFailed(true)}
+          src={src}
+        />
+      ) : null}
+    </div>
   );
 }

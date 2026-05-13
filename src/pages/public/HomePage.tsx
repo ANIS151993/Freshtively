@@ -23,6 +23,12 @@ import { Button } from "../../components/common/Button";
 
 const categories = ["Bangladeshi", "Mexican", "Caribbean", "Middle Eastern", "Ethiopian", "Korean"];
 
+const marketplaceStats = [
+  ["3 roles", "Customer, cooker, delivery"],
+  ["Live flow", "Order-to-handoff tracking"],
+  ["Verified", "Kitchen and delivery review"],
+];
+
 const dishes = [
   {
     name: "Homemade Beef Biryani",
@@ -73,13 +79,18 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#f6f7f4] via-[#f6f7f4]/95 to-[#f6f7f4]/55" />
         </div>
 
-        <div className="relative mx-auto grid min-h-[calc(100vh-74px)] max-w-7xl items-center gap-10 px-4 py-12 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
+        <div className="relative mx-auto grid min-h-[calc(100vh-96px)] max-w-7xl items-center gap-10 px-4 py-10 md:px-10 lg:grid-cols-[1.02fr_0.98fr] lg:py-14">
           <div className="max-w-3xl">
+            <img
+              alt="Freshtively"
+              className="mb-5 h-auto w-[min(72vw,360px)] drop-shadow-[0_18px_34px_rgba(22,29,25,.16)]"
+              src="/logo/main-logo.png"
+            />
             <div className="inline-flex items-center gap-2 rounded-md border border-[#d8dfd8] bg-white px-3 py-2 text-sm font-bold text-emerald shadow-sm">
               <BadgeCheck size={18} />
               Verified local cooks, fresh homemade meals
             </div>
-            <h1 className="mt-6 max-w-3xl text-5xl font-extrabold leading-tight text-ink md:text-7xl">
+            <h1 className="mt-5 max-w-3xl text-5xl font-extrabold leading-tight text-ink md:text-7xl">
               Freshtively brings local home kitchens online.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
@@ -125,33 +136,59 @@ export default function HomePage() {
                 </Button>
               </Link>
             </div>
+
+            <div className="mt-7 grid gap-3 sm:grid-cols-3">
+              {marketplaceStats.map(([value, label]) => (
+                <div key={value} className="rounded-lg border border-[#d8dfd8] bg-white/90 px-4 py-3 shadow-sm">
+                  <p className="text-lg font-extrabold text-ink">{value}</p>
+                  <p className="mt-1 text-xs font-bold text-muted">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="hidden items-center justify-end lg:flex">
-            <Card className="w-full max-w-md bg-white/95 p-0">
-              <div className="border-b border-[#e1e7e1] p-5">
-                <p className="text-sm font-extrabold text-ink">Live marketplace snapshot</p>
-                <p className="mt-1 text-sm text-muted">Customer, cooker, and delivery flow</p>
-              </div>
-              <div className="grid gap-0">
-                {[
-                  ["Order placed", "Customer checkout completed", "10:24 AM"],
-                  ["Kitchen accepted", "Cooker confirmed prep time", "10:27 AM"],
-                  ["Courier matched", "Pickup route ready", "10:43 AM"],
-                ].map(([title, text, time]) => (
-                  <div key={title} className="grid grid-cols-[1fr_auto] gap-4 border-b border-[#eef1ee] p-5 last:border-b-0">
-                    <div className="flex gap-3">
-                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald" />
+            <div className="w-full max-w-[520px]">
+              <div className="grid grid-cols-[1fr_0.82fr] gap-4">
+                <div className="group overflow-hidden rounded-lg border border-white/70 bg-white shadow-lg">
+                  <img
+                    alt="Fresh homemade meal"
+                    className="h-72 w-full object-cover transition duration-300 group-hover:scale-105"
+                    src="https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=80"
+                  />
+                  <div className="p-5">
+                    <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-sm font-extrabold text-ink">{title}</p>
-                        <p className="mt-1 text-sm text-muted">{text}</p>
+                        <p className="text-lg font-extrabold text-ink">Beef Biryani</p>
+                        <p className="mt-1 text-sm font-semibold text-muted">Ayesha Rahman Kitchen</p>
                       </div>
+                      <span className="rounded-full bg-[#edf6ef] px-3 py-1 text-sm font-extrabold text-emerald">4.9</span>
                     </div>
-                    <span className="text-xs font-bold text-muted">{time}</span>
+                    <div className="mt-4 flex items-center justify-between border-t border-[#e7ece7] pt-4 text-sm font-bold text-muted">
+                      <span>32 min</span>
+                      <span>$16.99</span>
+                    </div>
                   </div>
-                ))}
+                </div>
+                <div className="grid gap-4">
+                  {[
+                    ["Kitchen accepted", "10:27 AM"],
+                    ["Courier matched", "10:43 AM"],
+                    ["Ready for delivery", "11:04 AM"],
+                  ].map(([title, time]) => (
+                    <div key={title} className="rounded-lg border border-[#d8dfd8] bg-white/95 p-4 shadow-sm transition hover:-translate-y-1 hover:border-emerald">
+                      <span className="mb-3 block h-2 w-10 rounded-full bg-emerald" />
+                      <p className="text-sm font-extrabold text-ink">{title}</p>
+                      <p className="mt-1 text-xs font-bold text-muted">{time}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </Card>
+              <div className="mt-4 rounded-lg border border-[#d8dfd8] bg-white/95 p-4 shadow-sm">
+                <p className="text-sm font-extrabold text-ink">Live marketplace snapshot</p>
+                <p className="mt-1 text-sm text-muted">Customer order, kitchen preparation, and delivery handoff in one system.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -173,9 +210,10 @@ export default function HomePage() {
           {categories.map((category) => (
             <Link
               key={category}
-              className="rounded-lg border border-[#d8dfd8] bg-white px-4 py-5 text-center text-sm font-bold text-ink shadow-sm transition hover:border-emerald hover:text-emerald"
+              className="group rounded-lg border border-[#d8dfd8] bg-white px-4 py-5 text-center text-sm font-bold text-ink shadow-sm transition hover:-translate-y-1 hover:border-emerald hover:text-emerald hover:shadow-lg"
               to="/discover"
             >
+              <span className="mx-auto mb-3 block h-1.5 w-10 rounded-full bg-[#d26b2d] transition group-hover:w-16 group-hover:bg-emerald" />
               {category}
             </Link>
           ))}
@@ -185,13 +223,13 @@ export default function HomePage() {
       <PublicSection eyebrow="Popular dishes" title="Homemade plates ready to discover">
         <div className="grid gap-5 md:grid-cols-3">
           {dishes.map((dish) => (
-            <Card key={dish.name} className="overflow-hidden p-0">
-              <img alt={dish.name} className="h-52 w-full object-cover" src={dish.image} />
+            <Card key={dish.name} className="group overflow-hidden p-0 transition hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
+              <img alt={dish.name} className="h-52 w-full object-cover transition duration-300 group-hover:scale-105" src={dish.image} />
               <div className="p-5">
-                <p className="text-lg font-bold text-ink">{dish.name}</p>
+                <p className="text-lg font-extrabold text-ink">{dish.name}</p>
                 <p className="mt-1 text-sm text-muted">{dish.cook}</p>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-extrabold text-clay">{dish.price}</span>
+                  <span className="text-lg font-extrabold text-ink">{dish.price}</span>
                   <Link to="/discover">
                     <Button className="px-4 py-2">View</Button>
                   </Link>
@@ -205,9 +243,9 @@ export default function HomePage() {
       <PublicSection eyebrow="Featured cookers" title="Local kitchens with trusted taste">
         <div className="grid gap-5 md:grid-cols-3">
           {cookers.map((cook) => (
-            <Card key={cook.name}>
+            <Card key={cook.name} className="transition hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
               <div className="flex items-start justify-between gap-4">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-saffron-soft text-saffron-dark">
+                <span className="grid h-14 w-14 place-items-center rounded-lg bg-saffron-soft text-saffron-dark">
                   <Home size={26} />
                 </span>
                 <span className="flex items-center gap-1 rounded-full bg-emerald-soft px-3 py-1 text-sm font-bold text-emerald">

@@ -13,7 +13,7 @@ export function ShellNav({ items, homeTo = "/" }: { items: NavItem[]; homeTo?: s
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#d9dfd8] bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-3 md:px-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-2 md:px-10">
         <Logo to={homeTo} />
         <nav className="hidden items-center gap-1 md:flex">
           {items.map((item) => (

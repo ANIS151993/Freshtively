@@ -10,10 +10,12 @@ export default function AuthLayout() {
   }
 
   return (
-    <div className="min-h-screen freshtively-gradient px-4 py-8">
+    <div className="min-h-screen bg-[#f6f7f4] px-4 py-6 sm:px-6">
       <div className="mx-auto max-w-6xl">
-        <Logo />
-        <div className="mt-10 grid min-h-[calc(100vh-160px)] place-items-center">
+        <div className="flex justify-center md:justify-start">
+          <Logo />
+        </div>
+        <div className="mt-5 grid min-h-[calc(100vh-150px)] place-items-center">
           <Outlet />
         </div>
       </div>

@@ -97,7 +97,7 @@ export default function PublicInfoPage({ kind }: { kind: PublicPageKind }) {
             </Link>
           </div>
         </div>
-        <img alt="" className="aspect-[4/3] w-full rounded-3xl object-cover shadow-lift" src={content.image} />
+        <img alt="" className="aspect-[4/3] w-full rounded-lg border border-[#d8dfd8] object-cover shadow-sm" src={content.image} />
       </section>
 
       {kind === "contact" ? <ContactSection /> : null}
@@ -133,9 +133,9 @@ function StoryGrid({ kind }: { kind: PublicPageKind }) {
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-10 md:py-16">
       <div className="grid gap-5 md:grid-cols-3">
         {cards.map(([title, text, icon]) => (
-          <Card key={title as string} className="transition duration-200 hover:-translate-y-1 hover:shadow-lift">
-            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-soft text-emerald">{icon}</span>
-            <h2 className="mt-5 text-xl font-bold text-ink">{title}</h2>
+          <Card key={title as string} className="transition duration-200 hover:border-emerald">
+            <span className="grid h-12 w-12 place-items-center rounded-lg bg-[#edf6ef] text-emerald">{icon}</span>
+            <h2 className="mt-5 text-xl font-extrabold text-ink">{title}</h2>
             <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
           </Card>
         ))}

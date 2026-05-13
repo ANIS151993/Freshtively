@@ -20,7 +20,7 @@ export function DashboardStatCard({
           <p className="mt-2 text-3xl font-bold text-ink">{value}</p>
           {helper ? <p className="mt-2 text-sm text-muted">{helper}</p> : null}
         </div>
-        {icon ? <div className="rounded-2xl bg-emerald-soft p-3 text-emerald">{icon}</div> : null}
+        {icon ? <div className="rounded-lg bg-[#edf6ef] p-3 text-emerald">{icon}</div> : null}
       </div>
     </Card>
   );

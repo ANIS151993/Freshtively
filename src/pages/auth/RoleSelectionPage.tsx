@@ -35,9 +35,9 @@ export default function RoleSelectionPage() {
       <div className="mt-8 grid gap-5 md:grid-cols-3">
         {roles.map((role) => (
           <Link key={role.to} to={role.to}>
-            <Card className="h-full transition duration-200 hover:-translate-y-1 hover:shadow-lift">
+            <Card className="h-full transition duration-200 hover:border-emerald">
               <role.icon className="text-emerald" size={32} />
-              <h2 className="mt-5 text-xl font-bold text-ink">{role.title}</h2>
+              <h2 className="mt-5 text-xl font-extrabold text-ink">{role.title}</h2>
               <p className="mt-2 text-sm leading-6 text-muted">{role.description}</p>
             </Card>
           </Link>

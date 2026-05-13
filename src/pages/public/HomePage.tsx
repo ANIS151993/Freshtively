@@ -8,7 +8,6 @@ import {
   Github,
   Heart,
   Home,
-  Leaf,
   Linkedin,
   MapPin,
   Search,
@@ -64,49 +63,49 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="relative min-h-[calc(100vh-80px)] overflow-hidden bg-cream-dim">
+      <section className="relative overflow-hidden bg-[#f6f7f4]">
         <div className="absolute inset-0">
           <img
             alt="Homemade cultural food spread"
             className="h-full w-full object-cover"
             src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1800&q=80"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-cream-dim via-cream-dim/90 to-cream-dim/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#f6f7f4] via-[#f6f7f4]/95 to-[#f6f7f4]/55" />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+        <div className="relative mx-auto grid min-h-[calc(100vh-74px)] max-w-7xl items-center gap-10 px-4 py-12 md:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-saffron px-4 py-2 text-sm font-bold text-[#2a1700] shadow-ambient">
+            <div className="inline-flex items-center gap-2 rounded-md border border-[#d8dfd8] bg-white px-3 py-2 text-sm font-bold text-emerald shadow-sm">
               <BadgeCheck size={18} />
               Verified local cooks, fresh homemade meals
             </div>
-            <h1 className="mt-6 text-5xl font-extrabold leading-tight text-ink md:text-7xl">
-              Taste the heart of every home
+            <h1 className="mt-6 max-w-3xl text-5xl font-extrabold leading-tight text-ink md:text-7xl">
+              Freshtively brings local home kitchens online.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-              Discover authentic cultural dishes from trusted household cooks nearby, then track every order from
-              kitchen acceptance to delivery.
+              A professional food marketplace for customers, verified household cookers, and delivery partners with
+              clear ordering, kitchen operations, delivery tracking, and owner oversight.
             </p>
 
             <form
-              className="mt-8 grid gap-3 rounded-3xl border border-white/70 bg-white/90 p-3 shadow-lift md:grid-cols-[1fr_1fr_auto]"
+              className="mt-8 grid gap-3 rounded-lg border border-[#d8dfd8] bg-white p-3 shadow-sm md:grid-cols-[1fr_1fr_auto]"
               onSubmit={handleSearch}
             >
-              <label className="flex min-h-14 items-center gap-3 rounded-2xl bg-cream px-4 text-muted">
+              <label className="flex min-h-14 items-center gap-3 rounded-md border border-[#e2e8e2] bg-[#fbfcfa] px-4 text-muted">
                 <Search size={20} className="text-emerald" />
                 <input
                   className="w-full border-0 bg-transparent text-sm font-semibold text-ink outline-none placeholder:text-muted focus:ring-0"
                   placeholder="Search biryani, tacos, dumplings"
                 />
               </label>
-              <label className="flex min-h-14 items-center gap-3 rounded-2xl bg-cream px-4 text-muted">
+              <label className="flex min-h-14 items-center gap-3 rounded-md border border-[#e2e8e2] bg-[#fbfcfa] px-4 text-muted">
                 <MapPin size={20} className="text-emerald" />
                 <input
                   className="w-full border-0 bg-transparent text-sm font-semibold text-ink outline-none placeholder:text-muted focus:ring-0"
                   placeholder="Enter ZIP or address"
                 />
               </label>
-              <Button type="submit" className="min-h-14 rounded-2xl px-8">
+              <Button type="submit" className="min-h-14 px-8">
                 Find Food
               </Button>
             </form>
@@ -128,22 +127,27 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hidden items-end justify-end lg:flex">
-            <Card className="max-w-sm bg-white/95">
-              <div className="flex items-center gap-3">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-soft text-emerald">
-                  <Leaf size={24} />
-                </span>
-                <div>
-                  <p className="text-sm font-bold text-ink">Live demo flow</p>
-                  <p className="text-sm text-muted">Cooker accepted, delivery searching</p>
-                </div>
+          <div className="hidden items-center justify-end lg:flex">
+            <Card className="w-full max-w-md bg-white/95 p-0">
+              <div className="border-b border-[#e1e7e1] p-5">
+                <p className="text-sm font-extrabold text-ink">Live marketplace snapshot</p>
+                <p className="mt-1 text-sm text-muted">Customer, cooker, and delivery flow</p>
               </div>
-              <div className="mt-5 space-y-3">
-                {["Order placed", "Cooker accepted", "Delivery assigned"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm font-semibold text-muted">
-                    <span className="h-3 w-3 rounded-full bg-emerald" />
-                    {item}
+              <div className="grid gap-0">
+                {[
+                  ["Order placed", "Customer checkout completed", "10:24 AM"],
+                  ["Kitchen accepted", "Cooker confirmed prep time", "10:27 AM"],
+                  ["Courier matched", "Pickup route ready", "10:43 AM"],
+                ].map(([title, text, time]) => (
+                  <div key={title} className="grid grid-cols-[1fr_auto] gap-4 border-b border-[#eef1ee] p-5 last:border-b-0">
+                    <div className="flex gap-3">
+                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald" />
+                      <div>
+                        <p className="text-sm font-extrabold text-ink">{title}</p>
+                        <p className="mt-1 text-sm text-muted">{text}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-bold text-muted">{time}</span>
                   </div>
                 ))}
               </div>
@@ -169,7 +173,7 @@ export default function HomePage() {
           {categories.map((category) => (
             <Link
               key={category}
-              className="rounded-2xl border border-[#bbcabf]/70 bg-white/85 px-4 py-5 text-center text-sm font-bold text-ink shadow-ambient transition hover:-translate-y-1 hover:text-emerald hover:shadow-lift"
+              className="rounded-lg border border-[#d8dfd8] bg-white px-4 py-5 text-center text-sm font-bold text-ink shadow-sm transition hover:border-emerald hover:text-emerald"
               to="/discover"
             >
               {category}
@@ -330,8 +334,8 @@ function PublicSection({
 
 function FeatureCard({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
   return (
-    <Card className="transition duration-200 hover:-translate-y-1 hover:shadow-lift">
-      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-soft text-emerald">{icon}</span>
+    <Card className="transition duration-200 hover:border-emerald">
+      <span className="grid h-12 w-12 place-items-center rounded-lg bg-[#edf6ef] text-emerald">{icon}</span>
       <h3 className="mt-5 text-xl font-bold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
     </Card>

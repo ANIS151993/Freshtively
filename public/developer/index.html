@@ -6,13 +6,13 @@
     <title>Freshtively Developer Portal</title>
     <style>
       :root {
-        --ink: #17211c;
-        --muted: #66736b;
+        --ink: #151a17;
+        --muted: #5c665f;
         --paper: #ffffff;
-        --cream: #f5f7f3;
-        --line: #d8e1d9;
+        --cream: #f6f7f4;
+        --line: #dfe5de;
         --dark: #111915;
-        --panel: #17201b;
+        --panel: #121713;
         --emerald: #0d5f35;
         --emerald-2: #167344;
         --green-soft: #e7f3ea;
@@ -151,10 +151,10 @@
 
       .card {
         border: 1px solid var(--line);
-        border-radius: 12px;
-        background: rgba(255,255,255,.98);
+        border-radius: 8px;
+        background: #ffffff;
         padding: 20px;
-        box-shadow: 0 18px 50px rgba(23,33,28,.08);
+        box-shadow: 0 1px 2px rgba(17,25,21,.06);
       }
 
       .login-card {
@@ -270,7 +270,7 @@
       }
 
       .shell { min-height: 100vh; display: grid; background: var(--cream); }
-      @media (min-width: 1120px) { .shell { grid-template-columns: 248px minmax(0, 1fr); } }
+      @media (min-width: 1120px) { .shell { grid-template-columns: 264px minmax(0, 1fr); } }
 
       .sidebar {
         position: sticky;
@@ -278,10 +278,11 @@
         z-index: 8;
         align-self: start;
         min-height: 100vh;
-        background: var(--panel);
+        border-right: 1px solid rgba(255,255,255,.08);
+        background: #111511;
         color: white;
         overflow-y: auto;
-        padding: 18px;
+        padding: 18px 14px;
       }
       @media (max-width: 1119px) {
         .sidebar {
@@ -289,12 +290,27 @@
           min-height: auto;
         }
       }
-      .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-      .brand-logo { width: 152px; height: auto; display: block; filter: drop-shadow(0 10px 24px rgba(0,0,0,.18)); }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        padding: 4px 4px 18px;
+      }
+      .brand-logo {
+        width: 160px;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        background: white;
+        padding: 5px;
+        filter: none;
+      }
       .mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 10px; background: linear-gradient(135deg, var(--emerald), var(--emerald-2)); font-weight: 950; }
       .nav {
         display: grid;
-        gap: 8px;
+        gap: 4px;
       }
       @media (max-width: 1119px) {
         .nav {
@@ -303,13 +319,14 @@
       }
       .nav button {
         justify-content: flex-start;
-        min-height: 38px;
-        border-radius: 8px;
+        min-height: 42px;
+        border-radius: 6px;
         background: transparent;
-        color: #d8e6dc;
+        padding: 0 12px;
+        color: #d7dfd8;
         font-weight: 800;
       }
-      .nav button.active, .nav button:hover { background: rgba(210,107,45,.18); color: white; }
+      .nav button.active, .nav button:hover { background: rgba(255,255,255,.09); color: white; }
       .sidebar-foot { margin-top: 18px; display: grid; gap: 10px; }
       @media (max-width: 1119px) {
         .sidebar-foot {
@@ -320,9 +337,9 @@
       .main { min-width: 0; }
       .topbar {
         border-bottom: 1px solid var(--line);
-        background: rgba(255,255,255,.92);
+        background: rgba(255,255,255,.94);
         backdrop-filter: blur(16px);
-        padding: 18px 18px;
+        padding: 16px 18px;
       }
       .topbar-inner {
         width: min(1240px, 100%);
@@ -333,7 +350,7 @@
         gap: 16px;
         flex-wrap: wrap;
       }
-      .content { width: min(1180px, calc(100% - 24px)); margin: 0 auto; padding: 22px 0 48px; }
+      .content { width: min(1220px, calc(100% - 24px)); margin: 0 auto; padding: 20px 0 48px; }
 
       .grid { display: grid; gap: 16px; }
       @media (min-width: 760px) {
@@ -346,7 +363,16 @@
       }
       .section { display: none; }
       .section.active { display: block; }
-      .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 16px;
+      }
       .stat strong { display: block; margin-top: 7px; font-size: clamp(1.45rem, 3vw, 2rem); color: var(--ink); overflow-wrap: anywhere; }
       .muted { color: var(--muted); }
 
@@ -357,7 +383,7 @@
         border-radius: 999px;
         background: var(--green-soft);
         color: var(--emerald);
-        padding: 6px 10px;
+        padding: 5px 9px;
         font-size: .76rem;
         font-weight: 950;
       }
@@ -365,7 +391,21 @@
       .badge.danger { background: var(--clay-soft); color: var(--clay); }
       .badge.dark { background: #e9eee9; color: #26332c; }
 
-      .table { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: white; }
+      .table { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: white; }
+      .table-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfcfa;
+        padding: 13px 14px;
+        color: var(--ink);
+        font-size: .82rem;
+        font-weight: 950;
+        letter-spacing: .02em;
+        text-transform: uppercase;
+      }
       .row { display: grid; gap: 12px; border-bottom: 1px solid #e1ebe3; padding: 14px; }
       .row:hover { background: #fbfcf9; }
       .row:last-child { border-bottom: 0; }
@@ -373,6 +413,33 @@
       @media (min-width: 920px) { .row.orders { grid-template-columns: 1.2fr 120px 120px 260px; align-items: center; } }
       @media (min-width: 920px) { .row.simple { grid-template-columns: 1fr 150px 220px; align-items: center; } }
       .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+      .command-strip {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      @media (min-width: 840px) {
+        .command-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+      .command-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+        padding: 16px;
+        box-shadow: 0 1px 2px rgba(17,25,21,.05);
+      }
+      .command-item strong { display: block; margin-top: 6px; font-size: 1.05rem; }
+      .module-list { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+      .module-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+        padding: 13px 14px;
+      }
+      .module-row:last-child { border-bottom: 0; }
       .split { display: grid; gap: 16px; }
       @media (min-width: 960px) { .split { grid-template-columns: minmax(320px, 400px) minmax(0, 1fr); } }
       .permission-grid,
@@ -392,7 +459,7 @@
         justify-content: space-between;
         gap: 10px;
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 6px;
         background: #fbfffb;
         padding: 10px 12px;
         color: var(--ink);
@@ -410,7 +477,7 @@
         z-index: 20;
         max-width: 420px;
         border: 1px solid rgba(8,122,82,.2);
-        border-radius: 10px;
+        border-radius: 8px;
         background: var(--green-soft);
         color: var(--emerald);
         padding: 14px 16px;
@@ -511,6 +578,11 @@
                 <p>Monitor the full marketplace from one owner console.</p>
               </div>
               <span class="badge warn">Firestore-only test mode</span>
+            </div>
+            <div class="command-strip">
+              <div class="command-item"><span class="badge">Control</span><strong>Approve and restrict accounts</strong><p class="compact">Govern customer, cooker, and delivery access.</p></div>
+              <div class="command-item"><span class="badge warn">Revenue</span><strong>Commission and payout oversight</strong><p class="compact">Track platform fees, payments, refunds, and balances.</p></div>
+              <div class="command-item"><span class="badge dark">Growth</span><strong>Promotions and feature rollout</strong><p class="compact">Launch campaigns and toggle marketplace modules.</p></div>
             </div>
             <div class="grid four" id="kpis"></div>
             <div class="grid two" style="margin-top:16px">
@@ -811,8 +883,9 @@
       function renderModules() {
         const modules = ["Customer console", "Cooker console", "Delivery console", "Admin console", "Money control", "Promotion control"];
         document.getElementById("moduleCards").innerHTML = modules.map((item) =>
-          `<div class="card" style="box-shadow:none"><span class="badge">${item}</span><p class="compact" style="margin-top:10px">Control surface is present in portal UI.</p></div>`
+          `<div class="module-row"><div><strong>${item}</strong><p class="compact">Control surface is present in portal UI.</p></div><span class="badge">Ready</span></div>`
         ).join("");
+        document.getElementById("moduleCards").className = "module-list";
       }
 
       function renderUserOptions() {
@@ -823,7 +896,7 @@
       }
 
       function renderUsers() {
-        document.getElementById("usersTable").innerHTML = state.users.map((u) => `
+        document.getElementById("usersTable").innerHTML = `<div class="table-title"><span>Accounts</span><span>${state.users.length} users</span></div>` + state.users.map((u) => `
           <div class="row users">
             <div><strong>${u.name}</strong><br><span class="muted">${u.email}</span><br><span class="muted">${(state.permissions[u.id] || []).length} permissions</span></div>
             ${badge(u.role)}
@@ -875,7 +948,7 @@
       }
 
       function renderPayments() {
-        document.getElementById("paymentsTable").innerHTML = state.payments.map((p) => `
+        document.getElementById("paymentsTable").innerHTML = `<div class="table-title"><span>Payment ledger</span><span>${state.payments.length} records</span></div>` + state.payments.map((p) => `
           <div class="row orders">
             <div><strong>${p.id}</strong><br><span class="muted">${p.order} - ${p.user}</span></div>
             ${badge(p.status)}
@@ -890,7 +963,7 @@
       }
 
       function renderPromotions() {
-        document.getElementById("promotionsTable").innerHTML = state.promotions.map((p) => `
+        document.getElementById("promotionsTable").innerHTML = `<div class="table-title"><span>Campaigns</span><span>${state.promotions.length} total</span></div>` + state.promotions.map((p) => `
           <div class="row simple">
             <div><strong>${p.title}</strong><br><span class="muted">${p.code} - ${p.audience} - ${p.value}%</span></div>
             ${badge(p.status)}
@@ -904,7 +977,7 @@
       }
 
       function renderOrders() {
-        document.getElementById("ordersTable").innerHTML = state.orders.map((o) => `
+        document.getElementById("ordersTable").innerHTML = `<div class="table-title"><span>Order control</span><span>${state.orders.length} orders</span></div>` + state.orders.map((o) => `
           <div class="row orders">
             <div><strong>${o.id}</strong><br><span class="muted">${o.customer} -> ${o.cooker} -> ${o.delivery}</span></div>
             ${badge(o.status)}
@@ -919,7 +992,7 @@
       }
 
       function renderContent() {
-        document.getElementById("contentTable").innerHTML = state.content.map((c) => `
+        document.getElementById("contentTable").innerHTML = `<div class="table-title"><span>Food content moderation</span><span>${state.content.length} listings</span></div>` + state.content.map((c) => `
           <div class="row simple">
             <div><strong>${c.title}</strong><br><span class="muted">${c.owner}</span></div>
             ${badge(c.status)}

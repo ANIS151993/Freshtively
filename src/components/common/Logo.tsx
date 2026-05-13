@@ -2,11 +2,10 @@ import { Link } from "react-router-dom";
 
 export function Logo({ to = "/", inverse = false }: { to?: string; inverse?: boolean }) {
   return (
-    <Link to={to} className="flex items-center gap-3" aria-label="Freshtively home">
-      <span className="logo-mark grid h-11 w-11 place-items-center rounded-2xl bg-emerald text-lg font-extrabold text-white shadow-ambient transition-transform duration-200 hover:-translate-y-0.5">
-        F
+    <Link to={to} className="inline-flex items-center" aria-label="Freshtively home">
+      <span className={inverse ? "inline-flex rounded-lg bg-white px-2 py-1 shadow-sm" : "inline-flex"}>
+        <img className="h-12 w-auto object-contain" src="/logo/main-logo.png" alt="Freshtively" />
       </span>
-      <span className={`text-xl font-extrabold tracking-normal ${inverse ? "text-white" : "text-ink"}`}>Freshtively</span>
     </Link>
   );
 }

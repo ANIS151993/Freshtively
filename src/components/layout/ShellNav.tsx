@@ -12,8 +12,8 @@ export function ShellNav({ items, homeTo = "/" }: { items: NavItem[]; homeTo?: s
   const { currentUser, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#bbcabf]/60 bg-cream/90 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 md:px-10">
+    <header className="sticky top-0 z-40 border-b border-[#d9dfd8] bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-3 md:px-10">
         <Logo to={homeTo} />
         <nav className="hidden items-center gap-2 md:flex">
           {items.map((item) => (
@@ -21,8 +21,8 @@ export function ShellNav({ items, homeTo = "/" }: { items: NavItem[]; homeTo?: s
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  isActive ? "bg-emerald text-white" : "text-muted hover:bg-emerald-soft hover:text-emerald"
+                `rounded-md px-3 py-2 text-sm font-bold transition ${
+                  isActive ? "bg-[#eef4ef] text-emerald" : "text-muted hover:bg-[#f4f6f2] hover:text-emerald"
                 }`
               }
             >

@@ -14,12 +14,37 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-import { type FormEvent, type ReactNode, useState } from "react";
+import { type FormEvent, type ReactNode, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/cards/Card";
 import { Button } from "../../components/common/Button";
 
-const categories = ["Bangladeshi", "Mexican", "Caribbean", "Middle Eastern", "Ethiopian", "Korean"];
+const categories = [
+  {
+    name: "Bangladeshi",
+    image: "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Mexican",
+    image: "https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Caribbean",
+    image: "https://images.unsplash.com/photo-1534939561126-855b8675edd7?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Middle Eastern",
+    image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Ethiopian",
+    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Korean",
+    image: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=600&q=80",
+  },
+];
 
 const marketplaceStats = [
   ["3 roles", "Customer, cooker, delivery"],
@@ -51,6 +76,27 @@ const dishes = [
   },
 ];
 
+const featuredSlides = [
+  {
+    title: "Homemade Beef Biryani",
+    subtitle: "Ayesha Rahman Kitchen",
+    meta: "Bangladeshi • 32 min • 4.9",
+    image: "https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=1000&q=80",
+  },
+  {
+    title: "Chicken Mole Plate",
+    subtitle: "Lucia Martinez",
+    meta: "Mexican • 28 min • 4.8",
+    image: "https://images.unsplash.com/photo-1613514785940-daed07799d9b?auto=format&fit=crop&w=1000&q=80",
+  },
+  {
+    title: "Handmade Dumpling Box",
+    subtitle: "Mei Chen",
+    meta: "Korean • 24 min • New",
+    image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=1000&q=80",
+  },
+];
+
 const cookers = [
   { name: "Ayesha Rahman", cuisine: "Bangladeshi home kitchen", rating: "4.9", orders: "128 orders" },
   { name: "Lucia Martinez", cuisine: "Mexican family recipes", rating: "4.8", orders: "94 orders" },
@@ -62,31 +108,66 @@ const rolePanels = [
     title: "Customer",
     text: "Search dishes, compare kitchens, place orders, and follow delivery status.",
     icon: <ShoppingBag />,
+    image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=700&q=80",
   },
   {
     title: "Cooker",
     text: "Publish menus, manage preparation windows, accept orders, and track payouts.",
     icon: <ChefHat />,
+    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=700&q=80",
   },
   {
     title: "Delivery",
     text: "Review delivery requests, coordinate pickup, complete drop-off, and monitor earnings.",
     icon: <Truck />,
+    image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=700&q=80",
+  },
+];
+
+const trustPanels = [
+  {
+    title: "Verification",
+    text: "Cooker and delivery onboarding supports safety and document review.",
+    icon: <ShieldCheck />,
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    title: "Live order states",
+    text: "Every handoff is designed around visible status updates.",
+    icon: <Clock />,
+    image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    title: "Reviews and support",
+    text: "Ratings, support tickets, and admin monitoring are core workflows.",
+    icon: <Heart />,
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80",
   },
 ];
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % featuredSlides.length);
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     navigate("/discover");
   }
 
+  const slide = featuredSlides[activeSlide];
+
   return (
     <>
       <section className="bg-[#f6f7f4]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-14">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-14">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-md border border-[#d8dfd8] bg-white px-3 py-2 text-sm font-bold text-emerald shadow-sm">
               <BadgeCheck size={18} />
@@ -141,30 +222,32 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-4">
-            <div className="grid gap-4 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="grid gap-4 md:grid-cols-[1.08fr_0.92fr]">
               <div className="group overflow-hidden rounded-lg border border-[#d8dfd8] bg-white shadow-sm">
                 <div className="relative">
                   <SafeImage
                     alt="Fresh homemade meal"
                     className="h-64 w-full object-cover transition duration-300 group-hover:scale-105 md:h-80"
-                    fallbackLabel="Featured homemade meal"
-                    src="https://images.unsplash.com/photo-1563379091339-03246963d51a?auto=format&fit=crop&w=900&q=80"
+                    fallbackLabel={slide.title}
+                    src={slide.image}
                   />
                   <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-sm font-extrabold text-emerald shadow-sm">
-                    32 min
+                    Featured now
                   </div>
                 </div>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-lg font-extrabold text-ink">Homemade Beef Biryani</p>
-                      <p className="mt-1 text-sm font-semibold text-muted">Ayesha Rahman Kitchen</p>
+                      <p className="text-lg font-extrabold text-ink">{slide.title}</p>
+                      <p className="mt-1 text-sm font-semibold text-muted">{slide.subtitle}</p>
                     </div>
-                    <span className="rounded-full bg-[#edf6ef] px-3 py-1 text-sm font-extrabold text-emerald">4.9</span>
+                    <span className="rounded-full bg-[#edf6ef] px-3 py-1 text-sm font-extrabold text-emerald">
+                      {activeSlide + 1}/{featuredSlides.length}
+                    </span>
                   </div>
                   <div className="mt-4 flex items-center justify-between border-t border-[#e7ece7] pt-4 text-sm font-bold text-muted">
-                    <span>Bangladeshi</span>
-                    <span>$16.99</span>
+                    <span>{slide.meta}</span>
+                    <Link className="text-emerald hover:underline" to="/discover">Order</Link>
                   </div>
                 </div>
               </div>
@@ -189,6 +272,18 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                <div className="flex gap-2">
+                  {featuredSlides.map((item, index) => (
+                    <button
+                      key={item.title}
+                      aria-label={`Show ${item.title}`}
+                      className={`h-2 flex-1 rounded-full transition ${index === activeSlide ? "bg-emerald" : "bg-[#d8dfd8]"}`}
+                      type="button"
+                      onClick={() => setActiveSlide(index)}
+                    />
+                  ))}
+                </div>
+
                 <div className="grid grid-cols-3 gap-3">
                   {marketplaceStats.map(([value, label]) => (
                     <div key={value} className="rounded-lg border border-[#d8dfd8] bg-white p-3 shadow-sm">
@@ -206,7 +301,13 @@ export default function HomePage() {
       <PublicSection eyebrow="Portals" title="One system for every marketplace role">
         <div className="grid gap-5 md:grid-cols-3">
           {rolePanels.map((panel) => (
-            <FeatureCard key={panel.title} icon={panel.icon} title={panel.title} text={panel.text} />
+            <FeatureCard
+              key={panel.title}
+              icon={panel.icon}
+              image={panel.image}
+              title={panel.title}
+              text={panel.text}
+            />
           ))}
         </div>
       </PublicSection>
@@ -215,12 +316,17 @@ export default function HomePage() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
           {categories.map((category) => (
             <Link
-              key={category}
-              className="group rounded-lg border border-[#d8dfd8] bg-white px-4 py-5 text-center text-sm font-bold text-ink shadow-sm transition hover:-translate-y-1 hover:border-emerald hover:text-emerald hover:shadow-lg"
+              key={category.name}
+              className="group overflow-hidden rounded-lg border border-[#d8dfd8] bg-white text-sm font-bold text-ink shadow-sm transition hover:-translate-y-1 hover:border-emerald hover:text-emerald hover:shadow-lg"
               to="/discover"
             >
-              <span className="mx-auto mb-3 block h-1.5 w-10 rounded-full bg-[#d26b2d] transition group-hover:w-16 group-hover:bg-emerald" />
-              {category}
+              <SafeImage
+                alt={category.name}
+                className="h-28 w-full object-cover transition duration-300 group-hover:scale-105"
+                fallbackLabel={category.name}
+                src={category.image}
+              />
+              <span className="block px-4 py-3 text-center">{category.name}</span>
             </Link>
           ))}
         </div>
@@ -273,9 +379,15 @@ export default function HomePage() {
 
       <PublicSection eyebrow="Safety and trust" title="Built for confidence before the first bite">
         <div className="grid gap-5 md:grid-cols-3">
-          <FeatureCard icon={<ShieldCheck />} title="Verification" text="Cooker and delivery onboarding supports safety and document review." />
-          <FeatureCard icon={<Clock />} title="Live order states" text="Every handoff is designed around visible status updates." />
-          <FeatureCard icon={<Heart />} title="Reviews and support" text="Ratings, support tickets, and admin monitoring are core workflows." />
+          {trustPanels.map((panel) => (
+            <FeatureCard
+              key={panel.title}
+              icon={panel.icon}
+              image={panel.image}
+              title={panel.title}
+              text={panel.text}
+            />
+          ))}
         </div>
       </PublicSection>
 
@@ -347,12 +459,30 @@ function PublicSection({
   );
 }
 
-function FeatureCard({ icon, title, text }: { icon: ReactNode; title: string; text: string }) {
+function FeatureCard({
+  icon,
+  image,
+  title,
+  text,
+}: {
+  icon: ReactNode;
+  image: string;
+  title: string;
+  text: string;
+}) {
   return (
-    <Card className="transition duration-200 hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
-      <span className="grid h-12 w-12 place-items-center rounded-lg bg-[#edf6ef] text-emerald">{icon}</span>
-      <h3 className="mt-5 text-xl font-bold text-ink">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
+    <Card className="group overflow-hidden p-0 transition duration-200 hover:-translate-y-1 hover:border-emerald hover:shadow-lg">
+      <SafeImage
+        alt={title}
+        className="h-36 w-full object-cover transition duration-300 group-hover:scale-105"
+        fallbackLabel={title}
+        src={image}
+      />
+      <div className="p-5">
+        <span className="grid h-12 w-12 place-items-center rounded-lg bg-[#edf6ef] text-emerald">{icon}</span>
+        <h3 className="mt-5 text-xl font-bold text-ink">{title}</h3>
+        <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
+      </div>
     </Card>
   );
 }
